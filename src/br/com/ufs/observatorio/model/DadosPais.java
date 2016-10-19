@@ -2,6 +2,8 @@ package br.com.ufs.observatorio.model;
 
 public class DadosPais {
 
+	private int qtHospitaisSemSites;
+	private int qtSitesDisponiveis;
 	private int qtHospitaisCatalogados;
 	private int qtSitesForaDoAr;
 	private int qtHospitaisComSite;
@@ -17,8 +19,26 @@ public class DadosPais {
 	// ----------------------------------------Getters and
 	// Setters--------------------------------
 	
+	
+	
 	public int getQtHospitaisCatalogados() {
 		return qtHospitaisCatalogados;
+	}
+
+	public int getQtHospitaisSemSites() {
+		return qtHospitaisSemSites;
+	}
+
+	public void setQtHospitaisSemSites(int qtHospitaisSemSites) {
+		this.qtHospitaisSemSites = qtHospitaisSemSites;
+	}
+
+	public int getQtSitesDisponiveis() {
+		return qtSitesDisponiveis;
+	}
+
+	public void setQtSitesDisponiveis(int qtSitesDisponiveis) {
+		this.qtSitesDisponiveis = qtSitesDisponiveis;
 	}
 
 	public int getHospitaisPrivados() {

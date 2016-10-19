@@ -37,6 +37,30 @@ public class PaisDAO {
 
 	}
 
+	public Pais consultarPaisByNome(String nome) throws SQLException {
+
+		Pais obj = new Pais();
+
+		String sql = "select * from pais where cv_descricao='" + nome + "'";
+		// System.out.println(sql);
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		ResultSet resultado = comando.executeQuery(sql);
+
+		while (resultado.next()) {
+			obj.setCodigo(resultado.getInt("id_pais"));
+			obj.setDescricao(resultado.getString("cv_descricao"));
+			obj.setCapital(resultado.getString("cv_capital"));
+			obj.setPopulacao(resultado.getString("cv_populacao"));
+		}
+
+		comando.close();
+		con.conexao.close();
+		return obj;
+
+	}
+
 	public DadosPais consultarDadosPais(String pais, String data) throws SQLException {
 
 		int id = capturarIdPaisByNome(pais);
@@ -45,10 +69,12 @@ public class PaisDAO {
 		int quantidadeSitesInfomacoesInstitucionais = retornarQtSitesComInformacoesInstitucionais(id);
 		int quantidadeSitesComServicos = retornarQtSitesComServico(id);
 		int quantidadeSitesComCorpoClinico = retornarQtSitesComCorpoClinico(id);
-		int quantidadeSitesForaDoAr = retornarQtSitesForaDoAr(id);
+		int quantidadeSitesForaDoAr = retornarQtSitesForaDoAr(id, data);
 		int quantidadeSitesComComentarios = retornarQtSitesComComentarios(id);
 		int hospitaisPublicos = retornarQtHospitaisPublicos(id);
 		int hospitaisPrivados = retornarQtHospitaisPrivados(id);
+		int hospitaisSemSites = retornarQtHospitaisSemSites(id, data);
+		int quantidadeSitesDisponiveis = retornarQtSitesDisponiveis(id, data);
 
 		// Preenchendo o objeto
 
@@ -65,9 +91,31 @@ public class PaisDAO {
 		obj.setPais(pais);
 		obj.setHospitaisPrivados(hospitaisPrivados);
 		obj.setHospitaisPublicos(hospitaisPublicos);
+		obj.setQtHospitaisSemSites(hospitaisSemSites);
+		obj.setQtSitesDisponiveis(quantidadeSitesDisponiveis);
 
 		return obj;
 
+	}
+
+	// Hospitais Sem Sites
+	private int retornarQtHospitaisSemSites(int id, String data) throws SQLException {
+		String sql = "Select count(id_pais) as qt_HospitaisSemSite from Hospital where id_pais=" + id
+				+ " and cv_site = 'Não possui Site'";
+		
+		int hospitaisSemSite = 0;
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		ResultSet resultado = comando.executeQuery(sql);
+
+		while (resultado.next()) {
+			hospitaisSemSite = resultado.getInt("qt_HospitaisSemSite");
+		}
+
+		comando.close();
+		con.conexao.close();
+		return hospitaisSemSite;
 	}
 
 	public int capturarIdPaisByNome(String pais) throws SQLException {
@@ -201,11 +249,11 @@ public class PaisDAO {
 	}
 
 	// SITES FORA DO AR
-	public int retornarQtSitesForaDoAr(int id) throws SQLException {
+	public int retornarQtSitesForaDoAr(int id, String data) throws SQLException {
 		String sql = " select COUNT(cv_observacao) as qt_sitesForaDoAr from formulario_hospital fm "
 				+ " INNER JOIN formulario f ON f.id_formulario = fm.id_formulario "
-				+ " INNER JOIN hospital h ON h.id_hospital = fm.id_hospital " + " where id_Pais =" + id
-				+ " AND cv_observacao = 'Site fora do AR'";
+				+ " INNER JOIN hospital h ON h.id_hospital = fm.id_hospital  " + " where h.id_Pais = " + id
+				+ " AND f.cv_observacao = 'Site fora do AR' " + " AND f.dt_formulario LIKE '%" + data + "%'";
 
 		int sitesForaDoAr = 0;
 
@@ -223,14 +271,35 @@ public class PaisDAO {
 
 	}
 
+	// Sites Disponíveis
+	private int retornarQtSitesDisponiveis(int id, String data) throws SQLException {
+
+		String sql = " select COUNT(cv_observacao) as qt_sitesDisponiveis from formulario_hospital fm "
+				+ " INNER JOIN formulario f ON f.id_formulario = fm.id_formulario "
+				+ " INNER JOIN hospital h ON h.id_hospital = fm.id_hospital  " + " where h.id_Pais = " + id
+				+ " AND f.cv_observacao = 'Sem Observações!' " + " AND f.dt_formulario LIKE '%" + data + "%'";
+
+		int sitesDisponiveis = 0;
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		ResultSet resultado = comando.executeQuery(sql);
+
+		while (resultado.next()) {
+			sitesDisponiveis = resultado.getInt("qt_sitesDisponiveis");
+		}
+
+		comando.close();
+		con.conexao.close();
+		return sitesDisponiveis;
+	}
+
 	// HOSPITAIS PRIVADOS
 	public int retornarQtHospitaisPrivados(int id) throws SQLException {
 		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisPrivados from formulario_hospital fm "
 				+ " INNER JOIN formulario f ON f.id_formulario = fm.id_formulario "
 				+ " INNER JOIN hospital h ON h.id_hospital = fm.id_hospital " + " where id_Pais =" + id
 				+ " AND cv_tipo_organizacao = 'Privado'";
-		
-		
 
 		int hospitaisPrivados = 0;
 
@@ -247,28 +316,28 @@ public class PaisDAO {
 		return hospitaisPrivados;
 
 	}
-	
+
 	// HOSPITAIS PUBLICOS
-		public int retornarQtHospitaisPublicos(int id) throws SQLException {
-			String sql = " select COUNT(cv_tipo_organizacao) as hospitaisPublicos from formulario_hospital fm "
-					+ " INNER JOIN formulario f ON f.id_formulario = fm.id_formulario "
-					+ " INNER JOIN hospital h ON h.id_hospital = fm.id_hospital " + " where id_Pais =" + id
-					+ " AND cv_tipo_organizacao = 'Publico'";
+	public int retornarQtHospitaisPublicos(int id) throws SQLException {
+		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisPublicos from formulario_hospital fm "
+				+ " INNER JOIN formulario f ON f.id_formulario = fm.id_formulario "
+				+ " INNER JOIN hospital h ON h.id_hospital = fm.id_hospital " + " where id_Pais =" + id
+				+ " AND cv_tipo_organizacao = 'Publico'";
 
-			int hospitaisPublicos = 0;
+		int hospitaisPublicos = 0;
 
-			con.setConnection();
-			Statement comando = con.conexao.createStatement();
-			ResultSet resultado = comando.executeQuery(sql);
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		ResultSet resultado = comando.executeQuery(sql);
 
-			while (resultado.next()) {
-				hospitaisPublicos = resultado.getInt("hospitaisPublicos");
-			}
-
-			comando.close();
-			con.conexao.close();
-			return hospitaisPublicos;
-
+		while (resultado.next()) {
+			hospitaisPublicos = resultado.getInt("hospitaisPublicos");
 		}
+
+		comando.close();
+		con.conexao.close();
+		return hospitaisPublicos;
+
+	}
 
 }

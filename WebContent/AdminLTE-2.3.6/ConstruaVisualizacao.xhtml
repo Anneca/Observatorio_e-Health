@@ -7,9 +7,14 @@
 	<title>Construa Visualização</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta
-		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-		name="viewport"></meta>
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 	<!-- Bootstrap 3.3.6 -->
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"></link>
 	<!-- Font Awesome -->
@@ -40,52 +45,245 @@
 		href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"></link>
 
 	<link rel="stylesheet" href="assets/css/main.css"></link>
+
+
+	<style type="text/css">
+.container {
+	max-width: 1500px;
+	color: #343434;
+}
+
+/* Specific mapael css class are below
+         * 'mapael' class is added by plugin
+        */
+.mapael .map {
+	position: relative;
+}
+
+.mapael .mapTooltip {
+	position: absolute;
+	background-color: #fff;
+	moz-opacity: 0.70;
+	opacity: 0.70;
+	filter: alpha(opacity = 70);
+	border-radius: 10px;
+	padding: 10px;
+	z-index: 1000;
+	max-width: 200px;
+	display: none;
+	color: #343434;
+	font-weight: bold;
+}
+</style>
+
+	
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"
+		charset="utf-8"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.0/raphael-min.js"
+		charset="utf-8"></script>
+	<script src="js/jquery.mapael.js" charset="utf-8"></script>
+	<script src="js/maps/france_departments.js" charset="utf-8"></script>
+	<script src="js/maps/world_countries.js" charset="utf-8"></script>
+	<script src="js/maps/usa_states.js" charset="utf-8"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			var a = document.createElement('a');
+			$(".mapcontainer").mapael({
+				map : {
+					name : "world_countries",
+					width : "1200",
+					defaultArea : {
+						attrs : {
+							stroke : "#fff",
+							"stroke-width" : 1
+						},
+						attrsHover : {
+							"stroke-width" : 2
+						}
+					}
+				},
+
+				areas : {
+					"BR" : {
+						tooltip : {
+							content : "<span>Brasil</span>"
+						},
+						href : "#",
+						target : "_top",
+                        eventHandlers: {
+                            click: function (e, id, mapElem, textElem) {
+                            	openModal('Brasil');
+                            }
+                        }
+
+					},
+					"US" : {
+						tooltip : {
+							"content" : "<span>Estados Unidos</span>"
+						},
+						target : "_self",
+						href : "#"
+					},
+					"CA" : {
+						"tooltip" : {
+							"content" : "<span>Canadá</span>"
+						},
+						target: "_self",
+						href : "#" 
+					},
+					"AR" : {
+						"tooltip" : {
+							"content" : "<span>Argentina</span>"
+						},
+						href : "#" 
+
+					},
+					"CL" : {
+						"tooltip" : {
+							"content" : "<span>Chile</span>"
+						},
+						target: "_self",
+						href : "#" 
+					},
+				},
+				
+				plots: {
+					'BR': {
+                        type: "image",
+                        url: "http://www.neveldo.fr/mapael/assets/img/marker.png",
+                        width: 12,
+                        height: 40, 
+                        latitude: -15.781682,
+                        longitude: -47.924195,
+                        attrs: {
+                            opacity: 1
+                        },
+                        attrsHover: {
+                            transform: "s1.5"
+                        },
+                        tooltip: {content: "Brasil"},
+                        eventHandlers: {
+                            click: function (e, id, mapElem, textElem) {
+                            	openModal('Brasil');
+                            }
+                        }
+                    },
+                    'US': {
+                    	type: "image",
+                        url: "http://www.neveldo.fr/mapael/assets/img/marker.png",
+                        width: 12,
+                        height: 40, 
+                    	latitude: 40.000,
+                        longitude: -95.833,
+                        attrs: {
+                            opacity: 1
+                        },
+                        attrsHover: {
+                            transform: "s1.5"
+                        },
+                        tooltip: {content: "Estados Unidos"},
+                        eventHandlers: {
+                            click: function (e, id, mapElem, textElem) {
+                            	openModal('Estados Unidos');
+                            }
+                        }
+                    },
+                    'CA': {
+                    	type: "image",
+                        url: "http://www.neveldo.fr/mapael/assets/img/marker.png",
+                        width: 12,
+                        height: 40, 
+                    	latitude: 60.000,
+                        longitude: -110.833,
+                        attrs: {
+                            opacity: 1
+                        },
+                        attrsHover: {
+                            transform: "s1.5"
+                        },
+                        tooltip: {content: "Canadá"},
+                        eventHandlers: {
+                            click: function (e, id, mapElem, textElem) {
+                            	openModal('Canada');
+                            }
+                        }
+                    },
+                    
+                    'AR': {
+                        type: "image",
+                        url: "http://www.neveldo.fr/mapael/assets/img/marker.png",
+                        width: 12,
+                        height: 40, 
+                        latitude: -35.781682,
+                        longitude: -64.924195,
+                        attrs: {
+                            opacity: 1
+                        },
+                        attrsHover: {
+                            transform: "s1.5"
+                        },
+                        tooltip: {content: "Argentina"},
+                        eventHandlers: {
+                            click: function (e, id, mapElem, textElem) {
+                            	openModal('Argentina');
+                            }
+                        }
+                    },
+                    'CL': {
+                        type: "image",
+                        url: "http://www.neveldo.fr/mapael/assets/img/marker.png",
+                        width: 12,
+                        height: 40, 
+                        latitude: -45.781682,
+                        longitude: -72.924195,
+                        attrs: {
+                            opacity: 1
+                        },
+                        attrsHover: {
+                            transform: "s1.5"
+                        },
+                        tooltip: {content: "Chile"},
+                        eventHandlers: {
+                            click: function (e, id, mapElem, textElem) {
+                            	openModal('Chile');
+                            }
+                        }
+                    },
+				}
+			});
+		});
+		
+		function openModal(pais) {
+			$.ajax({
+				  url: "InformacaoPais.xhtml?pais="+pais
+			})
+			.done(function( response ) {
+			 	$('#myContent').html(response);
+			 });
+			$('#myModal').modal('show');
+		}
+	</script>
 </h:head>
 <h:body>
-
-	<!-- Page Wrapper -->
 	<div id="page-wrapper">
 
 		<!-- Header -->
 		<header id="header">
 
-			<div class="col-md-6">
+			<div class="col-md-8">
 				<h1>
 					<a href="index.html">OBSERVATÓRIO</a>
 				</h1>
 			</div>
-			<div class="col-md-6">
-				<div class="language">
-					<ul>
-						<li><a class="active" href="#"> <img alt=""
-								src="images/inglaterra.jpg" style="margin-top: 16px;"
-								width="27px" height="15px" />
-						</a></li>
-						<li><a href="#"> <img alt=""
-								src="images/Bandeira_da_Espanha.png" style="margin-top: 16px;"
-								width="27px" height="15px" />
-						</a></li>
-					</ul>
-				</div>
+			<div class="col-md-4">
 				<nav id="nav">
-					<ul>
-						<li class="special"><a href="#menu" class="menuToggle"><span>Menu</span></a>
-							<div id="menu">
-								<ul>
-									<li><a href="index.xhtml">Home</a></li>
-									<li><a href="Sobre.xhtml">Sobre</a></li>
-									<li><a id="27_faq" href="#">Ranking</a>
-										<div id="27" style="display: none;">
-											<ul style="margin-top: 15px; margin-bottom: 15px">
-												<li style="font-size: 0.8em; margin-left: 15px;"><a
-													href="RedesSociais.xhtml">Redes Sociais</a></li>
-												<li style="font-size: 0.8em; margin-left: 15px;"><a
-													href="Tecnologias.xhtml">Tecnologias</a></li>
-											</ul>
-										</div></li>
-									<li><a href="Contato.xhtml">Contato</a></li>
-								</ul>
-							</div></li>
+					<ul style="font-weight: bold">
+						<li><a href="index.xhtml">Home</a></li>
+						<li><a href="Sobre.xhtml">Sobre</a></li>
+						<li><a href="Contato.xhtml">Contato</a></li>
 					</ul>
 
 				</nav>
@@ -95,265 +293,51 @@
 		</header>
 
 		<!-- Main -->
-		<article id="main">
+		<article id="main" style="background-color: #FFF">
 
 			<section>
 
 				<!-- Content Wrapper. Contains page content -->
-				<div class="content-wrapper"
-					style="margin-left: 0px; background-color: #FFF">
-					<!-- Content Header (Page header) -->
-					<section style="color: #FFF; margin-left: 245px;"
-						class="content-header"></section>
-					<!-- Main content -->
-					<section style="width: 1500px;" class="content">
+				<div style="margin-right: 5000px; background-color: #FFF;">
 
-						<div class="row">
-							<div class="2u">
-								<br />
+					<div class="container">
+						<br />
+						<h1 style="">Map with a legend for areas</h1>
 
-								<div class="filter-dash">
-									<h1
-										style="font-size: 22px; margin-bottom: 10px; color: #777; letter-spacing: 2px;">Filtro</h1>
-									<h:form>
-										<label> Pais </label>
-										<h:selectOneMenu value="#{paisMB.pais}"
-											style="border-style: solid; border-radius: 1px; background: rgba(249, 247, 247, 0.3); border-width: 2px; border-color: #E7E7E7;">
-
-											<f:selectItem itemValue="" itemLabel="--País--" />
-
-											<f:selectItem itemValue="Brasil" itemLabel="Brasil" />
-											<f:selectItem itemValue="Canada" itemLabel="Canadá" />
-											<f:selectItem itemValue="Estados Unidos"
-												itemLabel="Estados Unidos" />
-											<f:selectItem itemValue="Nova Zelandia"
-												itemLabel="Nova Zelândia" />
-											<f:selectItem itemValue="Australia" itemLabel="Austrália" />
-
-										</h:selectOneMenu>
-										<label> Ano </label>
-										<h:selectOneMenu value="#{paisMB.ano}"
-											style="border-style: solid; border-radius: 1px; background: rgba(249, 247, 247, 0.3); border-width: 2px; border-color: #E7E7E7;">
-											<f:selectItem itemValue="" itemLabel="--Ano--" />
-
-											<f:selectItem itemValue="2016" itemLabel="2016" />
-											<f:selectItem itemValue="2015" itemLabel="2015" />
-											<f:selectItem itemValue="2014" itemLabel="2014" />
-
-										</h:selectOneMenu>
-										<h:commandButton value="Filtrar"
-											action="#{paisMB.preencherDadosPais}">
-										</h:commandButton>
-									</h:form>
-								</div>
-
-								<br />
-
+						<div class="mapcontainer">
+							<div class="map">
+								<span>Alternative content for the map</span>
 							</div>
-							<div class="10u" id="dashboard">
-								<br />
-								<h1 style="color: grey; font-size: 22px;">
-									<h:outputText value="#{paisMB.pais}"></h:outputText>
-									<SMALL><h:outputText value="#{paisMB.ano}"></h:outputText></SMALL>
-								</h1>
 
-								<!-- Small boxes (Stat box) -->
-								<div class="row">
-									<div class="col-lg-3 col-xs-6">
-										<!-- small box -->
-										<div class="small-box bg-aqua">
-											<div class="inner">
-												<h3>
-													<h:outputText value="#{paisMB.qtHospitaisCatalogados}"></h:outputText>
-												</h3>
-
-												<p>
-													<b>Hospitais <br />Catalogados
-													</b>
-												</p>
-											</div>
-											<div class="icon">
-												<i class="fa fa-hospital-o"></i>
-											</div>
-
-										</div>
-									</div>
-									<div class="col-lg-3 col-xs-6">
-										<div class="small-box bg-orange">
-											<div class="inner">
-												<h3>
-													<h:outputText value="#{paisMB.hospitaisPrivados}"></h:outputText>
-												</h3>
-
-												<p>
-													<b>Hospitais </b> <br /> <b>Privados</b>
-												</p>
-											</div>
-											<div class="icon">
-												<i class="fa fa-ambulance "></i>
-											</div>
-
-										</div>
-									</div>
-
-									<div class="col-lg-3 col-xs-6">
-										<div class="small-box bg-blue">
-											<div class="inner">
-												<h3>
-													<h:outputText value="#{paisMB.hospitaisPublicos}"></h:outputText>
-												</h3>
-
-												<p>
-													<b>Hospitais </b> <br /> <b>Públicos</b>
-												</p>
-											</div>
-											<div class="icon">
-												<i class="fa fa-plus-square"></i>
-											</div>
-
-										</div>
-									</div>
-
-								</div>
-								<div class="row">
-
-									<!-- ./col -->
-									<div class="col-lg-3 col-xs-6">
-										<!-- small box -->
-										<div class="small-box bg-green">
-											<div class="inner">
-												<h3>
-													<h:outputText value="#{paisMB.qtHospitaisComSite}"></h:outputText>
-												</h3>
-												<p>
-													<b>Hospitais com </b><br /> <b>Site Próprio</b>
-												</p>
-											</div>
-											<div class="icon">
-												<i class="fa fa-wifi "></i>
-											</div>
-										</div>
-									</div>
-									<!-- ./col -->
-									<div class="col-lg-3 col-xs-6">
-										<!-- small box -->
-										<div class="small-box bg-purple">
-											<div class="inner">
-												<h3>
-													<h:outputText value="#{paisMB.qtSitesForaDoAr}"></h:outputText>
-												</h3>
-
-												<p>
-													<b>Sites</b> <br /> <b>Fora do Ar</b>
-												</p>
-											</div>
-											<div class="icon">
-												<i class="fa fa-exclamation-triangle "></i>
-											</div>
-
-										</div>
-									</div>
-
-
-
-									<div class="col-lg-3 col-xs-6">
-										<div class="small-box bg-red">
-											<div class="inner">
-												<h3>
-													<h:outputText value="#{paisMB.qtSitesComServico}"></h:outputText>
-
-												</h3>
-
-												<p>
-													<span class="info-box-text"><b>Sites
-															disponilibilizam os </b><br /> <b>Serviços Prestados</b></span> <span
-														class="info-box-number"> </span>
-												</p>
-											</div>
-											<div class="icon">
-												<i class="fa fa-medkit"></i>
-											</div>
-
-										</div>
-									</div>
-
-
-								</div>
-								<div class="row">
-
-
-									<div class="col-lg-3 col-xs-6">
-										<div class="small-box bg-red">
-											<div class="inner">
-												<h3>
-													<h:outputText value="#{paisMB.qtSitesComComentarios}"></h:outputText>
-												</h3>
-
-												<p>
-													<span class="info-box-text"><b>Sites
-															disponilibilizam</b><br /> <b>Endereço Eletrônico</b></span> <span
-														class="info-box-number"> </span>
-												</p>
-											</div>
-											<div class="icon">
-												<i class="fa fa-comments-o"></i>
-											</div>
-
-										</div>
-									</div>
-
-
-									<!-- /.col -->
-
-
-									<div class="col-lg-3 col-xs-6">
-										<div class="small-box bg-aqua">
-											<div class="inner">
-												<h3>
-													<h:outputText
-														value="#{paisMB.qtSitesInformacaoInstitucional}"></h:outputText>
-												</h3>
-
-												<p>
-													<span class="info-box-text"><b>Sites
-															disponilibilizam</b><br /> <b>Informações Institucionais</b></span>
-													<span class="info-box-number"> </span>
-												</p>
-											</div>
-											<div class="icon">
-												<i class="fa fa-info"></i>
-											</div>
-
-										</div>
-									</div>
-
-									<div class="col-lg-3 col-xs-6">
-										<div class="small-box bg-green">
-											<div class="inner">
-												<h3>
-													<h:outputText value="#{paisMB.qtSitesComCorpoClinico}"></h:outputText>
-												</h3>
-
-												<p>
-													<span class="info-box-text"><b>Sites
-															disponilibilizam o </b><br /> <b>Corpo Clínico</b></span> <span
-														class="info-box-number"> </span>
-												</p>
-											</div>
-											<div class="icon">
-												<i class="fa fa-user-md"></i>
-											</div>
-
-										</div>
-									</div>
-
-								</div>
-							</div>
 						</div>
-					</section>
+					</div>
 				</div>
 			</section>
 		</article>
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		        	<span aria-hidden="true"></span>
+		        </button>
+		        <h4 style="color: grey; font-size: 1.5em; text-align: center; margin-top: 20px; margin-bottom: 5px" id="myModalLabel"> País</h4>
+		      </div>
+		      <div class="modal-body" id="myContent">
+		        ...
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+				
+
 
 		<!-- Footer -->
 		<footer id="footer">
@@ -375,47 +359,5 @@
 		</footer>
 
 	</div>
-
-	<!-- Scripts -->
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-
-	<script>
-		$(document).ready(function() {
-			$("#27_faq").click(function() {
-				$("#27").slideToggle(170);
-			});
-		});
-	</script>
-
-
-
-
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-
-	<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
-	<!-- Bootstrap 3.3.6 -->
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<!-- FastClick -->
-	<script src="plugins/fastclick/fastclick.js"></script>
-	<!-- AdminLTE App -->
-	<script src="dist/js/app.min.js"></script>
-	<!-- Sparkline -->
-	<script src="plugins/sparkline/jquery.sparkline.min.js"></script>
-	<!-- jvectormap -->
-	<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-	<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-	<!-- SlimScroll 1.3.0 -->
-	<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- ChartJS 1.0.1 -->
-	<script src="plugins/chartjs/Chart.min.js"></script>
-	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-	<script src="dist/js/pages/dashboard2.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="dist/js/demo.js"></script>
 </h:body>
 </html>

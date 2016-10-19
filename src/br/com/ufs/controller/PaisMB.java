@@ -1,16 +1,23 @@
 package br.com.ufs.controller;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import br.com.ufs.observatorio.dao.PaisDAO;
 import br.com.ufs.observatorio.model.DadosPais;
+import br.com.ufs.observatorio.model.Pais;
 
 @ManagedBean(name = "paisMB")
 public class PaisMB {
 
 	String teste = "39";
+	private int qtSitesDisponiveis;
+	private int qtHospitaisSemSite;
 	private int qtHospitaisCatalogados;
 	private int qtSitesForaDoAr;
 	private int qtHospitaisComSite;
@@ -24,18 +31,47 @@ public class PaisMB {
 	private String propertyName2;
 	private int hospitaisPublicos;
 	private int hospitaisPrivados;
+	Pais objPais = new Pais();
 
 	PaisDAO paisDAO = new PaisDAO();
 
+	@PostConstruct
 	public void action() {
-		System.out.println("propertyName1: " + pais);
-		System.out.println("propertyName2: " + ano);
+		String valor = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("pais");
+		pais = valor;
+		try {
+			// Set objeto País
+			objPais = paisDAO.consultarPaisByNome(pais);
+			// Capturando a Data Atual
+			Date data = new Date(System.currentTimeMillis());
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			String format = formatter.format(data);
+			System.out.println(format);
+			format = "13-10-2016";
+			// Capturando o objeto
+			DadosPais objeto = paisDAO.consultarDadosPais(pais, format);
+			qtHospitaisCatalogados = objeto.getQtHospitaisCatalogados();
+			qtHospitaisComSite = objeto.getQtHospitaisComSite();
+			qtSitesForaDoAr = objeto.getQtSitesForaDoAr();
+			qtSitesComServico = objeto.getQtSitesComServico();
+			qtSitesComComentarios = objeto.getQtSitesComComentarios();
+			qtSitesComCorpoClinico = objeto.getQtSitesComCorpoClinico();
+			qtSitesInformacaoInstitucional = objeto.getQtSitesInformacaoInstitucional();
+			hospitaisPrivados = objeto.getHospitaisPrivados();
+			hospitaisPublicos = objeto.getHospitaisPublicos();
+			qtSitesDisponiveis = objeto.getQtSitesDisponiveis();
+			qtHospitaisSemSite = objeto.getQtHospitaisSemSites();
+			pais = objeto.getPais();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	public void preencherDadosPais() throws SQLException {
-		
-		System.out.println("propertyName1: " + pais);
-		System.out.println("propertyName2: " + ano);
+
 		DadosPais objeto = paisDAO.consultarDadosPais(pais, ano);
 		qtHospitaisCatalogados = objeto.getQtHospitaisCatalogados();
 		qtHospitaisComSite = objeto.getQtHospitaisComSite();
@@ -51,11 +87,35 @@ public class PaisMB {
 
 	// -----------------------------------Getters and
 	// Setters------------------------
+	
+	
 
-	
-	
 	public String getTeste() {
 		return teste;
+	}
+
+	public int getQtSitesDisponiveis() {
+		return qtSitesDisponiveis;
+	}
+
+	public void setQtSitesDisponiveis(int qtSitesDisponiveis) {
+		this.qtSitesDisponiveis = qtSitesDisponiveis;
+	}
+
+	public int getQtHospitaisSemSite() {
+		return qtHospitaisSemSite;
+	}
+
+	public void setQtHospitaisSemSite(int qtHospitaisSemSite) {
+		this.qtHospitaisSemSite = qtHospitaisSemSite;
+	}
+
+	public Pais getObjPais() {
+		return objPais;
+	}
+
+	public void setObjPais(Pais objPais) {
+		this.objPais = objPais;
 	}
 
 	public int getHospitaisPublicos() {

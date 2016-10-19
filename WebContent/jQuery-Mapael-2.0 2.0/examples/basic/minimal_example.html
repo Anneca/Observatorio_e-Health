@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Minimal example</title>
+<style type="text/css">
+body {
+	color: #5d5d5d;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+	font-size: 30px;
+	margin: auto;
+	margin-top: 50px;
+}
+
+.container {
+	max-width: 800px;
+	margin: auto;
+}
+</style>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"
+	charset="utf-8"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"
+	charset="utf-8"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.0/raphael-min.js"
+	charset="utf-8"></script>
+<script src="../../js/jquery.mapael.js" charset="utf-8"></script>
+<script src="../../js/maps/france_departments.js" charset="utf-8"></script>
+<script src="../../js/maps/world_countries.js" charset="utf-8"></script>
+<script src="../../js/maps/usa_states.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+	$(function() {
+		$(".mapcontainer")
+				.mapael(
+						{
+							map : {
+								// Setta o tipo de mapa
+								name : "world_countries",
+								// Define a coloração e a espessura das linhas que cortam os países
+								defaultArea : {
+									attrs : {
+										stroke : "#fff",
+										"stroke-width" : 1
+									},
+
+									attrsHover : {
+										"stroke-width" : 2
+									}
+								}
+							},
+
+							areas : {
+								"BR" : {
+									value : "196655014",
+									href : "#",
+									tooltip : {
+										"content" : "<span style=\"font-weight:bold;\">Brazil<\/span><br \/>"
+									}
+								}
+							}
+
+						});
+	});
+</script>
+
+</head>
+
+<body>
+	<div class="container">
+
+		<h1>Mapa Mundi</h1>
+
+
+		<div class="mapcontainer">
+			<div class="map">
+				<span>Alternative content for the map</span>
+			</div>
+			<div class="areaLegend">
+				<span>Alternative content for the legend</span>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
