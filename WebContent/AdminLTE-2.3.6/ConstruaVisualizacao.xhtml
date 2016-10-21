@@ -11,7 +11,7 @@
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		
+
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -76,7 +76,7 @@
 }
 </style>
 
-	
+
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"
 		charset="utf-8"></script>
@@ -91,178 +91,195 @@
 	<script type="text/javascript">
 		$(function() {
 			var a = document.createElement('a');
-			$(".mapcontainer").mapael({
-				map : {
-					name : "world_countries",
-					width : "1200",
-					defaultArea : {
-						attrs : {
-							stroke : "#fff",
-							"stroke-width" : 1
-						},
-						attrsHover : {
-							"stroke-width" : 2
-						}
-					}
-				},
+			$(".mapcontainer")
+					.mapael(
+							{
+								map : {
+									name : "world_countries",
+									width : "1200",
+									defaultArea : {
+										attrs : {
+											stroke : "#fff",
+											"stroke-width" : 1
+										},
+										attrsHover : {
+											"stroke-width" : 2
+										}
+									}
+								},
 
-				areas : {
-					"BR" : {
-						tooltip : {
-							content : "<span>Brasil</span>"
-						},
-						href : "#",
-						target : "_top",
-                        eventHandlers: {
-                            click: function (e, id, mapElem, textElem) {
-                            	openModal('Brasil');
-                            }
-                        }
+								areas : {
+									"BR" : {
+										tooltip : {
+											content : "<span>Brasil</span>"
+										},
+										href : "#",
+										target : "_top",
+										eventHandlers : {
+											click : function(e, id, mapElem,
+													textElem) {
+												openModal('Brasil');
+											}
+										}
 
-					},
-					"US" : {
-						tooltip : {
-							"content" : "<span>Estados Unidos</span>"
-						},
-						target : "_self",
-						href : "#"
-					},
-					"CA" : {
-						"tooltip" : {
-							"content" : "<span>Canadá</span>"
-						},
-						target: "_self",
-						href : "#" 
-					},
-					"AR" : {
-						"tooltip" : {
-							"content" : "<span>Argentina</span>"
-						},
-						href : "#" 
+									},
+									"US" : {
+										tooltip : {
+											"content" : "<span>Estados Unidos</span>"
+										},
+										target : "_self",
+										href : "#"
+									},
+									"CA" : {
+										"tooltip" : {
+											"content" : "<span>Canadá</span>"
+										},
+										target : "_self",
+										href : "#"
+									},
+									"AR" : {
+										"tooltip" : {
+											"content" : "<span>Argentina</span>"
+										},
+										href : "#"
 
-					},
-					"CL" : {
-						"tooltip" : {
-							"content" : "<span>Chile</span>"
-						},
-						target: "_self",
-						href : "#" 
-					},
-				},
-				
-				plots: {
-					'BR': {
-                        type: "image",
-                        url: "http://www.neveldo.fr/mapael/assets/img/marker.png",
-                        width: 12,
-                        height: 40, 
-                        latitude: -15.781682,
-                        longitude: -47.924195,
-                        attrs: {
-                            opacity: 1
-                        },
-                        attrsHover: {
-                            transform: "s1.5"
-                        },
-                        tooltip: {content: "Brasil"},
-                        eventHandlers: {
-                            click: function (e, id, mapElem, textElem) {
-                            	openModal('Brasil');
-                            }
-                        }
-                    },
-                    'US': {
-                    	type: "image",
-                        url: "http://www.neveldo.fr/mapael/assets/img/marker.png",
-                        width: 12,
-                        height: 40, 
-                    	latitude: 40.000,
-                        longitude: -95.833,
-                        attrs: {
-                            opacity: 1
-                        },
-                        attrsHover: {
-                            transform: "s1.5"
-                        },
-                        tooltip: {content: "Estados Unidos"},
-                        eventHandlers: {
-                            click: function (e, id, mapElem, textElem) {
-                            	openModal('Estados Unidos');
-                            }
-                        }
-                    },
-                    'CA': {
-                    	type: "image",
-                        url: "http://www.neveldo.fr/mapael/assets/img/marker.png",
-                        width: 12,
-                        height: 40, 
-                    	latitude: 60.000,
-                        longitude: -110.833,
-                        attrs: {
-                            opacity: 1
-                        },
-                        attrsHover: {
-                            transform: "s1.5"
-                        },
-                        tooltip: {content: "Canadá"},
-                        eventHandlers: {
-                            click: function (e, id, mapElem, textElem) {
-                            	openModal('Canada');
-                            }
-                        }
-                    },
-                    
-                    'AR': {
-                        type: "image",
-                        url: "http://www.neveldo.fr/mapael/assets/img/marker.png",
-                        width: 12,
-                        height: 40, 
-                        latitude: -35.781682,
-                        longitude: -64.924195,
-                        attrs: {
-                            opacity: 1
-                        },
-                        attrsHover: {
-                            transform: "s1.5"
-                        },
-                        tooltip: {content: "Argentina"},
-                        eventHandlers: {
-                            click: function (e, id, mapElem, textElem) {
-                            	openModal('Argentina');
-                            }
-                        }
-                    },
-                    'CL': {
-                        type: "image",
-                        url: "http://www.neveldo.fr/mapael/assets/img/marker.png",
-                        width: 12,
-                        height: 40, 
-                        latitude: -45.781682,
-                        longitude: -72.924195,
-                        attrs: {
-                            opacity: 1
-                        },
-                        attrsHover: {
-                            transform: "s1.5"
-                        },
-                        tooltip: {content: "Chile"},
-                        eventHandlers: {
-                            click: function (e, id, mapElem, textElem) {
-                            	openModal('Chile');
-                            }
-                        }
-                    },
-				}
-			});
+									},
+									"CL" : {
+										"tooltip" : {
+											"content" : "<span>Chile</span>"
+										},
+										target : "_self",
+										href : "#"
+									},
+								},
+
+								plots : {
+									'BR' : {
+										type : "image",
+										url : "http://www.neveldo.fr/mapael/assets/img/marker.png",
+										width : 12,
+										height : 40,
+										latitude : -15.781682,
+										longitude : -47.924195,
+										attrs : {
+											opacity : 1
+										},
+										attrsHover : {
+											transform : "s1.5"
+										},
+										tooltip : {
+											content : "Brasil"
+										},
+										eventHandlers : {
+											click : function(e, id, mapElem,
+													textElem) {
+												openModal('Brasil');
+											}
+										}
+									},
+									'US' : {
+										type : "image",
+										url : "http://www.neveldo.fr/mapael/assets/img/marker.png",
+										width : 12,
+										height : 40,
+										latitude : 40.000,
+										longitude : -95.833,
+										attrs : {
+											opacity : 1
+										},
+										attrsHover : {
+											transform : "s1.5"
+										},
+										tooltip : {
+											content : "Estados Unidos"
+										},
+										eventHandlers : {
+											click : function(e, id, mapElem,
+													textElem) {
+												openModal('Estados Unidos');
+											}
+										}
+									},
+									'CA' : {
+										type : "image",
+										url : "http://www.neveldo.fr/mapael/assets/img/marker.png",
+										width : 12,
+										height : 40,
+										latitude : 60.000,
+										longitude : -110.833,
+										attrs : {
+											opacity : 1
+										},
+										attrsHover : {
+											transform : "s1.5"
+										},
+										tooltip : {
+											content : "Canadá"
+										},
+										eventHandlers : {
+											click : function(e, id, mapElem,
+													textElem) {
+												openModal('Canada');
+											}
+										}
+									},
+
+									'AR' : {
+										type : "image",
+										url : "http://www.neveldo.fr/mapael/assets/img/marker.png",
+										width : 12,
+										height : 40,
+										latitude : -35.781682,
+										longitude : -64.924195,
+										attrs : {
+											opacity : 1
+										},
+										attrsHover : {
+											transform : "s1.5"
+										},
+										tooltip : {
+											content : "Argentina"
+										},
+										eventHandlers : {
+											click : function(e, id, mapElem,
+													textElem) {
+												openModal('Argentina');
+											}
+										}
+									},
+									'CL' : {
+										type : "image",
+										url : "http://www.neveldo.fr/mapael/assets/img/marker.png",
+										width : 12,
+										height : 40,
+										latitude : -45.781682,
+										longitude : -72.924195,
+										attrs : {
+											opacity : 1
+										},
+										attrsHover : {
+											transform : "s1.5"
+										},
+										tooltip : {
+											content : "Chile"
+										},
+										eventHandlers : {
+											click : function(e, id, mapElem,
+													textElem) {
+												openModal('Chile');
+											}
+										}
+									},
+								}
+							});
 		});
-		
+
 		function openModal(pais) {
 			$.ajax({
-				  url: "InformacaoPais.xhtml?pais="+pais
-			})
-			.done(function( response ) {
-			 	$('#myContent').html(response);
-			 });
+				url : "InformacaoPais.xhtml?pais=" + pais
+			}).done(function(response) {
+				$('#myContent').html(response);
+			});
 			$('#myModal').modal('show');
 		}
 	</script>
@@ -275,7 +292,7 @@
 
 			<div class="col-md-8">
 				<h1>
-					<a href="index.html">OBSERVATÓRIO</a>
+					<a href="index.xhtml">OBSERVATÓRIO</a>
 				</h1>
 			</div>
 			<div class="col-md-4">
@@ -283,6 +300,7 @@
 					<ul style="font-weight: bold">
 						<li><a href="index.xhtml">Home</a></li>
 						<li><a href="Sobre.xhtml">Sobre</a></li>
+						<li><a href="">Pesquisa</a></li>
 						<li><a href="Contato.xhtml">Contato</a></li>
 					</ul>
 
@@ -317,26 +335,28 @@
 
 
 		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		        	<span aria-hidden="true"></span>
-		        </button>
-		        <h4 style="color: grey; font-size: 1.5em; text-align: center; margin-top: 20px; margin-bottom: 5px" id="myModalLabel"> País</h4>
-		      </div>
-		      <div class="modal-body" id="myContent">
-		        ...
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-		      </div>
-		    </div>
-		  </div>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true"></span>
+						</button>
+						<h4
+							style="color: grey; font-size: 1.5em; text-align: center; margin-top: 20px; margin-bottom: 5px"
+							id="myModalLabel">País</h4>
+					</div>
+					<div class="modal-body" id="myContent">...</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
 		</div>
-		
-				
+
+
 
 
 		<!-- Footer -->

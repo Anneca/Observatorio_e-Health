@@ -22,5 +22,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Primefaces 6.0"/>
 	<classpathentry kind="lib" path="/Users/Anne/Workspaces/Neon/Observatorio-e-Health/WebContent/WEB-INF/lib/jsp-api-2.0.jar"/>
 	<classpathentry kind="lib" path="/Users/Anne/Workspaces/Neon/Observatorio-e-Health/WebContent/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/Anne/Workspaces/Neon/Observatorio-e-Health/WebContent/WEB-INF/lib/gson-2.7.jar"/>
+	<classpathentry kind="lib" path="/Users/Anne/Workspaces/Neon/Observatorio-e-Health/WebContent/WEB-INF/lib/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/Anne/Workspaces/Neon/Observatorio-e-Health/WebContent/WEB-INF/lib/java-json.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
