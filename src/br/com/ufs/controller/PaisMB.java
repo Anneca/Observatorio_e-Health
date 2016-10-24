@@ -2,6 +2,7 @@ package br.com.ufs.controller;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +12,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
+
 import br.com.ufs.observatorio.dao.PaisDAO;
 import br.com.ufs.observatorio.model.DadosPais;
 import br.com.ufs.observatorio.model.Pais;
+import br.com.ufs.observatorio.util.JsonWrite;
 
 @ManagedBean(name = "paisMB")
 public class PaisMB {
@@ -38,8 +42,12 @@ public class PaisMB {
 	private int hospitaisMisto;
 	private int hospitaisUniversitarios;
 	private int hospitaisNaoDefinidos;
+	String listaJSON;
+	JsonWrite jsonWrite = new JsonWrite();
 
 	private List<Pais> listaPaises;
+	private ArrayList<Pais> listaPaises2;
+
 
 	Pais objPais = new Pais();
 
@@ -52,6 +60,7 @@ public class PaisMB {
 		try {
 
 			listaPaises = paisDAO.consultarPais();
+			listaPaises2 = paisDAO.consultarPais2();
 			// Set objeto País
 			objPais = paisDAO.consultarPaisByNome(pais);
 			// Capturando a Data Atual
@@ -80,7 +89,8 @@ public class PaisMB {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		listaJSON = JSONArray.toJSONString((jsonWrite.gerarArquivoJsonPais(listaPaises2)));
+		System.out.println(listaJSON);
 	}
 
 	public void preencherDadosPais() throws SQLException {
@@ -136,9 +146,26 @@ public class PaisMB {
 
 	// -----------------------------------Getters and
 	// Setters------------------------
-
+	
+	
 	public String getTeste() {
 		return teste;
+	}
+
+	public ArrayList<Pais> getListaPaises2() {
+		return listaPaises2;
+	}
+
+	public void setListaPaises2(ArrayList<Pais> listaPaises2) {
+		this.listaPaises2 = listaPaises2;
+	}
+
+	public String getListaJSON() {
+		return listaJSON;
+	}
+
+	public void setListaJSON(String listaJSON) {
+		this.listaJSON = listaJSON;
 	}
 
 	public List<Pais> getListaPaises() {

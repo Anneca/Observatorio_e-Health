@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 
+import br.com.ufs.observatorio.model.Cidade;
 import br.com.ufs.observatorio.model.DadosPais;
 import br.com.ufs.observatorio.model.Pais;
 import br.com.ufs.observatorio.util.Conexao;
@@ -15,6 +16,29 @@ public class PaisDAO {
 	int idPais;
 	String nomePais;
 
+	
+	public Pais consultarPaisByID(int id) throws SQLException {
+
+		String sql = "select * from pais where id_pais=" + id;
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		ResultSet resultado = comando.executeQuery(sql);
+		Pais obj = new Pais();
+
+		while (resultado.next()) {
+			obj.setCodigo(resultado.getInt("id_pais"));
+			obj.setDescricao(resultado.getString("cv_descricao"));
+			obj.setCapital(resultado.getString("cv_capital"));
+		}
+
+		comando.close();
+		con.conexao.close();
+		return obj;
+
+	}
+
+	
 	public boolean cadastrarPais(String descricao, String capital, String populacao, String IDH, String IDI, String PIB,
 			String ultimaAlteracao) throws SQLException {
 		boolean sucesso = false;
@@ -46,6 +70,37 @@ public class PaisDAO {
 			Pais obj = new Pais();
 			obj.setCodigo(resultado.getInt("id_pais"));
 			obj.setDescricao(resultado.getString("cv_descricao"));
+			obj.setCapital(resultado.getString("cv_capital"));
+			lista.add(obj);
+		}
+
+		comando.close();
+		con.conexao.close();
+		return lista;
+
+	}
+	
+	public ArrayList<Pais> consultarPais2() throws SQLException {
+
+		ArrayList<Pais> lista = new ArrayList<Pais>();
+
+		String sql = "select * from pais";
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		ResultSet resultado = comando.executeQuery(sql);
+
+		while (resultado.next()) {
+			Pais obj = new Pais();
+			obj.setCodigo(resultado.getInt("id_pais"));
+			obj.setDescricao(resultado.getString("cv_descricao"));
+			obj.setCapital(resultado.getString("cv_capital"));
+			obj.setIDH(resultado.getString("cv_idh"));
+			obj.setIDI(resultado.getString("cv_idi"));
+			obj.setPIB(resultado.getString("cv_pib"));
+			obj.setPopulacao(resultado.getString("cv_populacao"));
+			obj.setUltimaAlteracao(resultado.getString("dt_ultima_alteracao"));
+
 			lista.add(obj);
 		}
 

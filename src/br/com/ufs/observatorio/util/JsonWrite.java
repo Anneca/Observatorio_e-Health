@@ -6,6 +6,9 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import br.com.ufs.observatorio.model.Cidade;
+import br.com.ufs.observatorio.model.Hospital;
+import br.com.ufs.observatorio.model.Pais;
 import br.com.ufs.observatorio.model.RedeSocial;
 import br.com.ufs.observatorio.model.Tecnologia;
 
@@ -75,6 +78,65 @@ public class JsonWrite {
 
 		return jsonArray;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONArray gerarArquivoJsonHospital(ArrayList<Hospital> list) {
+
+		for (Hospital h : list) {
+
+			JSONObject jsonObject = new JSONObject();
+			// Armazena dados em um Objeto JSON
+			jsonObject.put("nome", h.getNome());
+			jsonObject.put("site", h.getSite());
+			jsonObject.put("cidade", h.getCidade().getDescricao());
+			jsonObject.put("pais", h.getPais().getDescricao());
+			jsonObject.put("possui_site", h.getPossuiSite());
+			jsonObject.put("dt_cadastro", h.getDataAlteracao());
+			jsonObject.put("natureza", h.getTipoOrganizacao());
+
+			jsonArray.add(jsonObject);
+		}
+		return jsonArray;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONArray gerarArquivoJsonPais(ArrayList<Pais> list) {
+
+		for (Pais p : list) {
+
+			JSONObject jsonObject = new JSONObject();
+			// Armazena dados em um Objeto JSON
+			jsonObject.put("codigo", p.getCodigo());
+			jsonObject.put("descricao", p.getDescricao());
+			jsonObject.put("capital", p.getCapital());
+			jsonObject.put("populacao", p.getPopulacao());
+			jsonObject.put("idh", p.getIDH());
+			jsonObject.put("idi", p.getIDI());
+			jsonObject.put("pib", p.getPIB());
+			jsonObject.put("ultima_alteracao", p.getUltimaAlteracao());
+			
+			jsonArray.add(jsonObject);
+		}
+		return jsonArray;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONArray gerarArquivoJsonCidade(ArrayList<Cidade> list) {
+
+		for (Cidade c : list) {
+
+			JSONObject jsonObject = new JSONObject();
+			// Armazena dados em um Objeto JSON
+			jsonObject.put("codigo", c.getCodigo());
+			jsonObject.put("descricao", c.getDescricao());
+			jsonObject.put("capital", c.getCapital());
+			jsonObject.put("ultima_alteracao", c.getUltimaAlteracao());
+			
+			jsonArray.add(jsonObject);
+		}
+		return jsonArray;
+	}
+
 
 	public List<String> getListaCores() {
 		return listaCores;

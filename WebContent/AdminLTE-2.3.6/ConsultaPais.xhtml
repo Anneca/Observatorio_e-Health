@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Consultar Países</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link href="assets/css/animate.css" rel="stylesheet" />
+	<link rel="stylesheet"
+		href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"></link>
+	<link rel="stylesheet"
+		href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css"></link>
+	<link rel="stylesheet"
+		href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css"></link>
+	<link rel="stylesheet"
+		href="https://editor.datatables.net/extensions/Editor/css/editor.dataTables.min.css"></link>
+
+	<!-- DataTable -->
+	<script src="//code.jquery.com/jquery-1.12.3.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
+	<script
+		src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+	<style>
+input, label, select {
+	color: #6b6565;
+	background-color: #FFF;
+	border-radius: 4px;
+}
+
+.wrapper.style5 select {
+	background-color: #FFF;
+	border: solid 1px;
+}
+
+input {
+	border: solid 1px;
+}
+
+.ui-growl {
+	margin-top: 56px;
+	left: 74%;
+	width: 360px;
+	height: 110px;
+	z-index: 9999;
+}
+
+.wrapper.style5 table tbody tr {
+	border-color: #fff;
+}
+
+.wrapper.style5 table tbody tr:nth-child(2n+1) {
+	background-color: rgba(246, 237, 237, 0);
+}
+
+table td {
+	padding: 0;
+}
+</style>
+</h:head>
+<h:body>
+
+	<!-- Page Wrapper -->
+	<div id="page-wrapper">
+
+		<!-- Header -->
+		<header id="header"
+			style="padding-top: 0px; padding-right: 2em; padding-bottom: 0px; padding-left: 0px;">
+			<div class="col-md-6">
+				<h1>OBSERVATÓRIO</h1>
+			</div>
+			<nav id="nav">
+				<ul>
+					<li class="special"><a href="#menu"
+						style="text-decoration: none;" class="menuToggle"><span>Menu</span></a>
+						<div id="menu">
+							<ul>
+								<li><a href="index.xhtml">Home</a></li>
+								<li><a href="Sobre.xhtml">Sobre</a></li>
+								<li><a href="Pesquisa.xhtml">Pesquisa</a></li>
+								<li><a id="27_faq" href="#">Cadastro</a>
+									<div id="27" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroHospital.xhtml">Hospital</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroPais.xhtml">País</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroCidade.xhtml">Cidade</a></li>
+										</ul>
+									</div></li>
+								<li><a id="28_faq" href="#">Consulta</a>
+									<div id="28" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="ConsultaHospital.xhtml">Hospital</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="ConsultaPais.xhtml">País</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="ConsultaCidade.xhtml">Cidade</a></li>
+										</ul>
+									</div></li>
+								<li><a href="Login.xhtml">Login</a></li>
+							</ul>
+						</div></li>
+				</ul>
+
+			</nav>
+
+		</header>
+
+		<section class="wrapper style5"
+			style="padding-top: 2em; padding-bottom: 1em;">
+			<div class="inner">
+
+				<div style="width: 80%; margin-bottom: 30px;">
+					<h4>Listagem de Países</h4>
+
+					<table id="example" class="display" width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Código</th>
+								<th>Nome</th>
+								<th>Capital</th>
+								<th>População</th>
+								<th>IDI</th>
+								<th>IDH</th>
+								<th>PIB</th>
+								<th>Última Alteracção</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</thead>
+
+					</table>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<ul class="icons">
+				<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon fa-facebook"><span
+						class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon fa-instagram"><span
+						class="label">Instagram</span></a></li>
+				<li><a href="#" class="icon fa-dribbble"><span
+						class="label">Dribbble</span></a></li>
+				<li><a href="#" class="icon fa-envelope-o"><span
+						class="label">Email</span></a></li>
+			</ul>
+			<ul class="copyright">
+				<li>UNIVERSIDADE FEDERAL DE SERGIPE</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</footer>
+
+	</div>
+
+	<script>
+		$(document).ready(function() {
+			var editor; // use a global for the submit and return data rendering in the examples
+			
+					$("#27_faq").click(function() {
+						$("#27").slideToggle(170);
+					});
+
+					$("#28_faq").click(function() {
+						$("#28").slideToggle(170);
+					});
+					
+					
+					var data =#{paisMB.listaJSON};
+
+					$('#example').DataTable( {
+					    data: data,
+					    columns: [
+							{
+    							data: null,
+    							defaultContent: '',
+    							className: 'select-checkbox',
+    							orderable: false
+							},
+					        { data: 'codigo'},
+					        { data: 'descricao' },
+					        { data: 'capital' },
+					        { data: 'populacao'},
+					        { data: 'idi'},
+					        { data: 'idh'},
+					        { data: 'pib'},
+					        { data: 'ultima_alteracao'},
+
+					        {
+    							data: null,
+    							defaultContent: '<a href="CadastroHospital.xhtml"> <i class="fa fa-pencil"/></a>',
+    							className: '',
+    							orderable: false
+							},
+							
+							 {
+    							data: null,
+    							defaultContent: '<i class="fa fa-times"/>',
+    							className: '',
+    							orderable: false
+							}
+					    ],
+					    language: {
+					        "sProcessing":    "Procesando...",
+					        "sLengthMenu":    "Mostrar _MENU_ registros",
+					        "sZeroRecords":   "Não foram encontrados resultados",
+					        "sEmptyTable":    "Ningún dato disponible en esta tabla",
+					        "sInfo":          "Mostrando registros de _START_ a _END_ de um total de _TOTAL_ registros",
+					        "sInfoEmpty":     "Mostrando registros de 0 a 0 de um total de 0 registros",
+					        "sInfoFiltered":  "(filtrado de um total de _MAX_ registros)",
+					        "sInfoPostFix":   "",
+					        "sSearch":        "Buscar:",
+					        "sUrl":           "",
+					        "sInfoThousands":  ",",
+					        "sLoadingRecords": "Carregando...",
+					        "oPaginate": {
+					            "sFirst":    "Primero",
+					            "sLast":    "Último",
+					            "sNext":    "Próximo",
+					            "sPrevious": "Anterior"
+					        },
+					        "oAria": {
+					            "sSortAscending":  ": Ativar para ordenar a coluna de maneira ascendente",
+					            "sSortDescending": ": Ativar para ordenar a coluna de maneira descendente"
+					        }
+					    },
+					    select: {
+				            style:    'os',
+				            selector: 'td:first-child'
+				        }				        
+					} );
+					
+					
+				});
+	</script>
+
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</h:body>
+</html>

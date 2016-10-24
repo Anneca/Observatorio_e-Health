@@ -7,7 +7,24 @@ public class Hospital {
 	Cidade cidade;
 	Pais pais;
 	private String tipoOrganizacao;
+	private String dataAlteracao;
+	private String possuiSite;
 	
+	
+	//-----------------Gettes And Setters-------------
+	
+	public String getDataAlteracao() {
+		return dataAlteracao;
+	}
+	public String getPossuiSite() {
+		return possuiSite;
+	}
+	public void setPossuiSite(String possuiSite) {
+		this.possuiSite = possuiSite;
+	}
+	public void setDataAlteracao(String dataAlteracao) {
+		this.dataAlteracao = dataAlteracao;
+	}
 	public String getNome() {
 		return nome;
 	}

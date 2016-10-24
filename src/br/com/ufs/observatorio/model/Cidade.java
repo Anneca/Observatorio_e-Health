@@ -4,6 +4,16 @@ public class Cidade {
 	private int codigo;
 	private String descricao;
 	private String capital;
+	private String ultimaAlteracao;
+
+	
+	public String getUltimaAlteracao() {
+		return ultimaAlteracao;
+	}
+
+	public void setUltimaAlteracao(String ultimaAlteracao) {
+		this.ultimaAlteracao = ultimaAlteracao;
+	}
 
 	public int getCodigo() {
 		return codigo;

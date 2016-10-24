@@ -2,14 +2,21 @@ package br.com.ufs.controller;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
+
 import br.com.ufs.observatorio.dao.HospitalDAO;
+import br.com.ufs.observatorio.model.Hospital;
+import br.com.ufs.observatorio.model.Tecnologia;
+import br.com.ufs.observatorio.util.JsonWrite;
 
 @ManagedBean(name = "hospitalMB")
 public class HospitalMB {
@@ -18,6 +25,20 @@ public class HospitalMB {
 	int pais;
 	int cidade;
 	boolean possuiSite;
+	ArrayList<Hospital> lista = new ArrayList<Hospital>();
+	String listaJSON;
+	JsonWrite jsonWrite = new JsonWrite();
+
+	@PostConstruct
+	public void init() {
+		try {
+			lista = hospitalDAO.consultarHospitais();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		listaJSON = JSONArray.toJSONString((jsonWrite.gerarArquivoJsonHospital(lista)));
+	}
 
 	public void cadastrarHospital() {
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
@@ -38,6 +59,22 @@ public class HospitalMB {
 			addMessageError("Não foi possível cadastrar o hospital");
 			e.printStackTrace();
 		}
+	}
+
+	public ArrayList<Hospital> getLista() {
+		return lista;
+	}
+
+	public void setLista(ArrayList<Hospital> lista) {
+		this.lista = lista;
+	}
+
+	public String getListaJSON() {
+		return listaJSON;
+	}
+
+	public void setListaJSON(String listaJSON) {
+		this.listaJSON = listaJSON;
 	}
 
 	public boolean getPossuiSite() {
