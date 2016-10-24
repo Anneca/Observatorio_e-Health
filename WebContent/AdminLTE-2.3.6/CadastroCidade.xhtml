@@ -37,26 +37,48 @@ table td {
 	<div id="page-wrapper">
 
 		<!-- Header -->
-		<!-- Header -->
-		<header id="header">
-
-			<div class="col-md-8">
-				<h1>
-					<a href="index.xhtml">OBSERVATÓRIO</a>
-				</h1>
+		<header id="header"
+			style="padding-top: 0px; padding-right: 2em; padding-bottom: 0px; padding-left: 0px;">
+			<div class="col-md-6">
+				<h1>OBSERVATÓRIO</h1>
 			</div>
-			<div class="col-md-4">
-				<nav id="nav">
-					<ul style="font-weight: bold">
-						<li><a href="index.xhtml">Home</a></li>
-						<li><a href="Sobre.xhtml">Sobre</a></li>
-						<li><a href="">Pesquisa</a></li>
-						<li><a href="Contato.xhtml">Contato</a></li>
-					</ul>
+			<nav id="nav">
+				<ul>
+					<li class="special"><a href="#menu"
+						style="text-decoration: none;" class="menuToggle"><span>Menu</span></a>
+						<div id="menu">
+							<ul>
+								<li><a href="index.xhtml">Home</a></li>
+								<li><a href="Sobre.xhtml">Sobre</a></li>
+								<li><a href="Pesquisa.xhtml">Pesquisa</a></li>
+								<li><a id="27_faq" href="#">Cadastro</a>
+									<div id="27" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroHospital.xhtml">Hospital</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroPais.xhtml">País</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroCidade.xhtml">Cidade</a></li>
+										</ul>
+									</div></li>
+								<li><a id="28_faq" href="#">Consulta</a>
+									<div id="28" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="#">Hospital</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="#">País</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="#">Cidade</a></li>
+										</ul>
+									</div></li>
+								<li><a href="Login.xhtml">Login</a></li>
+							</ul>
+						</div></li>
+				</ul>
 
-				</nav>
-
-			</div>
+			</nav>
 
 		</header>
 
@@ -76,11 +98,12 @@ table td {
 									placeholder="Nome" required="true"
 									requiredMessage="Campo nome é obrigatório"></p:inputText>
 							</div>
-							
+
 
 							<label for="consolee">Capital:</label>
 							<div class="6u$ 12u$(small)">
-								<h:selectOneRadio name="capital" id="capital" required="true" requiredMessage="O campo capital é obrigatório">
+								<h:selectOneRadio name="capital" id="capital" required="true"
+									requiredMessage="O campo capital é obrigatório">
 									<f:selectItem itemLabel="Sim" itemValue="Sim" />
 									<f:selectItem itemLabel="Não" itemValue="Não" />
 								</h:selectOneRadio>
@@ -90,9 +113,10 @@ table td {
 								<ul class="actions">
 									<li><p:commandButton
 											actionListener="#{cidadeMB.cadastrarCidade}" update="growl"
-											value="Cadastrar" style="height:45px;font-size: 1em; background-color:#ed4233"
+											value="Cadastrar"
+											style="height:45px;font-size: 1em; background-color:#ed4233; background-image: none;"
 											styleClass="special"></p:commandButton></li>
-									<li><input type="reset" value="Limpar"></input></li>
+									<li><input type="reset" value="Limpar" style="border:1px solid grey;"></input></li>
 								</ul>
 							</div>
 						</div>
@@ -124,6 +148,17 @@ table td {
 		</footer>
 
 	</div>
+	<script>
+		$(document).ready(function() {
+			$("#27_faq").click(function() {
+				$("#27").slideToggle(170);
+			});
+
+			$("#28_faq").click(function() {
+				$("#28").slideToggle(170);
+			});
+		});
+	</script>
 
 	<!-- Scripts -->
 	<script>
@@ -141,7 +176,6 @@ table td {
 	<script src="assets/js/jquery.scrolly.min.js"></script>
 	<script src="assets/js/skel.min.js"></script>
 	<script src="assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="assets/js/main.js"></script>
 
 </h:body>

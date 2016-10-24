@@ -22,49 +22,48 @@
 	<div id="page-wrapper">
 
 		<!-- Header -->
-		<header id="header">
+		<header id="header"
+			style="padding-top: 0px; padding-right: 2em; padding-bottom: 0px; padding-left: 0px;">
 			<div class="col-md-6">
-				<h1>
-					<a href="index.html">OBSERVATÓRIO</a>
-				</h1>
+				<h1>OBSERVATÓRIO</h1>
 			</div>
-			<div class="col-md-6">
-				<div class="language">
-					<ul>
-						<li><a class="active" href="#"> <img alt=""
-								src="images/inglaterra.jpg" style="margin-top: 16px;"
-								width="27px" height="15px" />
-						</a></li>
-						<li><a href="#"> <img alt=""
-								src="images/Bandeira_da_Espanha.png" style="margin-top: 16px;"
-								width="27px" height="15px" />
-						</a></li>
-					</ul>
-				</div>
-				<nav id="nav">
-					<ul>
-						<li class="special"><a href="#menu" class="menuToggle"><span>Menu</span></a>
-							<div id="menu">
-								<ul>
-									<li><a href="index.xhtml">Home</a></li>
-									<li><a href="Sobre.xhtml">Sobre</a></li>
-									<li><a id="27_faq" href="#">Ranking</a>
-										<div id="27" style="display: none;">
-											<ul style="margin-top: 15px; margin-bottom: 15px">
-												<li style="font-size: 0.8em; margin-left: 15px;"><a
-													href="RedesSociais.xhtml">Redes Sociais</a></li>
-												<li style="font-size: 0.8em; margin-left: 15px;"><a
-													href="Tecnologias.xhtml">Tecnologias</a></li>
-											</ul>
-										</div></li>
-									<li><a href="Contato.xhtml">Contato</a></li>
-								</ul>
-							</div></li>
-					</ul>
+			<nav id="nav">
+				<ul>
+					<li class="special"><a href="#menu"
+						style="text-decoration: none;" class="menuToggle"><span>Menu</span></a>
+						<div id="menu">
+							<ul>
+								<li><a href="index.xhtml">Home</a></li>
+								<li><a href="Sobre.xhtml">Sobre</a></li>
+								<li><a href="Pesquisa.xhtml">Pesquisa</a></li>
+								<li><a id="27_faq" href="#">Cadastro</a>
+									<div id="27" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroHospital.xhtml">Hospital</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroPais.xhtml">País</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroCidade.xhtml">Cidade</a></li>
+										</ul>
+									</div></li>
+								<li><a id="28_faq" href="#">Consulta</a>
+									<div id="28" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="#">Hospital</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="#">País</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="#">Cidade</a></li>
+										</ul>
+									</div></li>
+								<li><a href="Login.xhtml">Login</a></li>
+							</ul>
+						</div></li>
+				</ul>
 
-				</nav>
-
-			</div>
+			</nav>
 		</header>
 
 		<!-- Main -->
@@ -168,6 +167,10 @@
 		$(document).ready(function() {
 			$("#27_faq").click(function() {
 				$("#27").slideToggle(170);
+			});
+
+			$("#28_faq").click(function() {
+				$("#28").slideToggle(170);
 			});
 		});
 	</script>

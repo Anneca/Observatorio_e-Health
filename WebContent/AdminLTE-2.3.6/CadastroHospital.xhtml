@@ -39,29 +39,50 @@ table td {
 	<div id="page-wrapper">
 
 		<!-- Header -->
-		<!-- Header -->
-		<header id="header">
-
-			<div class="col-md-8">
-				<h1>
-					<a href="index.xhtml">OBSERVATÓRIO</a>
-				</h1>
+		<header id="header"
+			style="padding-top: 0px; padding-right: 2em; padding-bottom: 0px; padding-left: 0px;">
+			<div class="col-md-6">
+				<h1>OBSERVATÓRIO</h1>
 			</div>
-			<div class="col-md-4">
-				<nav id="nav">
-					<ul style="font-weight: bold">
-						<li><a href="index.xhtml">Home</a></li>
-						<li><a href="Sobre.xhtml">Sobre</a></li>
-						<li><a href="">Pesquisa</a></li>
-						<li><a href="Contato.xhtml">Contato</a></li>
-					</ul>
+			<nav id="nav">
+				<ul>
+					<li class="special"><a href="#menu"
+						style="text-decoration: none;" class="menuToggle"><span>Menu</span></a>
+						<div id="menu">
+							<ul>
+								<li><a href="index.xhtml">Home</a></li>
+								<li><a href="Sobre.xhtml">Sobre</a></li>
+								<li><a href="Pesquisa.xhtml">Pesquisa</a></li>
+								<li><a id="27_faq" href="#">Cadastro</a>
+									<div id="27" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroHospital.xhtml">Hospital</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroPais.xhtml">País</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroCidade.xhtml">Cidade</a></li>
+										</ul>
+									</div></li>
+								<li><a id="28_faq" href="#">Consulta</a>
+									<div id="28" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="#">Hospital</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="#">País</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="#">Cidade</a></li>
+										</ul>
+									</div></li>
+								<li><a href="Login.xhtml">Login</a></li>
+							</ul>
+						</div></li>
+				</ul>
 
-				</nav>
-
-			</div>
+			</nav>
 
 		</header>
-
 
 		<section class="wrapper style5"
 			style="padding-top: 2em; padding-bottom: 1em;">
@@ -74,8 +95,8 @@ table td {
 							<div class="6u 12u$(xsmall)">
 								<label for="nome">Nome:</label>
 								<p:inputText name="nome" type="text" required="true"
-									placeholder="Nome"
-									requiredMessage="O campo nome é obrigatório" id="nome"
+									placeholder="Nome" requiredMessage="O campo nome é obrigatório"
+									id="nome"
 									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"></p:inputText>
 							</div>
 							<div class="12u$">
@@ -101,8 +122,8 @@ table td {
 
 							<div class="12u$">
 								<label for="advanced">País:</label>
-								<h:selectOneMenu value="#{hospitalMB.pais}" name="pais" required="true"
-									requiredMessage="O campo país é obrigatório"
+								<h:selectOneMenu value="#{hospitalMB.pais}" name="pais"
+									required="true" requiredMessage="O campo país é obrigatório"
 									style="position: relative; width: 25%; height: 2.75em; border-radius: 4px; color: #878787; border: 1px solid #C0C0C0; background-color: #FFF;">
 									<f:selectItem itemValue="" itemLabel="Selecione..." />
 									<f:selectItems value="#{paisMB.listaPaises}" var="pais"
@@ -113,8 +134,8 @@ table td {
 
 							<div class="12u$">
 								<label for="">Cidade:</label>
-								<h:selectOneMenu value="#{hospitalMB.cidade}" name="cidade" required="true"
-									requiredMessage="O campo cidade é obrigatório"
+								<h:selectOneMenu value="#{hospitalMB.cidade}" name="cidade"
+									required="true" requiredMessage="O campo cidade é obrigatório"
 									style="position: relative; width: 30%; height: 2.75em; border-radius: 4px; color: #878787; border: 1px solid #C0C0C0; background-color: #FFF;">
 									<f:selectItem itemValue="" itemLabel="Selecione..." />
 									<f:selectItems value="#{cidadeMB.listaCidades}" var="cidade"
@@ -146,11 +167,11 @@ table td {
 							<div class="12u$">
 								<ul class="actions">
 									<li><p:commandButton
-											actionListener="#{hospitalMB.cadastrarHospital}" update="growl"
-											value="Cadastrar"
-											style="height:45px;font-size: 1em; background-color:#ed4233"
+											actionListener="#{hospitalMB.cadastrarHospital}"
+											update="growl" value="Cadastrar"
+											style="height:45px;font-size: 1em; background-color:#ed4233; background-image:none;"
 											styleClass="special"></p:commandButton></li>
-									<li><input type="reset" value="Limpar"></input></li>
+									<li><input type="reset" value="Limpar"  style="border:1px solid grey;"></input></li>
 								</ul>
 							</div>
 						</div>
@@ -199,12 +220,25 @@ table td {
 
 		}
 	</script>
+	
+	<script>
+		$(document).ready(function() {
+			$("#27_faq").click(function() {
+				$("#27").slideToggle(170);
+			});
+
+			$("#28_faq").click(function() {
+				$("#28").slideToggle(170);
+			});
+		});
+	</script>
+
+	
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
 	<script src="assets/js/skel.min.js"></script>
 	<script src="assets/js/util.js"></script>
-	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="assets/js/main.js"></script>
 
 </h:body>
