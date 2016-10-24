@@ -4,7 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Cadastro de Pais</title>
+	<title>Cadastro de Cidade</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="assets/css/main.css" />
@@ -30,7 +30,6 @@ table td {
 	padding: 0;
 }
 </style>
-
 </h:head>
 <h:body>
 
@@ -63,66 +62,34 @@ table td {
 
 
 		<section class="wrapper style5"
-			style="padding-top: 2em; padding-bottom: 1em;">
+			style="padding-top: 2em; padding-bottom: 7em;">
 			<div class="inner">
 
-				<div style="width: 80%">
-					<h4>Cadastro de País</h4>
+				<div style="width: 90%">
+					<h4>Cadastro de Cidade</h4>
 					<form method="post" action="#">
 						<div class="row uniform">
-							<div class="6u 12u$(xsmall)">
+							<div class="12u$">
 								<label for="nome">Nome:</label>
-								<p:inputText type="text" id="nome" name="nome" required="true"
-									requiredMessage="O Campo nome é obrigatório"
-									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
-									placeholder="Nome"></p:inputText>
+								<p:inputText type="text" id="nome" name="nome"
+									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF; width: 30%;"
+									placeholder="Nome" required="true"
+									requiredMessage="Campo nome é obrigatório"></p:inputText>
 							</div>
-							<div class="6u 12u$(xsmall)">
-								<label for="capital">Capital:</label>
-								<p:inputText type="text" id="capital" required="true" name="capital"
-									requiredMessage="Campo Capital é obrigatório"
-									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
-									placeholder="Capital"></p:inputText>
-							</div>
+							
 
-							<div class="6u 12u$(xsmall)">
-								<label for="populacao">População:</label>
-								<p:inputText type="text" required="true"
-									requiredMessage="Campo população é obrigatório" id="populacao" name="populacao"
-									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
-									placeholder="População"></p:inputText>
-							</div>
-
-
-							<div class="6u 12u$(xsmall)">
-								<label for="IDH">Índice de Desenvolvimento Humano:</label>
-								<p:inputText required="true" requiredMessage="IDH é obrigatório" name="IDH"
-									type="text" id="IDH"
-									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
-									placeholder="IDH"></p:inputText>
-							</div>
-
-
-							<div class="6u 12u$(xsmall)">
-								<label for="IDI">Índice de Desenvolvimento Tecnológico:</label>
-								<p:inputText type="text" id="IDI" required="true" name="IDI"
-									requiredMessage="IDI é obrigatório"
-									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
-									placeholder="IDI"></p:inputText>
-							</div>
-
-							<div class="6u 12u$(xsmall)">
-								<label for="PIB">Produto Interno Bruto:</label>
-								<p:inputText required="true" requiredMessage="PIB é obrigatório" name="PIB"
-									type="text" id="PIB"
-									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
-									placeholder="PIB"></p:inputText>
+							<label for="consolee">Capital:</label>
+							<div class="6u$ 12u$(small)">
+								<h:selectOneRadio name="capital" id="capital" required="true" requiredMessage="O campo capital é obrigatório">
+									<f:selectItem itemLabel="Sim" itemValue="Sim" />
+									<f:selectItem itemLabel="Não" itemValue="Não" />
+								</h:selectOneRadio>
 							</div>
 
 							<div class="12u$">
 								<ul class="actions">
 									<li><p:commandButton
-											actionListener="#{paisMB.cadastrarPais}" update="growl"
+											actionListener="#{cidadeMB.cadastrarCidade}" update="growl"
 											value="Cadastrar" style="height:45px;font-size: 1em; background-color:#ed4233"
 											styleClass="special"></p:commandButton></li>
 									<li><input type="reset" value="Limpar"></input></li>
@@ -132,7 +99,6 @@ table td {
 						<div class="grow">
 							<p:growl id="growl" life="9000" />
 						</div>
-
 					</form>
 				</div>
 			</div>

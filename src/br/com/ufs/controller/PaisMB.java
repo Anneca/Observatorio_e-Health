@@ -3,10 +3,13 @@ package br.com.ufs.controller;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import br.com.ufs.observatorio.dao.PaisDAO;
 import br.com.ufs.observatorio.model.DadosPais;
@@ -26,11 +29,18 @@ public class PaisMB {
 	private int qtSitesComCorpoClinico;
 	private int qtSitesInformacaoInstitucional;
 	private String pais = "Escolha um País";
-	private String ano = "ANO";
+	private String ano = "";
 	private String propertyName1;
 	private String propertyName2;
 	private int hospitaisPublicos;
 	private int hospitaisPrivados;
+	private int hospitaisSemFinsLucrativos;
+	private int hospitaisMisto;
+	private int hospitaisUniversitarios;
+	private int hospitaisNaoDefinidos;
+
+	private List<Pais> listaPaises;
+
 	Pais objPais = new Pais();
 
 	PaisDAO paisDAO = new PaisDAO();
@@ -40,6 +50,8 @@ public class PaisMB {
 		String valor = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("pais");
 		pais = valor;
 		try {
+
+			listaPaises = paisDAO.consultarPais();
 			// Set objeto País
 			objPais = paisDAO.consultarPaisByNome(pais);
 			// Capturando a Data Atual
@@ -47,6 +59,7 @@ public class PaisMB {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			String format = formatter.format(data);
 			System.out.println(format);
+			// Temporário
 			format = "13-10-2016";
 			// Capturando o objeto
 			DadosPais objeto = paisDAO.consultarDadosPais(pais, format);
@@ -71,7 +84,7 @@ public class PaisMB {
 	}
 
 	public void preencherDadosPais() throws SQLException {
-
+		objPais = paisDAO.consultarPaisByNome(pais);
 		DadosPais objeto = paisDAO.consultarDadosPais(pais, ano);
 		qtHospitaisCatalogados = objeto.getQtHospitaisCatalogados();
 		qtHospitaisComSite = objeto.getQtHospitaisComSite();
@@ -82,16 +95,58 @@ public class PaisMB {
 		qtSitesInformacaoInstitucional = objeto.getQtSitesInformacaoInstitucional();
 		hospitaisPrivados = objeto.getHospitaisPrivados();
 		hospitaisPublicos = objeto.getHospitaisPublicos();
+		hospitaisMisto = objeto.getHospitaisMisto();
+		hospitaisNaoDefinidos = objeto.getHospitaisNaoDefinidos();
+		hospitaisSemFinsLucrativos = objeto.getHospitaisSemFinsLucrativos();
+		hospitaisUniversitarios = objeto.getHospitaisUniversitarios();
 		pais = objeto.getPais();
+	}
+
+	public void cadastrarPais() {
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		String descricao = req.getParameter("nome");
+		String capital = req.getParameter("capital");
+		String populacao = req.getParameter("populacao");
+		String IDH = req.getParameter("IDH");
+		String IDI = req.getParameter("IDI");
+		String PIB = req.getParameter("PIB");
+		Date ultimaAlteracao = new Date(System.currentTimeMillis());
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		String format = formatter.format(ultimaAlteracao);
+
+		try {
+			paisDAO.cadastrarPais(descricao, capital, populacao, IDH, IDI, PIB, format);
+			addMessage("País Cadastrado");
+		} catch (SQLException e) {
+			addMessageError("Não foi possível cadastrar o país");
+			e.printStackTrace();
+		}
+	}
+
+	public void addMessageError(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
+	public void addMessage(String summary) {
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
+		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
 	// -----------------------------------Getters and
 	// Setters------------------------
-	
-	
 
 	public String getTeste() {
 		return teste;
+	}
+
+	public List<Pais> getListaPaises() {
+		return listaPaises;
+	}
+
+	public void setListaPaises(List<Pais> listaPaises) {
+		this.listaPaises = listaPaises;
 	}
 
 	public int getQtSitesDisponiveis() {
@@ -224,6 +279,46 @@ public class PaisMB {
 
 	public void setTeste(String teste) {
 		this.teste = teste;
+	}
+
+	public int getHospitaisSemFinsLucrativos() {
+		return hospitaisSemFinsLucrativos;
+	}
+
+	public void setHospitaisSemFinsLucrativos(int hospitaisSemFinsLucrativos) {
+		this.hospitaisSemFinsLucrativos = hospitaisSemFinsLucrativos;
+	}
+
+	public int getHospitaisMisto() {
+		return hospitaisMisto;
+	}
+
+	public void setHospitaisMisto(int hospitaisMisto) {
+		this.hospitaisMisto = hospitaisMisto;
+	}
+
+	public int getHospitaisUniversitarios() {
+		return hospitaisUniversitarios;
+	}
+
+	public void setHospitaisUniversitarios(int hospitaisUniversitarios) {
+		this.hospitaisUniversitarios = hospitaisUniversitarios;
+	}
+
+	public int getHospitaisNaoDefinidos() {
+		return hospitaisNaoDefinidos;
+	}
+
+	public void setHospitaisNaoDefinidos(int hospitaisNaoDefinidos) {
+		this.hospitaisNaoDefinidos = hospitaisNaoDefinidos;
+	}
+
+	public PaisDAO getPaisDAO() {
+		return paisDAO;
+	}
+
+	public void setPaisDAO(PaisDAO paisDAO) {
+		this.paisDAO = paisDAO;
 	}
 
 }

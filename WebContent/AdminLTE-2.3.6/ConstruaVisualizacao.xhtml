@@ -9,42 +9,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet"
 		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="assets/css/main.css"></link>
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	<!-- Bootstrap 3.3.6 -->
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"></link>
-	<!-- Font Awesome -->
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"></link>
-	<!-- Ionicons -->
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"></link>
-	<!-- Theme style -->
-	<link rel="stylesheet" href="dist/css/AdminLTE.min.css"></link>
-	<!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-	<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css"></link>
-	<!-- iCheck -->
-	<link rel="stylesheet" href="plugins/iCheck/flat/blue.css"></link>
-	<!-- Morris chart -->
-	<link rel="stylesheet" href="plugins/morris/morris.css"></link>
-	<!-- jvectormap -->
-	<link rel="stylesheet"
-		href="plugins/jvectormap/jquery-jvectormap-1.2.2.css"></link>
-	<!-- Date Picker -->
-	<link rel="stylesheet" href="plugins/datepicker/datepicker3.css"></link>
-	<!-- Daterange picker -->
-	<link rel="stylesheet"
-		href="plugins/daterangepicker/daterangepicker.css"></link>
-	<!-- bootstrap wysihtml5 - text editor -->
-	<link rel="stylesheet"
-		href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"></link>
 
-	<link rel="stylesheet" href="assets/css/main.css"></link>
 
 
 	<style type="text/css">
@@ -288,25 +261,51 @@
 	<div id="page-wrapper">
 
 		<!-- Header -->
-		<header id="header">
-
-			<div class="col-md-8">
+		<header id="header"
+			style="background: transparent; padding-top: 0px; padding-right: 2em; padding-bottom: 0px; padding-left: 0px;">
+			<div class="col-md-6">
 				<h1>
-					<a href="index.xhtml">OBSERVATÓRIO</a>
+					<a href="index.html">OBSERVATÓRIO</a>
 				</h1>
 			</div>
-			<div class="col-md-4">
-				<nav id="nav">
-					<ul style="font-weight: bold">
-						<li><a href="index.xhtml">Home</a></li>
-						<li><a href="Sobre.xhtml">Sobre</a></li>
-						<li><a href="">Pesquisa</a></li>
-						<li><a href="Contato.xhtml">Contato</a></li>
-					</ul>
+			<nav id="nav">
+				<ul>
+					<li class="special"><a href="#menu"
+						style="text-decoration: none;" class="menuToggle"><span>Menu</span></a>
+						<div id="menu">
+							<ul>
+								<li><a href="index.xhtml">Home</a></li>
+								<li><a href="Sobre.xhtml">Sobre</a></li>
+								<li><a id="27_faq" href="#">Cadastro</a>
+									<div id="27" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroHospital.xhtml">Hospital</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroPais.xhtml">País</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroCidade.xhtml">Cidade</a></li>
+										</ul>
+									</div></li>
+								<li><a href="Pesquisa.xhtml">Pesquisa</a></li>
+								<li><a id="28_faq" href="#">Consulta</a>
+									<div id="28" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="#">Hospital</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="#">País</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="#">Cidade</a></li>
+										</ul>
+									</div></li>
+								<li><a href="Login.xhtml">Login</a></li>
+							</ul>
+						</div></li>
+				</ul>
 
-				</nav>
+			</nav>
 
-			</div>
 
 		</header>
 
@@ -320,7 +319,7 @@
 
 					<div class="container">
 						<br />
-						<h1 style="">Map with a legend for areas</h1>
+						<h1 style="">Escolha um País</h1>
 
 						<div class="mapcontainer">
 							<div class="map">
@@ -356,9 +355,6 @@
 			</div>
 		</div>
 
-
-
-
 		<!-- Footer -->
 		<footer id="footer">
 			<ul class="icons">
@@ -379,5 +375,20 @@
 		</footer>
 
 	</div>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("#27_faq").click(function() {
+				$("#27").slideToggle(170);
+			});
+
+			$("#28_faq").click(function() {
+				$("#28").slideToggle(170);
+			});
+		});
+	</script>
 </h:body>
 </html>

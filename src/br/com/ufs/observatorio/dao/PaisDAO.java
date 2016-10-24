@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 import br.com.ufs.observatorio.model.DadosPais;
 import br.com.ufs.observatorio.model.Pais;
@@ -13,6 +14,23 @@ public class PaisDAO {
 	Conexao con = new Conexao();
 	int idPais;
 	String nomePais;
+
+	public boolean cadastrarPais(String descricao, String capital, String populacao, String IDH, String IDI, String PIB,
+			String ultimaAlteracao) throws SQLException {
+		boolean sucesso = false;
+
+		String sql = "Insert into pais (cv_descricao, cv_capital, cv_populacao, cv_idh, cv_idi, cv_pib, dt_ultima_alteracao) values ('"
+				+ descricao + "','" + capital + "','" + populacao + "','" + IDH + "','" + IDI + "','" + PIB + "','"
+				+ ultimaAlteracao + "')";
+
+		System.out.println(sql);
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		sucesso = comando.execute(sql);
+
+		return sucesso;
+	}
 
 	public ArrayList<Pais> consultarPais() throws SQLException {
 
@@ -52,7 +70,12 @@ public class PaisDAO {
 			obj.setCodigo(resultado.getInt("id_pais"));
 			obj.setDescricao(resultado.getString("cv_descricao"));
 			obj.setCapital(resultado.getString("cv_capital"));
+			obj.setIDH(resultado.getString("cv_idh"));
+			obj.setIDI(resultado.getString("cv_idi"));
+			obj.setPIB(resultado.getString("cv_pib"));
+			obj.setUltimaAlteracao(resultado.getString("dt_ultima_alteracao"));
 			obj.setPopulacao(resultado.getString("cv_populacao"));
+
 		}
 
 		comando.close();
@@ -65,7 +88,7 @@ public class PaisDAO {
 
 		int id = capturarIdPaisByNome(pais);
 		int quantidadeHospitaisCatalogados = retornarQtHospitaisCatalogados(id);
-		int quantidadeHospitaisComSites = retornarQtHospitaisCatalogados(id);
+		int quantidadeHospitaisComSites = retornarQtHospitaisComSites(id, data);
 		int quantidadeSitesInfomacoesInstitucionais = retornarQtSitesComInformacoesInstitucionais(id);
 		int quantidadeSitesComServicos = retornarQtSitesComServico(id);
 		int quantidadeSitesComCorpoClinico = retornarQtSitesComCorpoClinico(id);
@@ -73,6 +96,10 @@ public class PaisDAO {
 		int quantidadeSitesComComentarios = retornarQtSitesComComentarios(id);
 		int hospitaisPublicos = retornarQtHospitaisPublicos(id);
 		int hospitaisPrivados = retornarQtHospitaisPrivados(id);
+		int hospitaisMisto = retornarQtHospitaisMisto(id);
+		int hospitaisNaoDefinidos = retornarQtHospitaisNaoDefinido(id);
+		int hospitaisUniversitarios = retornarQtHospitaisUniversitarios(id);
+		int hospitaisSemFinsLucrativos = retornarQtHospitaisSemFinsLucrativos(id);
 		int hospitaisSemSites = retornarQtHospitaisSemSites(id, data);
 		int quantidadeSitesDisponiveis = retornarQtSitesDisponiveis(id, data);
 
@@ -91,6 +118,10 @@ public class PaisDAO {
 		obj.setPais(pais);
 		obj.setHospitaisPrivados(hospitaisPrivados);
 		obj.setHospitaisPublicos(hospitaisPublicos);
+		obj.setHospitaisMisto(hospitaisMisto);
+		obj.setHospitaisUniversitarios(hospitaisUniversitarios);
+		obj.setHospitaisNaoDefinidos(hospitaisNaoDefinidos);
+		obj.setHospitaisSemFinsLucrativos(hospitaisSemFinsLucrativos);
 		obj.setQtHospitaisSemSites(hospitaisSemSites);
 		obj.setQtSitesDisponiveis(quantidadeSitesDisponiveis);
 
@@ -98,11 +129,30 @@ public class PaisDAO {
 
 	}
 
+	private int retornarQtHospitaisComSites(int id, String data) throws SQLException {
+		String sql = "Select count(id_pais) as qt_HospitaisComSite from Hospital where id_pais=" + id
+				+ " and cv_tem_site = 'Sim'";
+
+		int hospitaisComSite = 0;
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		ResultSet resultado = comando.executeQuery(sql);
+
+		while (resultado.next()) {
+			hospitaisComSite = resultado.getInt("qt_HospitaisComSite");
+		}
+
+		comando.close();
+		con.conexao.close();
+		return hospitaisComSite;
+	}
+
 	// Hospitais Sem Sites
 	private int retornarQtHospitaisSemSites(int id, String data) throws SQLException {
 		String sql = "Select count(id_pais) as qt_HospitaisSemSite from Hospital where id_pais=" + id
-				+ " and cv_site = 'Não possui Site'";
-		
+				+ " and cv_tem_site = 'Não'";
+
 		int hospitaisSemSite = 0;
 
 		con.setConnection();
@@ -294,13 +344,96 @@ public class PaisDAO {
 		return sitesDisponiveis;
 	}
 
+	// HOSPITAIS Misto
+	public int retornarQtHospitaisMisto(int id) throws SQLException {
+		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisMistos from hospital h "
+				+ " where id_Pais = " + id + " AND  cv_tipo_organizacao = 'Misto'";
+		
+		int hospitaisMistos = 0;
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		ResultSet resultado = comando.executeQuery(sql);
+
+		while (resultado.next()) {
+			hospitaisMistos = resultado.getInt("hospitaisMistos");
+		}
+
+		comando.close();
+		con.conexao.close();
+		return hospitaisMistos;
+
+	}
+
+	// HOSPITAIS Nao Definido
+	public int retornarQtHospitaisNaoDefinido(int id) throws SQLException {
+		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisNaoDefinido from hospital h "
+				+ " where id_Pais = " + id + " AND  cv_tipo_organizacao = 'Nao definido'";
+		
+		int hospitaisNaoDefinido = 0;
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		ResultSet resultado = comando.executeQuery(sql);
+
+		while (resultado.next()) {
+			hospitaisNaoDefinido = resultado.getInt("hospitaisNaoDefinido");
+		}
+
+		comando.close();
+		con.conexao.close();
+		return hospitaisNaoDefinido;
+
+	}
+
+	// HOSPITAIS SEM FINS LUCRATIVOS
+	public int retornarQtHospitaisSemFinsLucrativos(int id) throws SQLException {
+		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisSemFinsLucrativos from hospital h "
+				+ " where id_Pais = " + id + " AND  cv_tipo_organizacao = 'Sem Fins lucrativos'";
+		System.out.println(sql);
+
+		int hospitaisSemFinsLucrativos = 0;
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		ResultSet resultado = comando.executeQuery(sql);
+
+		while (resultado.next()) {
+			hospitaisSemFinsLucrativos = resultado.getInt("hospitaisSemFinsLucrativos");
+		}
+
+		comando.close();
+		con.conexao.close();
+		return hospitaisSemFinsLucrativos;
+
+	}
+
+	// HOSPITAIS Universitário
+	public int retornarQtHospitaisUniversitarios(int id) throws SQLException {
+		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisUniversitarios from hospital h "
+				+ " where id_Pais = " + id + " AND  cv_tipo_organizacao = 'Universitario'";
+	
+		int hospitaisUniversitarios = 0;
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		ResultSet resultado = comando.executeQuery(sql);
+
+		while (resultado.next()) {
+			hospitaisUniversitarios = resultado.getInt("hospitaisUniversitarios");
+		}
+
+		comando.close();
+		con.conexao.close();
+		return hospitaisUniversitarios;
+
+	}
+
 	// HOSPITAIS PRIVADOS
 	public int retornarQtHospitaisPrivados(int id) throws SQLException {
-		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisPrivados from formulario_hospital fm "
-				+ " INNER JOIN formulario f ON f.id_formulario = fm.id_formulario "
-				+ " INNER JOIN hospital h ON h.id_hospital = fm.id_hospital " + " where id_Pais =" + id
-				+ " AND cv_tipo_organizacao = 'Privado'";
-
+		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisPrivados from hospital h "
+				+ " where id_Pais = " + id + " AND  cv_tipo_organizacao = 'Privado'";
+	
 		int hospitaisPrivados = 0;
 
 		con.setConnection();
@@ -319,11 +452,9 @@ public class PaisDAO {
 
 	// HOSPITAIS PUBLICOS
 	public int retornarQtHospitaisPublicos(int id) throws SQLException {
-		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisPublicos from formulario_hospital fm "
-				+ " INNER JOIN formulario f ON f.id_formulario = fm.id_formulario "
-				+ " INNER JOIN hospital h ON h.id_hospital = fm.id_hospital " + " where id_Pais =" + id
-				+ " AND cv_tipo_organizacao = 'Publico'";
-
+		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisPublicos from hospital h "
+				+ " where id_Pais = " + id + " AND  cv_tipo_organizacao = 'Publico'";
+	
 		int hospitaisPublicos = 0;
 
 		con.setConnection();

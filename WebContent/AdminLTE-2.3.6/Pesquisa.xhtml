@@ -1,0 +1,470 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Pesquisa</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+		name="viewport"></meta>
+	<!-- Bootstrap 3.3.6 -->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"></link>
+	<!-- Font Awesome -->
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"></link>
+	<!-- Ionicons -->
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"></link>
+	<!-- Theme style -->
+	<link rel="stylesheet" href="dist/css/AdminLTE.min.css"></link>
+	<!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+	<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css"></link>
+	<!-- iCheck -->
+	<link rel="stylesheet" href="plugins/iCheck/flat/blue.css"></link>
+	<!-- Morris chart -->
+	<link rel="stylesheet" href="plugins/morris/morris.css"></link>
+	<!-- jvectormap -->
+	<link rel="stylesheet"
+		href="plugins/jvectormap/jquery-jvectormap-1.2.2.css"></link>
+	<!-- Date Picker -->
+	<link rel="stylesheet" href="plugins/datepicker/datepicker3.css"></link>
+	<!-- Daterange picker -->
+	<link rel="stylesheet"
+		href="plugins/daterangepicker/daterangepicker.css"></link>
+	<!-- bootstrap wysihtml5 - text editor -->
+	<link rel="stylesheet"
+		href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"></link>
+
+	<link rel="stylesheet" href="assets/css/main.css"></link>
+</h:head>
+<h:body>
+
+	<!-- Page Wrapper -->
+	<div id="page-wrapper">
+
+		<!-- Header -->
+		<header id="header">
+
+			<div class="col-md-8">
+				<h1>OBSERVATÓRIO</h1>
+			</div>
+			<div class="col-md-4">
+				<nav id="nav">
+					<ul style="font-weight: bold">
+						<li><a href="index.xhtml">Home</a></li>
+						<li><a href="Sobre.xhtml">Sobre</a></li>
+						<li><a href="">Pesquisa</a></li>
+						<li><a href="Contato.xhtml">Contato</a></li>
+					</ul>
+
+				</nav>
+
+			</div>
+
+		</header>
+
+
+		<!-- Main -->
+		<article id="main">
+
+			<section>
+
+				<!-- Content Wrapper. Contains page content -->
+				<div class="content-wrapper"
+					style="margin-left: 0px; background-color: #FFF">
+					<!-- Content Header (Page header) -->
+					<section style="color: #FFF; margin-left: 245px;"
+						class="content-header"></section>
+					<!-- Main content -->
+					<section style="width: 1500px;" class="content">
+
+						<div class="row">
+							<div class="2u">
+								<br />
+
+								<div class="filter-dash">
+									<h1
+										style="font-size: 22px; margin-bottom: 10px; color: #777; letter-spacing: 2px;"></h1>
+									<h:form>
+										<label for="advanced">País:</label>
+										<h:selectOneMenu value="#{paisMB.pais}" name="pais"
+											style="position: relative; height: 2.75em; border-radius: 4px; color: #878787; border: 1px solid #C0C0C0; background-color: #FFF;">
+											<f:selectItem itemValue="" itemLabel="Selecione..." />
+											<f:selectItems value="#{paisMB.listaPaises}" var="pais"
+												itemLabel="#{pais.descricao}" itemValue="#{pais.descricao}" />
+										</h:selectOneMenu>
+
+
+										<label> Ano: </label>
+										<h:selectOneMenu value="#{paisMB.ano}"
+											style="position: relative; height: 2.75em; border-radius: 4px; color: #878787; border: 1px solid #C0C0C0; background-color: #FFF;">
+											<f:selectItem itemValue="" itemLabel="Ano" />
+											<f:selectItem itemValue="2016" itemLabel="2016" />
+											<f:selectItem itemValue="2015" itemLabel="2015" />
+											<f:selectItem itemValue="2014" itemLabel="2014" />
+
+										</h:selectOneMenu>
+										<h:commandButton value="Pesquisar"
+											action="#{paisMB.preencherDadosPais}">
+										</h:commandButton>
+									</h:form>
+								</div>
+
+								<br />
+
+							</div>
+							<div class="10u" id="dashboard">
+								<br />
+								<h1 style="color: grey; font-size: 22px;">
+									<h:outputText value="#{paisMB.pais}"></h:outputText>
+									<SMALL><h:outputText value="#{paisMB.ano}"></h:outputText></SMALL>
+								</h1>
+
+								<!-- Small boxes (Stat box) -->
+								<div class="row">
+									<div class="col-lg-3 col-xs-6">
+										<!-- small box -->
+										<div class="small-box bg-aqua">
+											<div class="inner">
+												<h3>
+													<h:outputText value="#{paisMB.qtHospitaisCatalogados}"></h:outputText>
+												</h3>
+
+												<p>
+													<b>Hospitais <br />Catalogados
+													</b>
+												</p>
+											</div>
+											<div class="icon">
+												<i class="fa fa-hospital-o" style="margin-top: 18px"></i>
+											</div>
+											<a href="#" class="small-box-footer" data-toggle="modal"
+												data-target="#myModal" style="margin-bottom: 0px;">
+												Clique Aqui <i class="fa fa-arrow-circle-right"></i>
+											</a>
+
+
+										</div>
+									</div>
+									<!-- 									<div class="col-lg-3 col-xs-6"> -->
+									<!-- 										<div class="small-box bg-orange"> -->
+									<!-- 											<div class="inner"> -->
+									<!-- 												<h3> -->
+									<!-- 													<h:outputText value="#{paisMB.hospitaisPrivados}"></h:outputText> -->
+									<!-- 												</h3> -->
+
+									<!-- 												<p> -->
+									<!-- 													<b>Hospitais </b> <br /> <b>Privados</b> -->
+									<!-- 												</p> -->
+									<!-- 											</div> -->
+									<!-- 											<div class="icon"> -->
+									<!-- 												<i class="fa fa-ambulance "></i> -->
+									<!-- 											</div> -->
+
+									<!-- 										</div> -->
+									<!-- 									</div> -->
+
+									<!-- ./col -->
+									<div class="col-lg-3 col-xs-6">
+										<!-- small box -->
+										<div class="small-box bg-green">
+											<div class="inner">
+												<h3>
+													<h:outputText value="#{paisMB.qtHospitaisComSite}"></h:outputText>
+												</h3>
+												<p>
+													<b>Hospitais com </b><br /> <b>Site Próprio</b>
+												</p>
+											</div>
+											<div class="icon">
+												<i class="fa fa-wifi" style="margin-top: 18px;"></i>
+											</div>
+											<a href="#" class="small-box-footer" id="tipoOrganizacao"
+												onclick="visualizar()" style="margin-bottom: 0px;">
+												Clique Aqui <i class="fa fa-arrow-circle-right"></i>
+											</a>
+										</div>
+									</div>
+
+
+									<div class="col-lg-3 col-xs-6">
+										<div class="small-box bg-blue">
+											<div class="inner" style="margin-bottom: 20px;">
+												<h1 style="margin-top: 20px">
+													Tipo da <br /> <br />Organização<br />
+												</h1>
+
+												<p></p>
+											</div>
+											<div class="icon">
+												<i class="fa fa-plus-square" style="margin-top: 18px"></i>
+											</div>
+
+											<a href="#" class="small-box-footer" data-toggle="modal"
+												data-target="#myModal2"> Clique Aqui <i
+												class="fa fa-arrow-circle-right"></i>
+											</a>
+
+										</div>
+									</div>
+
+								</div>
+
+								<div id="infoSites" style="display: none;">
+									<div class="row">
+
+
+										<div class="col-lg-3 col-xs-6">
+											<div class="small-box bg-red">
+												<div class="inner">
+													<h3>
+														<h:outputText value="#{paisMB.qtSitesComServico}"></h:outputText>
+
+													</h3>
+
+													<p>
+														<span class="info-box-text"><b>Sites
+																disponilibilizam os </b><br /> <b>Serviços Prestados</b></span> <span
+															class="info-box-number"> </span>
+													</p>
+												</div>
+												<div class="icon">
+													<i class="fa fa-medkit" style="margin-top: 10px;"></i>
+												</div>
+
+											</div>
+										</div>
+
+										<div class="col-lg-3 col-xs-6">
+											<div class="small-box bg-red">
+												<div class="inner">
+													<h3>
+														<h:outputText value="#{paisMB.qtSitesComComentarios}"></h:outputText>
+													</h3>
+
+													<p>
+														<span class="info-box-text"><b>Sites
+																disponilibilizam</b><br /> <b>Endereço Eletrônico</b></span> <span
+															class="info-box-number"> </span>
+													</p>
+												</div>
+												<div class="icon">
+													<i class="fa fa-comments-o" style="margin-top: 18px;"></i>
+												</div>
+
+											</div>
+										</div>
+
+
+										<!-- /.col -->
+
+
+										<div class="col-lg-3 col-xs-6">
+											<div class="small-box bg-aqua">
+												<div class="inner">
+													<h3>
+														<h:outputText
+															value="#{paisMB.qtSitesInformacaoInstitucional}"></h:outputText>
+													</h3>
+
+													<p>
+														<span class="info-box-text"><b>Sites
+																disponilibilizam</b><br /> <b>Informações
+																Institucionais</b></span> <span class="info-box-number"> </span>
+													</p>
+												</div>
+												<div class="icon">
+													<i class="fa fa-info" style="margin-top: 18px;"></i>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<div class="row">
+
+										<div class="col-lg-3 col-xs-6">
+											<div class="small-box bg-green">
+												<div class="inner">
+													<h3>
+														<h:outputText value="#{paisMB.qtSitesComCorpoClinico}"></h:outputText>
+													</h3>
+
+													<p>
+														<span class="info-box-text"><b>Sites
+																disponilibilizam o </b><br /> <b>Corpo Clínico</b></span> <span
+															class="info-box-number"> </span>
+													</p>
+												</div>
+												<div class="icon">
+													<i class="fa fa-user-md" style="margin-top: 12px;"></i>
+												</div>
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			</section>
+		</article>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true"></span>
+						</button>
+						<h4
+							style="color: grey; font-size: 1.5em; text-align: left; margin-top: 20px; margin-bottom: 5px"
+							id="myModalLabel">
+							<h:outputText value="#{paisMB.pais}"></h:outputText>
+							<SMALL><h:outputText value="#{paisMB.ano}"></h:outputText></SMALL>
+						</h4>
+					</div>
+					<div class="modal-body" id="myContent">
+						<span style="color: grey; font-weight: bold">Capital: </span>
+						<h:outputText value="#{paisMB.objPais.capital}"
+							style="color: grey;"></h:outputText>
+						<br /> <span style="color: grey; font-weight: bold">População:
+						</span>
+						<h:outputText value="#{paisMB.objPais.populacao}"
+							style="color: grey;"></h:outputText>
+						<br /> <span style="color: grey; font-weight: bold">Nº
+							Hospitais Catalogados: </span>
+						<h:outputText value="#{paisMB.qtHospitaisCatalogados}"
+							style="color: grey;"></h:outputText>
+						<br /> <span style="color: grey; font-weight: bold">Índice
+							de Desenvolvimento Humano </span>
+						<h:outputText value="#{paisMB.objPais.IDH}" style="color: grey;"></h:outputText>
+						<br /> <span style="color: grey; font-weight: bold">Índice
+							de Desenvolvimento Tecnológico </span>
+						<h:outputText value="#{paisMB.objPais.IDI}" style="color: grey;"></h:outputText>
+						<br /> <span style="color: grey; font-weight: bold">Produto
+							Interno Bruto</span>
+						<h:outputText value="#{paisMB.objPais.PIB}" style="color: grey;"></h:outputText>
+						<br /> <span style="color: grey; font-weight: bold">Última
+							Alteração </span>
+						<h:outputText value="#{paisMB.objPais.ultimaAlteracao}"
+							style="color: grey;"></h:outputText>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="myModal2" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true"></span>
+						</button>
+						<h4
+							style="color: grey; font-size: 1.5em; text-align: left; margin-top: 20px; margin-bottom: 5px"
+							id="myModalLabel">
+							<h:outputText value="#{paisMB.pais}"></h:outputText>
+							<SMALL><h:outputText value="#{paisMB.ano}"></h:outputText></SMALL>
+						</h4>
+					</div>
+					<div class="modal-body" id="myContent">
+						<span style="color: grey; font-weight: bold">Hospitais
+							Públicos: </span>
+						<h:outputText value="#{paisMB.hospitaisPublicos}"
+							style="color: grey;"></h:outputText>
+						<br /> <span style="color: grey; font-weight: bold">Hospitais
+							Privados: </span>
+						<h:outputText value="#{paisMB.hospitaisPrivados}"
+							style="color: grey;"></h:outputText>
+						<br /> <span style="color: grey; font-weight: bold">Sem
+							Fins Lucrativos </span>
+						<h:outputText value="#{paisMB.hospitaisSemFinsLucrativos}"
+							style="color: grey;"></h:outputText>
+						<br /> <span style="color: grey; font-weight: bold">Hospitais
+							Universitários </span>
+						<h:outputText value="#{paisMB.hospitaisUniversitarios}" style="color: grey;"></h:outputText>
+						<br /> <span style="color: grey; font-weight: bold">Economia
+							Mista </span>
+						<h:outputText value="#{paisMB.hospitaisMisto}" style="color: grey;"></h:outputText>
+						<br /> <span style="color: grey; font-weight: bold">Não
+							Definido</span>
+						<h:outputText value="#{paisMB.hospitaisNaoDefinidos}" style="color: grey;"></h:outputText>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Footer -->
+		<footer id="footer" style="padding: 7em 0 2em 0;">
+			<ul class="icons">
+				<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon fa-facebook"><span
+						class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon fa-instagram"><span
+						class="label">Instagram</span></a></li>
+				<li><a href="#" class="icon fa-dribbble"><span
+						class="label">Dribbble</span></a></li>
+				<li><a href="#" class="icon fa-envelope-o"><span
+						class="label">Email</span></a></li>
+			</ul>
+			<ul class="copyright">
+				<li>UNIVERSIDADE FEDERAL DE SERGIPE</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</footer>
+
+	</div>
+
+	<script>
+		// 		$(document).ready(function() {
+		// 			$("#27_faq").click(function() {
+		// 				$("#27").slideToggle(170);
+		// 			});
+		// 		});
+
+		function visualizar() {
+			var teste = document.getElementById("infoSites").style.display
+			if (teste == "none") {
+				document.getElementById("infoSites").style.display = "block";
+			} else {
+				document.getElementById("infoSites").style.display = "none";
+			}
+
+		}
+	</script>
+
+
+
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+	<!-- Bootstrap 3.3.6 -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+</h:body>
+</html>

@@ -15,7 +15,12 @@ public class DadosPais {
 	private String data;
 	private int hospitaisPrivados;
 	private int hospitaisPublicos;
+	private int hospitaisSemFinsLucrativos;
+	private int hospitaisMisto;
+	private int hospitaisUniversitarios;
+	private int hospitaisNaoDefinidos;
 
+	
 	// ----------------------------------------Getters and
 	// Setters--------------------------------
 	
@@ -23,6 +28,38 @@ public class DadosPais {
 	
 	public int getQtHospitaisCatalogados() {
 		return qtHospitaisCatalogados;
+	}
+
+	public int getHospitaisSemFinsLucrativos() {
+		return hospitaisSemFinsLucrativos;
+	}
+
+	public void setHospitaisSemFinsLucrativos(int hospitaisSemFinsLucrativos) {
+		this.hospitaisSemFinsLucrativos = hospitaisSemFinsLucrativos;
+	}
+
+	public int getHospitaisMisto() {
+		return hospitaisMisto;
+	}
+
+	public void setHospitaisMisto(int hospitaisMisto) {
+		this.hospitaisMisto = hospitaisMisto;
+	}
+
+	public int getHospitaisUniversitarios() {
+		return hospitaisUniversitarios;
+	}
+
+	public void setHospitaisUniversitarios(int hospitaisUniversitarios) {
+		this.hospitaisUniversitarios = hospitaisUniversitarios;
+	}
+
+	public int getHospitaisNaoDefinidos() {
+		return hospitaisNaoDefinidos;
+	}
+
+	public void setHospitaisNaoDefinidos(int hospitaisNaoDefinidos) {
+		this.hospitaisNaoDefinidos = hospitaisNaoDefinidos;
 	}
 
 	public int getQtHospitaisSemSites() {

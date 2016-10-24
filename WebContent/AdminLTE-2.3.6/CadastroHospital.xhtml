@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Cadastro de Hospital</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link href="assets/css/animate.css" rel="stylesheet" />
+
+	<style>
+.ui-growl {
+	margin-top: 56px;
+	left: 74%;
+	width: 360px;
+	height: 110px;
+	z-index: 9999;
+}
+
+.wrapper.style5 table tbody tr {
+	border-color: #fff;
+}
+
+.wrapper.style5 table tbody tr:nth-child(2n+1) {
+	background-color: rgba(246, 237, 237, 0);
+}
+
+table td {
+	padding: 0;
+}
+</style>
+
+</h:head>
+<h:body>
+
+	<!-- Page Wrapper -->
+	<div id="page-wrapper">
+
+		<!-- Header -->
+		<!-- Header -->
+		<header id="header">
+
+			<div class="col-md-8">
+				<h1>
+					<a href="index.xhtml">OBSERVATÓRIO</a>
+				</h1>
+			</div>
+			<div class="col-md-4">
+				<nav id="nav">
+					<ul style="font-weight: bold">
+						<li><a href="index.xhtml">Home</a></li>
+						<li><a href="Sobre.xhtml">Sobre</a></li>
+						<li><a href="">Pesquisa</a></li>
+						<li><a href="Contato.xhtml">Contato</a></li>
+					</ul>
+
+				</nav>
+
+			</div>
+
+		</header>
+
+
+		<section class="wrapper style5"
+			style="padding-top: 2em; padding-bottom: 1em;">
+			<div class="inner">
+
+				<div style="width: 80%">
+					<h4>Cadastro de Hospital</h4>
+					<form method="post" action="#">
+						<div class="row uniform">
+							<div class="6u 12u$(xsmall)">
+								<label for="nome">Nome:</label>
+								<p:inputText name="nome" type="text" required="true"
+									placeholder="Nome"
+									requiredMessage="O campo nome é obrigatório" id="nome"
+									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"></p:inputText>
+							</div>
+							<div class="12u$">
+								<label for="demo-category">Tipo da Organização:</label>
+								<div class="select-wrapper"
+									style="position: relative; width: 27%; height: 2.75em;">
+
+									<select name="demo-category" id="demo-category"
+										required="required"
+										style="border-radius: 4px; color: #878787; border: 1px solid #C0C0C0; background-color: #FFF;">
+										<option value="">Tipo da Organização</option>
+										<option value="Privado">Privado</option>
+										<option value="Publico">Público</option>
+										<option value="Universitario">Universitário</option>
+										<option value="Misto">Misto</option>
+										<option value="Nao definido">Não definido</option>
+										<option value="Sem Fins Lucrativos">Sem Fins
+											Lucrativos</option>
+
+									</select>
+								</div>
+							</div>
+
+							<div class="12u$">
+								<label for="advanced">País:</label>
+								<h:selectOneMenu value="#{hospitalMB.pais}" name="pais" required="true"
+									requiredMessage="O campo país é obrigatório"
+									style="position: relative; width: 25%; height: 2.75em; border-radius: 4px; color: #878787; border: 1px solid #C0C0C0; background-color: #FFF;">
+									<f:selectItem itemValue="" itemLabel="Selecione..." />
+									<f:selectItems value="#{paisMB.listaPaises}" var="pais"
+										itemLabel="#{pais.descricao}" itemValue="#{pais.codigo}" />
+								</h:selectOneMenu>
+
+							</div>
+
+							<div class="12u$">
+								<label for="">Cidade:</label>
+								<h:selectOneMenu value="#{hospitalMB.cidade}" name="cidade" required="true"
+									requiredMessage="O campo cidade é obrigatório"
+									style="position: relative; width: 30%; height: 2.75em; border-radius: 4px; color: #878787; border: 1px solid #C0C0C0; background-color: #FFF;">
+									<f:selectItem itemValue="" itemLabel="Selecione..." />
+									<f:selectItems value="#{cidadeMB.listaCidades}" var="cidade"
+										itemLabel="#{cidade.descricao}" itemValue="#{cidade.codigo}" />
+								</h:selectOneMenu>
+
+							</div>
+
+
+							<label for="site">Possui Site?</label>
+							<div class="6u$ 12u$(small)">
+								<h:selectOneRadio name="site" id="site" required="true"
+									onclick="verPorRadio()" value="#{hospitalMB.possuiSite}"
+									requiredMessage="O campo possui site é obrigatório">
+									<f:selectItem id="sim" name="sim" itemLabel="Sim"
+										itemValue="true" />
+									<f:selectItem id="nao" itemLabel="Não" itemValue="false" />
+								</h:selectOneRadio>
+							</div>
+
+
+							<div class="6u 12u$(xsmall)" style="display: none;" id="campo">
+								<label for="url">Endereço do Site:</label>
+								<h:inputText type="text" name="url" id="url"
+									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
+									placeholder="Endereço do Site"></h:inputText>
+							</div>
+
+							<div class="12u$">
+								<ul class="actions">
+									<li><p:commandButton
+											actionListener="#{hospitalMB.cadastrarHospital}" update="growl"
+											value="Cadastrar"
+											style="height:45px;font-size: 1em; background-color:#ed4233"
+											styleClass="special"></p:commandButton></li>
+									<li><input type="reset" value="Limpar"></input></li>
+								</ul>
+							</div>
+						</div>
+						<div class="grow">
+							<p:growl id="growl" life="9000" />
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<ul class="icons">
+				<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon fa-facebook"><span
+						class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon fa-instagram"><span
+						class="label">Instagram</span></a></li>
+				<li><a href="#" class="icon fa-dribbble"><span
+						class="label">Dribbble</span></a></li>
+				<li><a href="#" class="icon fa-envelope-o"><span
+						class="label">Email</span></a></li>
+			</ul>
+			<ul class="copyright">
+				<li>UNIVERSIDADE FEDERAL DE SERGIPE</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script>
+		function verPorRadio() {
+
+			var elemento = document.getElementById("site:0").checked
+			if (elemento) {
+				document.getElementById("campo").style.display = 'block';
+			} else {
+
+				document.getElementById("campo").style.display = 'none';
+
+			}
+
+		}
+	</script>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="assets/js/main.js"></script>
+
+</h:body>
+</html>

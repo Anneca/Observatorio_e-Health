@@ -44,13 +44,39 @@
 
 			<div>
 				<nav id="nav">
-					<ul style="letter-spacing: 0.22em;">
-						<li><a href="index.xhtml">Home</a></li>
-						<li><a href="Sobre.xhtml" style="text-decoration: none;">Sobre</a></li>
-						<li><a href="#" style="text-decoration: none;">Pesquisa</a></li>
-						<li><a href="Contato.xhtml" style="text-decoration: none;">Contato</a></li>
-						<li><a href="#" id="myBtn" style="text-decoration: none;">Login</a></li>
-
+					<ul>
+						<li class="special"><a href="#menu"
+							style="text-decoration: none;" class="menuToggle"><span>Menu</span></a>
+							<div id="menu">
+								<ul>
+									<li><a href="index.xhtml">Home</a></li>
+									<li><a href="Sobre.xhtml">Sobre</a></li>
+									<li><a id="27_faq" href="#">Cadastro</a>
+										<div id="27" style="display: none;">
+											<ul style="margin-top: 15px; margin-bottom: 15px">
+												<li style="font-size: 0.8em; margin-left: 15px;"><a
+													href="CadastroHospital.xhtml">Hospital</a></li>
+												<li style="font-size: 0.8em; margin-left: 15px;"><a
+													href="CadastroPais.xhtml">País</a></li>
+												<li style="font-size: 0.8em; margin-left: 15px;"><a
+													href="CadastroCidade.xhtml">Cidade</a></li>
+											</ul>
+										</div></li>
+									<li><a href="Pesquisa.xhtml">Pesquisa</a></li>
+									<li><a id="28_faq" href="#">Consulta</a>
+										<div id="28" style="display: none;">
+											<ul style="margin-top: 15px; margin-bottom: 15px">
+												<li style="font-size: 0.8em; margin-left: 15px;"><a
+													href="#">Hospital</a></li>
+												<li style="font-size: 0.8em; margin-left: 15px;"><a
+													href="#">País</a></li>
+												<li style="font-size: 0.8em; margin-left: 15px;"><a
+													href="#">Cidade</a></li>
+											</ul>
+										</div></li>
+									<li><a href="Login.xhtml">Login</a></li>
+								</ul>
+							</div></li>
 					</ul>
 
 				</nav>
@@ -65,73 +91,31 @@
 				<h2>OBSERVATÓRIO</h2>
 				<p>Hospitais no Ciberespaço</p>
 				<ul class="actions">
-					<li><a href="ConstruaVisualizacao.xhtml" style="text-decoration: none;"
-						class="button special">Construa Visualização</a></li>
+					<li><a href="ConstruaVisualizacao.xhtml"
+						style="text-decoration: none;" class="button special">Construa
+							Visualização</a></li>
 				</ul>
 
 			</div>
 		</section>
 	</div>
 
-	<div class="modal fade" id="myModal" role="dialog" style="top: 30px;">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div style="width: 80%; margin-left: 70px;" class="modal-content">
-				<div class="modal-header" style="padding: 5px 10px;">
-					<a class="close" data-dismiss="modal"><i class="fa fa-times"
-						aria-hidden="true"></i></a>
-					<h4 style="font-size: 30px; margin-top: 40px;">
-						<span class="glyphicon glyphicon-lock"></span> Login
-					</h4>
-				</div>
-				<div class="modal-body" style="padding: 10px 27px;">
-					<form role="form">
-						<div class="form-group">
-							<label for="usrname" style="color: grey;"><span
-								class="glyphicon glyphicon-user"></span> Email</label> <input
-								type="text" class="form-control" id="usrname"
-								placeholder="Insira seu email"></input>
-						</div>
-						<div class="form-group">
-							<label for="psw" style="color: grey;"><span
-								class="glyphicon glyphicon-eye-open"></span> Senha</label> <input
-								type="text" class="form-control" id="psw"
-								placeholder="Insira a senha"></input>
-						</div>
-						<br />
-						<button type="submit" class="btn btn-success btn-block">
-							<span class="glyphicon glyphicon-off"></span> Login
-						</button>
-					</form>
-				</div>
-				<div class="modal-footer" style="font-size: 10pt">
-					<button type="submit" class="btn btn-danger btn-default pull-left"
-						data-dismiss="modal">
-						<span class="glyphicon glyphicon-remove"></span> Cancelar
-					</button>
-					<p style="color: grey;">
-						Não tenho Cadastro? <a href="CadastroUsuario.xhtml" style="color: blue;">Cadastre-se</a>
-					</p>
-					<p style="color: grey;">
-						Esqueceu a <a href="#" style="color: blue;">Senha?</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 	<script>
 		$(document).ready(function() {
-			$("#myBtn").click(function() {
-				$("#myModal").modal();
+			$("#27_faq").click(function() {
+				$("#27").slideToggle(170);
+			});
+
+			$("#28_faq").click(function() {
+				$("#28").slideToggle(170);
 			});
 		});
 	</script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/main.js"></script>
-
-
-
 
 </h:body>
 </html>
