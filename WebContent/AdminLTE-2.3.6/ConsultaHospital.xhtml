@@ -182,13 +182,9 @@ input[type="radio"]+label {
 
 
 							<label for="site">Possui Site?</label>
-							<h:selectOneRadio name="site" id="site" required="true"
-								onclick="verPorRadio()" value="#{hospitalMB.possuiSite}"
-								requiredMessage="O campo possui site é obrigatório">
-								<f:selectItem id="sim" name="sim" itemLabel="Sim"
-									itemValue="true" />
-								<f:selectItem id="nao" itemLabel="Não" itemValue="false" />
-							</h:selectOneRadio>
+							<p:inputText name="site" id="site"
+								type="text"></p:inputText>
+
 
 
 							<label for="url">Endereço do Site:</label>
