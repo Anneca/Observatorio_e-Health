@@ -50,7 +50,7 @@ public class LoginFilter implements Filter {
 			chain.doFilter(request, response);
 
 		} else {
-			resp.sendRedirect(req.getContextPath() + "//AdminLTE-2.3.6/index.xhtml");
+			resp.sendRedirect(req.getContextPath() + "faces/AdminLTE-2.3.6/index.xhtml");
 		}
 	}
 

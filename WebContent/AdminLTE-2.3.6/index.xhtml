@@ -43,6 +43,7 @@
 			style="background: transparent; padding-top: 0px; padding-right: 2em; padding-bottom: 0px; padding-left: 0px;">
 
 			<div>
+
 				<nav id="nav">
 					<ul>
 						<li class="special"><a href="#menu"
@@ -81,8 +82,12 @@
 
 				</nav>
 
-			</div>
+				<h1>
+					#{usuarioMB.nome}
+					<h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
+				</h1>
 
+			</div>
 		</header>
 
 		<!-- Banner -->

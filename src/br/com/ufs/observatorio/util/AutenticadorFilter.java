@@ -17,15 +17,15 @@ import br.com.ufs.observatorio.model.Usuario;
 /**
  * Servlet Filter implementation class AutenticadorFilter
  */
-@WebFilter("/AdminLTE-2.3.6/*")
+@WebFilter("*.xhtml")
 public class AutenticadorFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public AutenticadorFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public AutenticadorFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -37,15 +37,25 @@ public class AutenticadorFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest)request;
-		HttpServletResponse resp = (HttpServletResponse)response;
-		HttpSession session = (HttpSession)req.getSession();
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse resp = (HttpServletResponse) response;
+		HttpSession session = (HttpSession) req.getSession();
+
+		Usuario usuario = (Usuario) session.getAttribute("USUARIO");
 		
-		Usuario usuario = (Usuario)session.getAttribute("usuario");
-		
-		if (usuario==null) {
-			resp.sendRedirect(req.getContextPath() + "//AdminLTE-2.3.6/Login.xhtml");
+		System.out.println(req.getRequestURL().toString());
+
+		if (usuario == null && !req.getRequestURL().toString().contains("Login.xhtml")
+				&& !req.getRequestURL().toString().contains("CadastroUsuario.xhtml")
+				&& !req.getRequestURL().toString().contains("index.xhtml")
+				&& !req.getRequestURL().toString().contains("ConstruaVisualizacao.xhtml")
+				&& !req.getRequestURL().toString().contains("InformacaoPais.xhtml")
+				&& !req.getRequestURL().toString().contains("Sobre.xhtml")
+				&& !req.getRequestURL().toString().contains("javax.faces/")) {
+			resp.sendRedirect(req.getContextPath() + "/faces/AdminLTE-2.3.6/Login.xhtml");
+
 		} else {
 			chain.doFilter(request, response);
 		}
