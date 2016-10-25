@@ -86,6 +86,7 @@ public class JsonWrite {
 
 			JSONObject jsonObject = new JSONObject();
 			// Armazena dados em um Objeto JSON
+			jsonObject.put("codigo", h.getCodigo());
 			jsonObject.put("nome", h.getNome());
 			jsonObject.put("site", h.getSite());
 			jsonObject.put("cidade", h.getCidade().getDescricao());

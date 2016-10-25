@@ -53,13 +53,42 @@ public class PaisMB {
 
 	PaisDAO paisDAO = new PaisDAO();
 	
-	public void alterarPais(){
-		System.out.println("Oi");
+	public String alterarPais(){
+		
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		String descricao = req.getParameter("descricao");
+		String capital = req.getParameter("capital");
+		int id = Integer.parseInt(req.getParameter("codigo"));
+		String populacao = req.getParameter("populacao");
+		String idi = req.getParameter("idi");
+		String idh = req.getParameter("idh");
+		String pib = req.getParameter("pib");
+		
+		try {
+			paisDAO.alterarPais(descricao, capital, id, populacao, idi, idh, pib);
+			addMessage("Pais Alterado");
+		} catch (SQLException e) {
+			addMessageError("Não foi possível alterar o país");
+			e.printStackTrace();
+		}
+		return "/AdminLTE-2.3.6/ConsultaPais?faces-redirect=true";
 
 	}
 
 	public void excluirPais(){
-		System.out.println("Oi");
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		
+		int id = Integer.parseInt(req.getParameter("codigo"));
+		
+		try {
+			paisDAO.excluirPais(id);
+			addMessage("Pais excluído");
+		} catch (SQLException e) {
+			addMessageError("Não foi possível excluir o país");
+			e.printStackTrace();
+		}
 	}
 	
 	@PostConstruct

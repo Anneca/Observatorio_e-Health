@@ -1,7 +1,7 @@
 package br.com.ufs.observatorio.model;
 
 public class Hospital {
-	
+	private int codigo;
 	private String nome;
 	private String site;
 	Cidade cidade;
@@ -13,8 +13,15 @@ public class Hospital {
 	
 	//-----------------Gettes And Setters-------------
 	
+	
 	public String getDataAlteracao() {
 		return dataAlteracao;
+	}
+	public int getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	public String getPossuiSite() {
 		return possuiSite;

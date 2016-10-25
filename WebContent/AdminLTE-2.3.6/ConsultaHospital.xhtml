@@ -134,6 +134,7 @@ input[type="radio"]+label {
 					<table id="example" class="display" width="100%" cellspacing="0">
 						<thead>
 							<tr>
+								<th>Código</th>
 								<th>Nome</th>
 								<th>País</th>
 								<th>Cidade</th>
@@ -167,6 +168,8 @@ input[type="radio"]+label {
 						style="width: 90%; margin-left: 20px;">
 
 						<form name="frm" method="post" action="#">
+							<label for="nome">Código:</label>
+							<p:inputText name="codigo" id="codigo" type="text"></p:inputText>
 							<label for="nome">Nome:</label>
 							<p:inputText name="nome" id="nome" type="text"></p:inputText>
 							<label for="demo-category">Tipo da Organização:</label>
@@ -182,8 +185,7 @@ input[type="radio"]+label {
 
 
 							<label for="site">Possui Site?</label>
-							<p:inputText name="site" id="site"
-								type="text"></p:inputText>
+							<p:inputText name="site" id="site" type="text"></p:inputText>
 
 
 
@@ -192,7 +194,7 @@ input[type="radio"]+label {
 								style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
 								placeholder="Endereço do Site"></h:inputText>
 							<div style="margin-left: 70px; margin-top: 30px;">
-							
+
 								<p:commandButton actionListener="#{hospitalMB.alterarHospital}"
 									update="growl" value="Alterar"
 									style=" width:40%; height:45px;font-size: 1em; background-color:#3abd20; background-image:none;"
@@ -218,7 +220,7 @@ input[type="radio"]+label {
 			</div>
 		</div>
 
-		
+
 		<!-- Footer -->
 		<footer id="footer">
 			<ul class="icons">
@@ -258,6 +260,7 @@ input[type="radio"]+label {
 					var table = $('#example').DataTable( {
 					    data: data,
 					    columns: [
+							{ data: 'codigo'},
 							{ data: 'nome'},
 					        { data: 'pais' },
 					        { data: 'cidade' },
@@ -301,8 +304,8 @@ input[type="radio"]+label {
 					
 					$('#example tbody').on( 'click', 'td', function () {
 						var index = $(this).index();
-						if (index === 7) {
-					    	
+						if (index === 8) {
+					    	$('#codigo').val(table.row( this ).data().codigo);
 					    	$('#nome').val(table.row( this ).data().nome);
 					    	$('#demo-category').val(table.row( this ).data().natureza);
 					    	$('#pais').val(table.row( this ).data().pais);

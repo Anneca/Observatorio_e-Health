@@ -14,6 +14,34 @@ public class CidadeDAO {
 
 	Conexao con = new Conexao();
 
+	public void alterarCidade(String descricao, String capital, int id) throws SQLException {
+
+		Date data = new Date(System.currentTimeMillis());
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		String format = formatter.format(data);
+
+		String sql = "UPDATE cidade SET cv_descricao ='" + descricao + "'," + " cv_capital='" + capital
+				+ "', ultima_alteracao='" + format + "' where id_cidade=" + id;
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		comando.execute(sql);
+		comando.close();
+		con.conexao.close();
+
+	}
+
+	public void excluirCidade(int id) throws SQLException {
+		String sql = "DELETE FROM cidade WHERE id_cidade =" + id;
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		comando.execute(sql);
+		comando.close();
+		con.conexao.close();
+
+	}
+
 	public ArrayList<Cidade> consultarCidades() throws SQLException {
 
 		ArrayList<Cidade> lista = new ArrayList<Cidade>();
@@ -38,9 +66,8 @@ public class CidadeDAO {
 		return lista;
 
 	}
-	
-	public Cidade consultarCidadeByID(int id) throws SQLException {
 
+	public Cidade consultarCidadeByID(int id) throws SQLException {
 
 		String sql = "select * from cidade where id_cidade=" + id;
 
@@ -60,18 +87,18 @@ public class CidadeDAO {
 		return obj;
 
 	}
-	
-	public boolean cadastrarCidade(String nome, String capital) throws SQLException{
+
+	public boolean cadastrarCidade(String nome, String capital) throws SQLException {
 		boolean sucesso;
 		sucesso = false;
-		
 
 		Date data = new Date(System.currentTimeMillis());
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		String format = formatter.format(data);
-		
-		String sql = "Insert into cidade (cv_descricao, cv_capital, ultima_alteracao) values ('"+ nome + "','" + capital + "','" + format + "')" ;
-		
+
+		String sql = "Insert into cidade (cv_descricao, cv_capital, ultima_alteracao) values ('" + nome + "','"
+				+ capital + "','" + format + "')";
+
 		con.setConnection();
 		Statement comando = con.conexao.createStatement();
 		sucesso = comando.execute(sql);

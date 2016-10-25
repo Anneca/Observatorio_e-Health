@@ -148,21 +148,23 @@ table td {
 						<h4
 							style="color: grey; font-size: 1.5em; text-align: left; margin-top: 20px; margin-bottom: 5px"
 							id="myModalLabel">
-							<span class="glyphicon glyphicon-edit"></span>País
+							<span class="glyphicon glyphicon-edit"></span>Cidade
 						</h4>
 					</div>
 
 					<div class="modal-body" id="myContent"
 						style="width: 90%; margin-left: 20px;">
 
-						<form name="frm" method="post" action="#">
+						<form method="post" action="#">
 							<label for="codigo">Código:</label>
-							<p:inputText name="codigo" id="codigo" type="text" 
-								readonly="true"></p:inputText>
+							<p:inputText name="codigo" id="codigo" type="text"
+								value="capitalMB.codigo" readonly="true"></p:inputText>
 							<label for="descricao">Nome:</label>
-							<p:inputText name="descricao" id="descricao" type="text"></p:inputText>
+							<p:inputText name="descricao" id="descricao" type="text"
+								value="capitalMB.nome"></p:inputText>
 							<label for="capital">Capital:</label>
-							<p:inputText name="capital" id="capital" type="text"></p:inputText>
+							<p:inputText name="capital" id="capital" type="text"
+								value="capitalMB.capital"></p:inputText>
 
 							<div style="margin-left: 70px; margin-top: 30px;">
 								<p:commandButton actionListener="#{cidadeMB.alterarCidade}"

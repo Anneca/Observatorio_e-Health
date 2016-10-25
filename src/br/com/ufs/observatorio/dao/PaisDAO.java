@@ -3,6 +3,7 @@ package br.com.ufs.observatorio.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,7 +17,36 @@ public class PaisDAO {
 	int idPais;
 	String nomePais;
 
+	public void alterarPais(String descricao, String capital, int id, String populacao, String idi, String idh,
+			String pib) throws SQLException {
+		Date data = new Date(System.currentTimeMillis());
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		String format = formatter.format(data);
+
+		String sql = "UPDATE pais SET cv_descricao ='" + descricao + "'," + " cv_capital='" + capital
+				+ "', dt_ultima_alteracao='" + format + "', cv_idi='" + idi + "', cv_idh='" + idh + "', cv_pib='" + pib
+				+ "', cv_populacao='" + populacao + "' where id_pais=" + id;
+
+		System.out.println(sql);
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		comando.execute(sql);
+		comando.close();
+		con.conexao.close();
+
+	}
 	
+	public void excluirPais(int id) throws SQLException {
+		String sql = "DELETE FROM pais WHERE id_pais =" + id;
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		comando.execute(sql);
+		comando.close();
+		con.conexao.close();
+
+	}
+
 	public Pais consultarPaisByID(int id) throws SQLException {
 
 		String sql = "select * from pais where id_pais=" + id;
@@ -38,7 +68,6 @@ public class PaisDAO {
 
 	}
 
-	
 	public boolean cadastrarPais(String descricao, String capital, String populacao, String IDH, String IDI, String PIB,
 			String ultimaAlteracao) throws SQLException {
 		boolean sucesso = false;
@@ -79,7 +108,7 @@ public class PaisDAO {
 		return lista;
 
 	}
-	
+
 	public ArrayList<Pais> consultarPais2() throws SQLException {
 
 		ArrayList<Pais> lista = new ArrayList<Pais>();
@@ -401,9 +430,9 @@ public class PaisDAO {
 
 	// HOSPITAIS Misto
 	public int retornarQtHospitaisMisto(int id) throws SQLException {
-		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisMistos from hospital h "
-				+ " where id_Pais = " + id + " AND  cv_tipo_organizacao = 'Misto'";
-		
+		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisMistos from hospital h " + " where id_Pais = " + id
+				+ " AND  cv_tipo_organizacao = 'Misto'";
+
 		int hospitaisMistos = 0;
 
 		con.setConnection();
@@ -422,9 +451,9 @@ public class PaisDAO {
 
 	// HOSPITAIS Nao Definido
 	public int retornarQtHospitaisNaoDefinido(int id) throws SQLException {
-		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisNaoDefinido from hospital h "
-				+ " where id_Pais = " + id + " AND  cv_tipo_organizacao = 'Nao definido'";
-		
+		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisNaoDefinido from hospital h " + " where id_Pais = "
+				+ id + " AND  cv_tipo_organizacao = 'Nao definido'";
+
 		int hospitaisNaoDefinido = 0;
 
 		con.setConnection();
@@ -467,7 +496,7 @@ public class PaisDAO {
 	public int retornarQtHospitaisUniversitarios(int id) throws SQLException {
 		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisUniversitarios from hospital h "
 				+ " where id_Pais = " + id + " AND  cv_tipo_organizacao = 'Universitario'";
-	
+
 		int hospitaisUniversitarios = 0;
 
 		con.setConnection();
@@ -486,9 +515,9 @@ public class PaisDAO {
 
 	// HOSPITAIS PRIVADOS
 	public int retornarQtHospitaisPrivados(int id) throws SQLException {
-		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisPrivados from hospital h "
-				+ " where id_Pais = " + id + " AND  cv_tipo_organizacao = 'Privado'";
-	
+		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisPrivados from hospital h " + " where id_Pais = "
+				+ id + " AND  cv_tipo_organizacao = 'Privado'";
+
 		int hospitaisPrivados = 0;
 
 		con.setConnection();
@@ -507,9 +536,9 @@ public class PaisDAO {
 
 	// HOSPITAIS PUBLICOS
 	public int retornarQtHospitaisPublicos(int id) throws SQLException {
-		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisPublicos from hospital h "
-				+ " where id_Pais = " + id + " AND  cv_tipo_organizacao = 'Publico'";
-	
+		String sql = " select COUNT(cv_tipo_organizacao) as hospitaisPublicos from hospital h " + " where id_Pais = "
+				+ id + " AND  cv_tipo_organizacao = 'Publico'";
+
 		int hospitaisPublicos = 0;
 
 		con.setConnection();

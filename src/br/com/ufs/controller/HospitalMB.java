@@ -41,12 +41,35 @@ public class HospitalMB {
 	}
 
 	public void alterarHospital(){
-		System.out.println("Entrou");
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		String descricao = req.getParameter("nome");
+		String possui_site = req.getParameter("site");
+		String url = req.getParameter("url");
+		int id = Integer.parseInt(req.getParameter("codigo"));
+		
+		try {
+			hospitalDAO.alterarHospital(descricao, possui_site,url, id);
+			addMessage("Hospital Alterado");
+		} catch (SQLException e) {
+			addMessageError("Não foi possível alterar o Hospital");
+			e.printStackTrace();
+		}
 	}
 	
 	public void excluirHospital(){
-		System.out.println("Entrou");
-	}
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		
+		int id = Integer.parseInt(req.getParameter("codigo"));
+		
+		try {
+			hospitalDAO.excluirHospital(id);
+			addMessage("Hospital excluído");
+		} catch (SQLException e) {
+			addMessageError("Não foi possível excluir o hospital");
+			e.printStackTrace();
+		}	}
 
 	
 	public void cadastrarHospital() {
