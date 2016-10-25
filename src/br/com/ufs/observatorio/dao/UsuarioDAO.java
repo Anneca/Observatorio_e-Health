@@ -37,6 +37,30 @@ public class UsuarioDAO {
 
 	}
 	
+	public Usuario retornarUsuarioValido(String email, String senha) throws SQLException {
+
+
+		Usuario obj = new Usuario();
+		
+		String sql = "select * from usuario where cv_email='" + email + "' and cv_senha='" + senha + "'";
+
+		con.setConnection();
+		Statement comando = con.conexao.createStatement();
+		ResultSet resultado = comando.executeQuery(sql);
+
+		while (resultado.next()) {
+			obj.setCodigo(resultado.getInt("id_usuario"));
+			obj.setNome(resultado.getString("cv_nome"));
+			obj.setEmail(resultado.getString("cv_email"));
+			obj.setSenha(resultado.getString("cv_senha"));
+
+		}
+
+		comando.close();
+		con.conexao.close();
+		return obj;
+
+	}
 	public boolean login(String email, String senha) throws SQLException {
 
 

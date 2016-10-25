@@ -36,7 +36,15 @@ public class CidadeMB {
 		listaJSON = JSONArray.toJSONString((jsonWrite.gerarArquivoJsonCidade(listaCidades2)));
 
 	}
+	
+	public void alterarCidade(){
+		System.out.println("VOCE E FODA");
+	}
 
+	public void excluirCidade(){
+		System.out.println("VOCE E FODA 222");
+	}
+	
 	public void cadastrarCidade() {
 		try {
 

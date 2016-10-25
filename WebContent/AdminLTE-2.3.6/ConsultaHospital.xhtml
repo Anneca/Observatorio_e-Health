@@ -7,27 +7,27 @@
 	<title>Consultar Hospitais</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="assets/css/main.css"></link>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link href="assets/css/animate.css" rel="stylesheet" />
 	<link rel="stylesheet"
 		href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"></link>
 	<link rel="stylesheet"
-		href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css"></link>
-	<link rel="stylesheet"
 		href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css"></link>
-	<link rel="stylesheet"
-		href="https://editor.datatables.net/extensions/Editor/css/editor.dataTables.min.css"></link>
 
 	<!-- DataTable -->
-	<script src="//code.jquery.com/jquery-1.12.3.js"></script>
 	<script
 		src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 	<script
-		src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
-	<script
 		src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
-	<script
-		src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
 	<style>
 input, label, select {
 	color: #6b6565;
@@ -62,6 +62,14 @@ input {
 
 table td {
 	padding: 0;
+}
+
+table tbody tr:nth-child(2n+1) {
+	background-color: #FFF;
+}
+
+input[type="radio"]+label {
+	color: grey;
 }
 </style>
 </h:head>
@@ -126,7 +134,6 @@ table td {
 					<table id="example" class="display" width="100%" cellspacing="0">
 						<thead>
 							<tr>
-								<th></th>
 								<th>Nome</th>
 								<th>País</th>
 								<th>Cidade</th>
@@ -134,7 +141,6 @@ table td {
 								<th>Possui Site?</th>
 								<th>Endereço url</th>
 								<th>Última Alteração</th>
-								<th></th>
 								<th></th>
 							</tr>
 						</thead>
@@ -144,6 +150,79 @@ table td {
 			</div>
 		</section>
 
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document" style="width: 43%;">
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<h4
+							style="color: grey; font-size: 1.5em; text-align: left; margin-top: 20px; margin-bottom: 5px"
+							id="myModalLabel">
+							<span class="glyphicon glyphicon-edit"></span>Hospital
+						</h4>
+					</div>
+
+					<div class="modal-body" id="myContent"
+						style="width: 90%; margin-left: 20px;">
+
+						<form name="frm" method="post" action="#">
+							<label for="nome">Nome:</label>
+							<p:inputText name="nome" id="nome" type="text"></p:inputText>
+							<label for="demo-category">Tipo da Organização:</label>
+							<p:inputText name="demo-category" id="demo-category"
+								readonly="true" type="text"></p:inputText>
+
+							<label for="advanced">País:</label>
+							<p:inputText name="pais" id="pais" readonly="true" type="text"></p:inputText>
+
+							<label for="">Cidade:</label>
+							<p:inputText name="cidade" id="cidade" readonly="true"
+								type="text"></p:inputText>
+
+
+							<label for="site">Possui Site?</label>
+							<h:selectOneRadio name="site" id="site" required="true"
+								onclick="verPorRadio()" value="#{hospitalMB.possuiSite}"
+								requiredMessage="O campo possui site é obrigatório">
+								<f:selectItem id="sim" name="sim" itemLabel="Sim"
+									itemValue="true" />
+								<f:selectItem id="nao" itemLabel="Não" itemValue="false" />
+							</h:selectOneRadio>
+
+
+							<label for="url">Endereço do Site:</label>
+							<h:inputText type="text" name="url" id="url"
+								style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
+								placeholder="Endereço do Site"></h:inputText>
+							<div style="margin-left: 70px; margin-top: 30px;">
+							
+								<p:commandButton actionListener="#{hospitalMB.alterarHospital}"
+									update="growl" value="Alterar"
+									style=" width:40%; height:45px;font-size: 1em; background-color:#3abd20; background-image:none;"
+									styleClass="special"></p:commandButton>
+								<p:commandButton actionListener="#{hospitalMB.excluirHospital}"
+									update="growl" value="Excluir"
+									style=" width:33%; margin-left: 5px; height:45px;font-size: 1em; background-color:#ed4233; background-image:none;"
+									styleClass="special"></p:commandButton>
+
+							</div>
+							<div class="grow">
+								<p:growl id="growl" life="9000" />
+							</div>
+
+
+						</form>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
 		<!-- Footer -->
 		<footer id="footer">
 			<ul class="icons">
@@ -180,16 +259,10 @@ table td {
 					
 					var data =#{hospitalMB.listaJSON};
 
-					$('#example').DataTable( {
+					var table = $('#example').DataTable( {
 					    data: data,
 					    columns: [
-							{
-    							data: null,
-    							defaultContent: '',
-    							className: 'select-checkbox',
-    							orderable: false
-							},
-					        { data: 'nome'},
+							{ data: 'nome'},
 					        { data: 'pais' },
 					        { data: 'cidade' },
 					        { data: 'natureza' },
@@ -198,14 +271,7 @@ table td {
 					        { data: 'dt_cadastro' },
 					        {
     							data: null,
-    							defaultContent: '<a href="CadastroHospital.xhtml"> <i class="fa fa-pencil"/></a>',
-    							className: '',
-    							orderable: false
-							},
-							
-							 {
-    							data: null,
-    							defaultContent: '<i class="fa fa-times"/>',
+    							defaultContent: '<a href=""> <i class="fa fa-pencil"/></a>',
     							className: '',
     							orderable: false
 							}
@@ -234,14 +300,27 @@ table td {
 					            "sSortDescending": ": Ativar para ordenar a coluna de maneira descendente"
 					        }
 					    },
-					    select: {
-				            style:    'os',
-				            selector: 'td:first-child'
-				        }				        
+					    select: true	        
 					} );
 					
-					
+					$('#example tbody').on( 'click', 'td', function () {
+						var index = $(this).index();
+						if (index === 7) {
+					    	
+					    	$('#nome').val(table.row( this ).data().nome);
+					    	$('#demo-category').val(table.row( this ).data().natureza);
+					    	$('#pais').val(table.row( this ).data().pais);
+					    	$('#cidade').val(table.row( this ).data().cidade);
+					    	$('#url').val(table.row( this ).data().site);
+					    	$('#site').val(table.row( this ).data().possui_site);
+							$('#myModal').modal('show');
+						}
+						
+					    
+					    //CadastroHospital.xhtml?
+					} );
 				});
+
 	</script>
 
 	<script src="assets/js/jquery.scrollex.min.js"></script>

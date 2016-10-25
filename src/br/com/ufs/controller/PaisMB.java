@@ -52,7 +52,16 @@ public class PaisMB {
 	Pais objPais = new Pais();
 
 	PaisDAO paisDAO = new PaisDAO();
+	
+	public void alterarPais(){
+		System.out.println("Oi");
 
+	}
+
+	public void excluirPais(){
+		System.out.println("Oi");
+	}
+	
 	@PostConstruct
 	public void action() {
 		String valor = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("pais");

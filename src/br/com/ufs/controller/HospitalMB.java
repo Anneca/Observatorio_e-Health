@@ -40,6 +40,15 @@ public class HospitalMB {
 		listaJSON = JSONArray.toJSONString((jsonWrite.gerarArquivoJsonHospital(lista)));
 	}
 
+	public void alterarHospital(){
+		System.out.println("Entrou");
+	}
+	
+	public void excluirHospital(){
+		System.out.println("Entrou");
+	}
+
+	
 	public void cadastrarHospital() {
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();

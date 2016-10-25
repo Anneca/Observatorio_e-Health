@@ -7,27 +7,27 @@
 	<title>Consultar Países</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" href="assets/css/main.css"></link>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link href="assets/css/animate.css" rel="stylesheet" />
 	<link rel="stylesheet"
 		href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"></link>
 	<link rel="stylesheet"
-		href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.dataTables.min.css"></link>
-	<link rel="stylesheet"
 		href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css"></link>
-	<link rel="stylesheet"
-		href="https://editor.datatables.net/extensions/Editor/css/editor.dataTables.min.css"></link>
 
 	<!-- DataTable -->
-	<script src="//code.jquery.com/jquery-1.12.3.js"></script>
 	<script
 		src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 	<script
-		src="https://cdn.datatables.net/buttons/1.2.1/js/dataTables.buttons.min.js"></script>
-	<script
 		src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
-	<script
-		src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
 	<style>
 input, label, select {
 	color: #6b6565;
@@ -126,7 +126,6 @@ table td {
 					<table id="example" class="display" width="100%" cellspacing="0">
 						<thead>
 							<tr>
-								<th></th>
 								<th>Código</th>
 								<th>Nome</th>
 								<th>Capital</th>
@@ -136,7 +135,6 @@ table td {
 								<th>PIB</th>
 								<th>Última Alteracção</th>
 								<th></th>
-								<th></th>
 							</tr>
 						</thead>
 
@@ -144,6 +142,63 @@ table td {
 				</div>
 			</div>
 		</section>
+
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document" style="width: 43%;">
+				<div class="modal-content">
+					<div class="modal-header">
+
+						<h4
+							style="color: grey; font-size: 1.5em; text-align: left; margin-top: 20px; margin-bottom: 5px"
+							id="myModalLabel">
+							<span class="glyphicon glyphicon-edit"></span>País
+						</h4>
+					</div>
+
+					<div class="modal-body" id="myContent"
+						style="width: 90%; margin-left: 20px;">
+
+						<form name="frm" method="post" action="#">
+							<label for="codigo">Código:</label>
+							<p:inputText name="codigo" id="codigo" type="text"
+								readonly="true"></p:inputText>
+							<label for="descricao">Nome:</label>
+							<p:inputText name="descricao" id="descricao" type="text"></p:inputText>
+							<label for="capital">Capital:</label>
+							<p:inputText name="capital" id="capital" type="text"></p:inputText>
+							<label for="populacao">População:</label>
+							<p:inputText name="populacao" id="populacao" type="text"></p:inputText>
+							<label for="idh">IDH:</label>
+							<p:inputText name="idh" id="idh" type="text"></p:inputText>
+							<label for="idi">IDI:</label>
+							<p:inputText name="idi" id="idi" type="text"></p:inputText>
+							<label for="pib">PIB:</label>
+							<p:inputText name="pib" id="pib" type="text"></p:inputText>
+							<div style="margin-left: 70px; margin-top: 30px;">
+								<p:commandButton actionListener="#{paisMB.alterarPais}"
+									update="growl" value="Alterar"
+									style=" width:40%; height:45px;font-size: 1em; background-color:#3abd20; background-image:none;"
+									styleClass="special"></p:commandButton>
+								<p:commandButton actionListener="#{paisMB.excluirPais}"
+									update="growl" value="Excluir"
+									style=" width:33%; margin-left: 5px; height:45px;font-size: 1em; background-color:#ed4233; background-image:none;"
+									styleClass="special"></p:commandButton>
+							</div>
+							<div class="grow">
+								<p:growl id="growl" life="9000" />
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
 
 		<!-- Footer -->
 		<footer id="footer">
@@ -181,16 +236,10 @@ table td {
 					
 					var data =#{paisMB.listaJSON};
 
-					$('#example').DataTable( {
+					var table = $('#example').DataTable( {
 					    data: data,
 					    columns: [
-							{
-    							data: null,
-    							defaultContent: '',
-    							className: 'select-checkbox',
-    							orderable: false
-							},
-					        { data: 'codigo'},
+							{ data: 'codigo'},
 					        { data: 'descricao' },
 					        { data: 'capital' },
 					        { data: 'populacao'},
@@ -201,17 +250,11 @@ table td {
 
 					        {
     							data: null,
-    							defaultContent: '<a href="CadastroHospital.xhtml"> <i class="fa fa-pencil"/></a>',
-    							className: '',
-    							orderable: false
-							},
-							
-							 {
-    							data: null,
-    							defaultContent: '<i class="fa fa-times"/>',
+    							defaultContent: '<a href=""> <i class="fa fa-pencil"/></a>',
     							className: '',
     							orderable: false
 							}
+							
 					    ],
 					    language: {
 					        "sProcessing":    "Procesando...",
@@ -237,13 +280,24 @@ table td {
 					            "sSortDescending": ": Ativar para ordenar a coluna de maneira descendente"
 					        }
 					    },
-					    select: {
-				            style:    'os',
-				            selector: 'td:first-child'
-				        }				        
+					    select: true
 					} );
 					
-					
+					$('#example tbody').on( 'click', 'td', function () {
+						var index = $(this).index();
+						if (index === 8) {
+							
+							$('#codigo').val(table.row( this ).data().codigo);
+					    	$('#descricao').val(table.row( this ).data().descricao);
+					    	$('#capital').val(table.row( this ).data().capital);
+					    	$('#populacao').val(table.row( this ).data().populacao);
+					    	$('#idi').val(table.row( this ).data().idi);
+					    	$('#idh').val(table.row( this ).data().idh);
+					    	$('#pib').val(table.row( this ).data().pib);
+							$('#myModal').modal('show');
+						}
+						
+					} );
 				});
 	</script>
 

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import br.com.ufs.observatorio.dao.UsuarioDAO;
 import br.com.ufs.observatorio.dao.UsuarioPerfilDAO;
@@ -53,14 +54,21 @@ public class UsuarioMB {
 		}
 	}
 
-	public void login() {
+	public String login() {
 
+		String url = "/AdminLTE-2.3.6/Login?faces-redirect=true";
 		System.out.println("Anne");
 		try {
 			if (usuarioDAO.login(email, senha)) {
+				Usuario usuario = usuarioDAO.retornarUsuarioValido(email, senha);
+				HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+				session.setAttribute("usuario", usuario);
 				addMessage("Você está logado");
+
+				url = "/AdminLTE-2.3.6/ConstruaVisualizacao?faces-redirect=true";
 			} else {
 				addMessageError("Não foi possível realizar o login");
+				url = "/AdminLTE-2.3.6/Login?faces-redirect=true";
 
 			}
 
@@ -68,9 +76,13 @@ public class UsuarioMB {
 			addMessageError("Não foi possível realizar o login");
 			e.printStackTrace();
 		}
-
+		return url;
 	}
 
+	public String logout(){
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		return "/AdminLTE-2.3.6/Login?faces-redirect=true";
+	}
 	public void addMessageError(String summary) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, null);
 		FacesContext.getCurrentInstance().addMessage(null, message);
