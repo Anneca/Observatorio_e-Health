@@ -42,13 +42,26 @@ table td {
 		<header id="header"
 			style="padding-top: 0px; padding-right: 2em; padding-bottom: 0px; padding-left: 0px;">
 			<div class="col-md-6">
-				<h1> #{usuarioMB.nome} <h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
-				</h1>
+				<div id="login">
+					<h1>
+						#{usuarioMB.nome}
+						<h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
+					</h1>
+				</div>
+				<div id="logout" style="margin-left: 120px; display: none;">
+					<h:form action="" style="margin-right:30px;">
+						<h:commandButton style="box-shadow: 0 0 0 0 black;"
+							data-dismiss="modal" actionListener="#{usuarioMB.logout}"
+							value="Sair">
+						</h:commandButton>
+					</h:form>
+				</div>
+
 			</div>
 			<nav id="nav">
 				<ul>
 					<li class="special"><a href="#menu"
-						style="text-decoration: none;" class="menuToggle"><span>Menu</span></a>
+						style="text-decoration: none; position: static;" class="menuToggle"><span>Menu</span></a>
 						<div id="menu">
 							<ul>
 								<li><a href="index.xhtml">Home</a></li>
@@ -232,6 +245,7 @@ table td {
 			$("#28_faq").click(function() {
 				$("#28").slideToggle(170);
 			});
+
 		});
 	</script>
 

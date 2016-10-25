@@ -82,9 +82,11 @@ public class UsuarioMB {
 		System.out.println(usuario.getNome());
 	}
 
-	public String logout(){
+	public void logout() throws IOException {
+		String url = "Login.xhtml";
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "/AdminLTE-2.3.6/Login?faces-redirect=true";
+		FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+		System.out.println("Sair");;
 	}
 	public void addMessageError(String summary) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, null);

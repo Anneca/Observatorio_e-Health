@@ -82,10 +82,21 @@
 
 				</nav>
 
-				<h1>
-					#{usuarioMB.nome}
-					<h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
-				</h1>
+				<div id="login">
+					<h1 id="titulo">
+					  #{usuarioMB.nome}
+						<h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
+					</h1>
+				</div>
+
+				<div id="logout" style="margin-left: 140px; display: none;">
+					<h:form action="">
+						<h:commandButton style="box-shadow: 0 0 0 0 black;"
+							data-dismiss="modal" actionListener="#{usuarioMB.logout}"
+							value="Sair">
+						</h:commandButton>
+					</h:form>
+				</div>
 
 			</div>
 		</header>
@@ -119,6 +130,11 @@
 			$("#28_faq").click(function() {
 				$("#28").slideToggle(170);
 			});
+
+			$("#login").click(function() {
+				$("#logout").slideToggle(170);
+			});
+
 		});
 	</script>
 

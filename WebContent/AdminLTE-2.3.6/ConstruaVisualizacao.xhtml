@@ -264,9 +264,15 @@
 		<header id="header"
 			style="padding-top: 0px; padding-right: 2em; padding-bottom: 0px; padding-left: 0px;">
 			<div class="col-md-6">
-				<span style="margin-left: 20px;"> #{usuarioMB.nome} <h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
-				</span>
+				<div id="login">
+					<h1>
+						#{usuarioMB.nome}
+						<h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
+					</h1>
+				</div>
+				
 			</div>
+
 			<nav id="nav">
 				<ul>
 					<li class="special"><a href="#menu"
@@ -299,6 +305,8 @@
 										</ul>
 									</div></li>
 								<li><a href="Login.xhtml">Login</a></li>
+								<li><a href="Logout.xhtml" data-toggle="modal" data-target="#myModal">Sair
+								</a></li>
 							</ul>
 						</div></li>
 				</ul>
@@ -318,7 +326,7 @@
 
 					<div class="container">
 						<br />
-						<h1 style="">Escolha um País</h1>
+						<h1 style="margin-left: 500px;">Escolha um País</h1>
 
 						<div class="mapcontainer">
 							<div class="map">
@@ -346,7 +354,14 @@
 							style="color: grey; font-size: 1.5em; text-align: center; margin-top: 20px; margin-bottom: 5px"
 							id="myModalLabel">País</h4>
 					</div>
-					<div class="modal-body" id="myContent">...</div>
+					<div class="modal-body" id="myContent">
+						<h:form method="post" action="">
+							<h:commandButton style="box-shadow: 0 0 0 0 black;"
+								data-dismiss="modal" actionListener="#{usuarioMB.logout}"
+								value="Sair">
+							</h:commandButton>
+						</h:form>
+					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
 					</div>
@@ -387,6 +402,8 @@
 			$("#28_faq").click(function() {
 				$("#28").slideToggle(170);
 			});
+
+
 		});
 	</script>
 </h:body>
