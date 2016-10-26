@@ -73,11 +73,6 @@ public class CidadeMB {
 
 	public void cadastrarCidade() {
 		try {
-
-			HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-					.getRequest();
-			String nome = req.getParameter("nome");
-			String capital = req.getParameter("capital");
 			cidadeDAO.cadastrarCidade(nome, capital);
 			addMessage("Cidade Cadastrada");
 		} catch (SQLException e) {

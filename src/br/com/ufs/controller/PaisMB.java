@@ -43,6 +43,13 @@ public class PaisMB {
 	private int hospitaisUniversitarios;
 	private int hospitaisNaoDefinidos;
 	String listaJSON;
+	private String nome;
+	private String capital; 
+	private String populacao;
+	private String idi;
+	private String idh;
+	private String pib;
+	
 	JsonWrite jsonWrite = new JsonWrite();
 
 	private List<Pais> listaPaises;
@@ -151,20 +158,12 @@ public class PaisMB {
 	}
 
 	public void cadastrarPais() {
-		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
-		String descricao = req.getParameter("nome");
-		String capital = req.getParameter("capital");
-		String populacao = req.getParameter("populacao");
-		String IDH = req.getParameter("IDH");
-		String IDI = req.getParameter("IDI");
-		String PIB = req.getParameter("PIB");
 		Date ultimaAlteracao = new Date(System.currentTimeMillis());
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		String format = formatter.format(ultimaAlteracao);
 
 		try {
-			paisDAO.cadastrarPais(descricao, capital, populacao, IDH, IDI, PIB, format);
+			paisDAO.cadastrarPais(nome, capital, populacao, idh, idi, pib, format);
 			addMessage("País Cadastrado");
 		} catch (SQLException e) {
 			addMessageError("Não foi possível cadastrar o país");
@@ -186,8 +185,58 @@ public class PaisMB {
 	// Setters------------------------
 	
 	
+	
+	
 	public String getTeste() {
 		return teste;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCapital() {
+		return capital;
+	}
+
+	public void setCapital(String capital) {
+		this.capital = capital;
+	}
+
+	public String getPopulacao() {
+		return populacao;
+	}
+
+	public void setPopulacao(String populacao) {
+		this.populacao = populacao;
+	}
+
+	public String getIdi() {
+		return idi;
+	}
+
+	public void setIdi(String idi) {
+		this.idi = idi;
+	}
+
+	public String getIdh() {
+		return idh;
+	}
+
+	public void setIdh(String idh) {
+		this.idh = idh;
+	}
+
+	public String getPib() {
+		return pib;
+	}
+
+	public void setPib(String pib) {
+		this.pib = pib;
 	}
 
 	public ArrayList<Pais> getListaPaises2() {

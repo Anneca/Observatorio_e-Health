@@ -13,7 +13,7 @@
 .ui-growl {
 	margin-top: 56px;
 	left: 74%;
-	width: 360px;
+	width: 310px;
 	height: 110px;
 	z-index: 9999;
 }
@@ -42,7 +42,7 @@ table td {
 			style="padding-top: 0px; padding-right: 2em; padding-bottom: 0px; padding-left: 0px;">
 			<div class="col-md-6">
 				<h1>
-					#{usuarioMB.nome}
+					#{usuarioMB.texto}
 					<h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
 				</h1>
 
@@ -79,6 +79,10 @@ table td {
 										</ul>
 									</div></li>
 								<li><a href="Login.xhtml">Login</a></li>
+								<li><h:form id="usuario" method="post" action="#">
+										<h:commandLink style="text-decoration:none;"
+											action="#{usuarioMB.logout}">Sair</h:commandLink>
+									</h:form></li>
 							</ul>
 						</div></li>
 				</ul>
@@ -94,18 +98,18 @@ table td {
 
 				<div style="width: 80%">
 					<h4>Cadastro de País</h4>
-					<form method="post" action="#">
+					<h:form method="post" action="#">
 						<div class="row uniform">
 							<div class="6u 12u$(xsmall)">
 								<label for="nome">Nome:</label>
-								<p:inputText type="text" id="nome" name="nome" required="true"
+								<p:inputText type="text" id="nome" name="nome" required="true" value="#{paisMB.nome}"
 									requiredMessage="O Campo nome é obrigatório"
 									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
 									placeholder="Nome"></p:inputText>
 							</div>
 							<div class="6u 12u$(xsmall)">
 								<label for="capital">Capital:</label>
-								<p:inputText type="text" id="capital" required="true"
+								<p:inputText type="text" id="capital" required="true" value="#{paisMB.capital}"
 									name="capital" requiredMessage="Campo Capital é obrigatório"
 									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
 									placeholder="Capital"></p:inputText>
@@ -113,7 +117,7 @@ table td {
 
 							<div class="6u 12u$(xsmall)">
 								<label for="populacao">População:</label>
-								<p:inputText type="text" required="true"
+								<p:inputText type="text" required="true" value="#{paisMB.populacao}"
 									requiredMessage="Campo população é obrigatório" id="populacao"
 									name="populacao"
 									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
@@ -123,7 +127,7 @@ table td {
 
 							<div class="6u 12u$(xsmall)">
 								<label for="IDH">Índice de Desenvolvimento Humano:</label>
-								<p:inputText required="true" requiredMessage="IDH é obrigatório"
+								<p:inputText required="true" requiredMessage="IDH é obrigatório" value="#{paisMB.idh}"
 									name="IDH" type="text" id="IDH"
 									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
 									placeholder="IDH"></p:inputText>
@@ -132,7 +136,7 @@ table td {
 
 							<div class="6u 12u$(xsmall)">
 								<label for="IDI">Índice de Desenvolvimento Tecnológico:</label>
-								<p:inputText type="text" id="IDI" required="true" name="IDI"
+								<p:inputText type="text" id="IDI" required="true" name="IDI" value="#{paisMB.idi}"
 									requiredMessage="IDI é obrigatório"
 									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
 									placeholder="IDI"></p:inputText>
@@ -140,7 +144,7 @@ table td {
 
 							<div class="6u 12u$(xsmall)">
 								<label for="PIB">Produto Interno Bruto:</label>
-								<p:inputText required="true" requiredMessage="PIB é obrigatório"
+								<p:inputText required="true" requiredMessage="PIB é obrigatório" value="#{paisMB.pib}"
 									name="PIB" type="text" id="PIB"
 									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
 									placeholder="PIB"></p:inputText>
@@ -162,7 +166,7 @@ table td {
 							<p:growl id="growl" life="9000" />
 						</div>
 
-					</form>
+					</h:form>
 				</div>
 			</div>
 		</section>

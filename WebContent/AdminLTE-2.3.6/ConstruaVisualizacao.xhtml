@@ -266,11 +266,11 @@
 			<div class="col-md-6">
 				<div id="login">
 					<h1>
-						#{usuarioMB.nome}
+						#{usuarioMB.texto}
 						<h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
 					</h1>
 				</div>
-				
+
 			</div>
 
 			<nav id="nav">
@@ -305,8 +305,7 @@
 										</ul>
 									</div></li>
 								<li><a href="Login.xhtml">Login</a></li>
-								<li><a href="Logout.xhtml" data-toggle="modal" data-target="#myModal">Sair
-								</a></li>
+								<li><h:form><h:commandLink style="text-decoration:none;" action="#{usuarioMB.logout}">Sair</h:commandLink></h:form></li>
 							</ul>
 						</div></li>
 				</ul>
@@ -326,7 +325,7 @@
 
 					<div class="container">
 						<br />
-						<h1 style="margin-left: 500px;">Escolha um País</h1>
+						<h1>Escolha um País</h1>
 
 						<div class="mapcontainer">
 							<div class="map">
@@ -402,7 +401,6 @@
 			$("#28_faq").click(function() {
 				$("#28").slideToggle(170);
 			});
-
 
 		});
 	</script>

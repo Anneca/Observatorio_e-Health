@@ -14,7 +14,7 @@
 .ui-growl {
 	margin-top: 56px;
 	left: 74%;
-	width: 360px;
+	width: 310px;
 	height: 110px;
 	z-index: 9999;
 }
@@ -44,7 +44,7 @@ table td {
 			<div class="col-md-6">
 				<div id="login">
 					<h1>
-						#{usuarioMB.nome}
+						#{usuarioMB.texto}
 						<h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
 					</h1>
 				</div>
@@ -61,7 +61,8 @@ table td {
 			<nav id="nav">
 				<ul>
 					<li class="special"><a href="#menu"
-						style="text-decoration: none; position: static;" class="menuToggle"><span>Menu</span></a>
+						style="text-decoration: none; position: static;"
+						class="menuToggle"><span>Menu</span></a>
 						<div id="menu">
 							<ul>
 								<li><a href="index.xhtml">Home</a></li>
@@ -90,6 +91,10 @@ table td {
 										</ul>
 									</div></li>
 								<li><a href="Login.xhtml">Login</a></li>
+								<li><h:form id="usuario" method="post" action="#">
+										<h:commandLink style="text-decoration:none;"
+											action="#{usuarioMB.logout}">Sair</h:commandLink>
+									</h:form></li>
 							</ul>
 						</div></li>
 				</ul>
@@ -104,13 +109,13 @@ table td {
 
 				<div style="width: 80%">
 					<h4>Cadastro de Hospital</h4>
-					<form method="post" action="#">
+					<h:form method="post" action="#">
 						<div class="row uniform">
 							<div class="6u 12u$(xsmall)">
 								<label for="nome">Nome:</label>
 								<p:inputText name="nome" type="text" required="true"
-									placeholder="Nome" requiredMessage="O campo nome é obrigatório"
-									id="nome"
+									value="#{hospitalMB.nome}" placeholder="Nome"
+									requiredMessage="O campo nome é obrigatório" id="nome"
 									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"></p:inputText>
 							</div>
 							<div class="12u$">
@@ -174,6 +179,7 @@ table td {
 							<div class="6u 12u$(xsmall)" style="display: none;" id="campo">
 								<label for="url">Endereço do Site:</label>
 								<h:inputText type="text" name="url" id="url"
+									value="#{hospitalMB.url}"
 									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF;"
 									placeholder="Endereço do Site"></h:inputText>
 							</div>
@@ -194,7 +200,7 @@ table td {
 							<p:growl id="growl" life="9000" />
 						</div>
 
-					</form>
+					</h:form>
 				</div>
 			</div>
 		</section>
@@ -224,7 +230,7 @@ table td {
 	<script>
 		function verPorRadio() {
 
-			var elemento = document.getElementById("site:0").checked
+			var elemento = document.getElementById("j_idt14:site:0").checked
 			if (elemento) {
 				document.getElementById("campo").style.display = 'block';
 			} else {

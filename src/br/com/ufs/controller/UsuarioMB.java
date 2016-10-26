@@ -18,6 +18,7 @@ import br.com.ufs.observatorio.model.Usuario;
 public class UsuarioMB {
 	UsuarioDAO usuarioDAO = new UsuarioDAO();
 	UsuarioPerfilDAO usuarioPerfilDAO = new UsuarioPerfilDAO();
+	String texto;
 	String nome;
 	String email;
 	String senha;
@@ -34,9 +35,14 @@ public class UsuarioMB {
 				// Perfil coordenador 1
 				usuarioPerfilDAO.cadastrarUsuarioPerfil(obj.getCodigo(), 1);
 				addMessage("Usuário Cadastrado");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				addMessageError("Não foi possível realizar o seu cadastro");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 		} else {
@@ -47,10 +53,14 @@ public class UsuarioMB {
 					// Perfil pesquisador 2
 					usuarioPerfilDAO.cadastrarUsuarioPerfil(obj.getCodigo(), 2);
 					addMessage("Usuário Cadastrado");
+					FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					addMessageError("Não foi possível realizar o seu cadastro");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			} else {
 				addMessageError("Código inserido não é válido");
@@ -67,7 +77,7 @@ public class UsuarioMB {
 			if (sucesso){
 				usuario = usuarioDAO.retornarUsuarioValido(email, senha);  
 				System.out.println(usuario.getNome());
-				nome = "Olá ";
+				texto = "Olá ";
 				url = "index.xhtml";
 				HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 				session.setAttribute("USUARIO", usuario);
@@ -99,9 +109,19 @@ public class UsuarioMB {
 	}
 	
 	//--------------Setters and Getters------------------
+	
+	
 
 	public Usuario getUsuario() {
 		return usuario;
+	}
+
+	public String getTexto() {
+		return texto;
+	}
+
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
 
 	public void setUsuario(Usuario usuario) {

@@ -24,6 +24,9 @@ public class HospitalMB {
 	HospitalDAO hospitalDAO = new HospitalDAO();
 	int pais;
 	int cidade;
+	String nome;
+	String site;
+	String url;
 	boolean possuiSite;
 	ArrayList<Hospital> lista = new ArrayList<Hospital>();
 	String listaJSON;
@@ -75,12 +78,11 @@ public class HospitalMB {
 	public void cadastrarHospital() {
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
-		String nome = req.getParameter("nome");
 		String tipoOrganizacao = req.getParameter("demo-category");
-		String site = "http://www.linkquebrado.com/";
+		site = "http://www.linkquebrado.com/";
 		String temSite = "Não";
 		if (possuiSite) {
-			site = req.getParameter("url");
+			site = url;
 			temSite = "Sim";
 		}
 
@@ -91,6 +93,32 @@ public class HospitalMB {
 			addMessageError("Não foi possível cadastrar o hospital");
 			e.printStackTrace();
 		}
+	}
+
+	
+	
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSite() {
+		return site;
+	}
+
+	public void setSite(String site) {
+		this.site = site;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public ArrayList<Hospital> getLista() {

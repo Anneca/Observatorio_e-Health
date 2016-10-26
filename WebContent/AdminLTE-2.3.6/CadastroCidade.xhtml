@@ -13,7 +13,7 @@
 .ui-growl {
 	margin-top: 56px;
 	left: 74%;
-	width: 360px;
+	width: 310px;
 	height: 110px;
 	z-index: 9999;
 }
@@ -41,7 +41,7 @@ table td {
 			style="padding-top: 0px; padding-right: 2em; padding-bottom: 0px; padding-left: 0px;">
 			<div class="col-md-6">
 				<h1>
-					#{usuarioMB.nome}
+					#{usuarioMB.texto}
 					<h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
 				</h1>
 			</div>
@@ -77,6 +77,10 @@ table td {
 										</ul>
 									</div></li>
 								<li><a href="Login.xhtml">Login</a></li>
+								<li><h:form id="usuario" method="post" action="#">
+										<h:commandLink style="text-decoration:none;"
+											action="#{usuarioMB.logout}">Sair</h:commandLink>
+									</h:form></li>
 							</ul>
 						</div></li>
 				</ul>
@@ -92,11 +96,11 @@ table td {
 
 				<div style="width: 90%">
 					<h4>Cadastro de Cidade</h4>
-					<form method="post" action="#">
+					<h:form method="post" action="#">
 						<div class="row uniform">
 							<div class="12u$">
 								<label for="nome">Nome:</label>
-								<p:inputText type="text" id="nome" name="nome"
+								<p:inputText type="text" id="nome" name="nome" value="#{cidadeMB.nome}"
 									style="border-radius: 4px; color: #878787; margin: 0px; border: 1px solid #C0C0C0; background-color: #FFF; width: 30%;"
 									placeholder="Nome" required="true"
 									requiredMessage="Campo nome é obrigatório"></p:inputText>
@@ -105,7 +109,7 @@ table td {
 
 							<label for="consolee">Capital:</label>
 							<div class="6u$ 12u$(small)">
-								<h:selectOneRadio name="capital" id="capital" required="true"
+								<h:selectOneRadio name="capital" id="capital" required="true" value="#{cidadeMB.capital}"
 									requiredMessage="O campo capital é obrigatório">
 									<f:selectItem itemLabel="Sim" itemValue="Sim" />
 									<f:selectItem itemLabel="Não" itemValue="Não" />
@@ -127,7 +131,7 @@ table td {
 						<div class="grow">
 							<p:growl id="growl" life="9000" />
 						</div>
-					</form>
+					</h:form>
 				</div>
 			</div>
 		</section>
