@@ -1,5 +1,6 @@
 package br.com.ufs.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,14 +51,20 @@ public class HospitalMB {
 		String possui_site = req.getParameter("site");
 		String url = req.getParameter("url");
 		int id = Integer.parseInt(req.getParameter("codigo"));
+		String pagina = "ConsultaHospital.xhtml";
 		
 		try {
 			hospitalDAO.alterarHospital(descricao, possui_site,url, id);
 			addMessage("Hospital Alterado");
+			FacesContext.getCurrentInstance().getExternalContext().redirect(pagina);
 		} catch (SQLException e) {
 			addMessageError("Não foi possível alterar o Hospital");
 			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	
 	}
 	
 	public void excluirHospital(){
@@ -65,14 +72,21 @@ public class HospitalMB {
 				.getRequest();
 		
 		int id = Integer.parseInt(req.getParameter("codigo"));
+		String pagina = "ConsultaHospital.xhtml";
 		
 		try {
 			hospitalDAO.excluirHospital(id);
 			addMessage("Hospital excluído");
+			FacesContext.getCurrentInstance().getExternalContext().redirect(pagina);
+
 		} catch (SQLException e) {
 			addMessageError("Não foi possível excluir o hospital");
 			e.printStackTrace();
-		}	}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	
 	public void cadastrarHospital() {

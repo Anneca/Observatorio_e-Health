@@ -44,7 +44,7 @@ public class AutenticadorFilter implements Filter {
 		HttpSession session = (HttpSession) req.getSession();
 
 		Usuario usuario = (Usuario) session.getAttribute("USUARIO");
-		
+
 		System.out.println(req.getRequestURL().toString());
 
 		if (usuario == null && !req.getRequestURL().toString().contains("Login.xhtml")
@@ -53,7 +53,9 @@ public class AutenticadorFilter implements Filter {
 				&& !req.getRequestURL().toString().contains("ConstruaVisualizacao.xhtml")
 				&& !req.getRequestURL().toString().contains("InformacaoPais.xhtml")
 				&& !req.getRequestURL().toString().contains("Sobre.xhtml")
-				&& !req.getRequestURL().toString().contains("javax.faces/")) {
+				&& !req.getRequestURL().toString().contains("javax.faces/")
+				&& !req.getRequestURL().toString().contains("Pesquisa.xhtml")
+				&& !req.getRequestURL().toString().contains("Pesquisa2.xhtml")) {
 			resp.sendRedirect(req.getContextPath() + "/faces/AdminLTE-2.3.6/Login.xhtml");
 
 		} else {

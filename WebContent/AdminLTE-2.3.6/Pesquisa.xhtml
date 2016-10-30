@@ -10,20 +10,73 @@
 	<meta
 		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 		name="viewport"></meta>
-	<!-- Bootstrap 3.3.6 -->
+	<!-- CSS -->
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"></link>
-	<!-- Font Awesome -->
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"></link>
-	<!-- Theme style -->
 	<link rel="stylesheet" href="dist/css/AdminLTE.min.css"></link>
-	<!-- Morris chart -->
-	<link rel="stylesheet" href="plugins/morris/morris.css"></link>
+	<link rel="stylesheet"
+		href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 	<link rel="stylesheet" href="assets/css/main.css"></link>
+
+	<!-- Script -->
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+	<!-- CSS -->
+
+	<style>
+.dropdown-menu {
+	background-color: #2f2c2c;
+}
+
+.filter-dash label {
+	color: #777;
+	margin-bottom: 6px;
+}
+
+input [type="text"] {
+	height: 2.55em;
+}
+
+.ui-inputfield {
+	box-shadow: 0 2px 2px #FFF;
+}
+
+.ui-state-default {
+	border: 1px solid #C0C0C0;
+}
+
+table th {
+	color: #7d7373;
+}
+
+.ui-datepicker table {
+	background-color: white;
+}
+
+table tbody tr:nth-child(2n+1) {
+	background-color: white;
+}
+
+.ui-datepicker {
+	width: 13em;
+}
+
+.ui-datepicker .ui-datepicker-header {
+	background: white;
+}
+</style>
+
 </h:head>
 <h:body>
 
@@ -73,7 +126,7 @@
 								<li><a href="Login.xhtml">Login</a></li>
 								<li><h:form id="usuario" method="post" action="#">
 										<h:commandLink style="text-decoration:none;"
-											action="#{usuarioMB.logout}">Sair</h:commandLink>
+											action="#{usuarioMB.logout}">SAIR</h:commandLink>
 									</h:form></li>
 							</ul>
 						</div></li>
@@ -104,27 +157,22 @@
 								<div class="filter-dash">
 									<h1
 										style="font-size: 22px; margin-bottom: 10px; color: #777; letter-spacing: 2px;"></h1>
-									<h:form>
+									<h:form method="#post" action="#">
 										<label for="advanced">País:</label>
 										<h:selectOneMenu value="#{paisMB.pais}" name="pais"
-											style="position: relative; height: 2.75em; border-radius: 4px; color: #878787; border: 1px solid #C0C0C0; background-color: #FFF;">
+											style="margin-left:6px; position: relative; height: 2.55em; border-radius: 4px; border: 1px solid #C0C0C0; background-color: #FFF;">
 											<f:selectItem itemValue="" itemLabel="Selecione..." />
 											<f:selectItems value="#{paisMB.listaPaises}" var="pais"
 												itemLabel="#{pais.descricao}" itemValue="#{pais.descricao}" />
 										</h:selectOneMenu>
 
 
-										<label> Ano: </label>
-										<h:selectOneMenu value="#{paisMB.ano}"
-											style="position: relative; height: 2.75em; border-radius: 4px; color: #878787; border: 1px solid #C0C0C0; background-color: #FFF;">
-											<f:selectItem itemValue="" itemLabel="Ano" />
-											<f:selectItem itemValue="2016" itemLabel="2016" />
-											<f:selectItem itemValue="2015" itemLabel="2015" />
-											<f:selectItem itemValue="2014" itemLabel="2014" />
-
-										</h:selectOneMenu>
+										<label for="popup"> Data: </label>
+										<input value="#{paisMB.data}"
+											style="position: relative; height: 2.55em; width:100%; color:#545454; border-radius: 4px; padding-left: 5px; border: 1px solid #C0C0C0; background-color: #FFF; font-weight: 600;"
+											id="calendario" name="calendario"></input>
 										<h:commandButton value="Pesquisar"
-											action="#{paisMB.preencherDadosPais}">
+											actionListener="#{paisMB.preencherDadosPais}">
 										</h:commandButton>
 									</h:form>
 								</div>
@@ -136,7 +184,7 @@
 								<br />
 								<h1 style="color: grey; font-size: 22px;">
 									<h:outputText value="#{paisMB.pais}"></h:outputText>
-									<SMALL><h:outputText value="#{paisMB.ano}"></h:outputText></SMALL>
+									<SMALL><h:outputText value="#{paisMB.dataFormatada}"></h:outputText></SMALL>
 								</h1>
 
 								<!-- Small boxes (Stat box) -->
@@ -165,25 +213,6 @@
 
 										</div>
 									</div>
-									<!-- 									<div class="col-lg-3 col-xs-6"> -->
-									<!-- 										<div class="small-box bg-orange"> -->
-									<!-- 											<div class="inner"> -->
-									<!-- 												<h3> -->
-									<!-- 													<h:outputText value="#{paisMB.hospitaisPrivados}"></h:outputText> -->
-									<!-- 												</h3> -->
-
-									<!-- 												<p> -->
-									<!-- 													<b>Hospitais </b> <br /> <b>Privados</b> -->
-									<!-- 												</p> -->
-									<!-- 											</div> -->
-									<!-- 											<div class="icon"> -->
-									<!-- 												<i class="fa fa-ambulance "></i> -->
-									<!-- 											</div> -->
-
-									<!-- 										</div> -->
-									<!-- 									</div> -->
-
-									<!-- ./col -->
 									<div class="col-lg-3 col-xs-6">
 										<!-- small box -->
 										<div class="small-box bg-green">
@@ -462,8 +491,7 @@
 			}
 
 		}
-	</script>
-	<script>
+
 		$(document).ready(function() {
 			$("#27_faq").click(function() {
 				$("#27").slideToggle(170);
@@ -473,15 +501,36 @@
 				$("#28").slideToggle(170);
 			});
 		});
+
+		$(function() {
+			$.noConflict(); //Not to conflict with other scripts
+			jQuery(document).ready(
+					function($) {
+						$('#calendario')
+								.datepicker(
+										{
+											dateFormat : "dd-mm-yy",
+											monthNames : [ 'Janeiro',
+													'Fevereiro', 'Março',
+													'Abril', 'Maio', 'Junho',
+													'Julho', 'Agosto',
+													'Setembro', 'Outubro',
+													'Novembro', 'Dezembro' ],
+											dayNames : [ 'Domingo', 'Segunda',
+													'Terça', 'Quarta',
+													'Quinta', 'Sexta',
+													'Sábado', 'Domingo' ],
+											dayNamesShort : [ 'Dom', 'Seg',
+													'Ter', 'Qua', 'Qui', 'Sex',
+													'Sáb', 'Dom' ],
+											dayNamesMin : [ 'D', 'S', 'T', 'Q',
+													'Q', 'S', 'S', 'D' ]
+										})
+
+					})
+		});
 	</script>
 
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/skel.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
 
 
 </h:body>

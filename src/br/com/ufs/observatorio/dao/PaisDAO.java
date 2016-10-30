@@ -35,7 +35,7 @@ public class PaisDAO {
 		con.conexao.close();
 
 	}
-	
+
 	public void excluirPais(int id) throws SQLException {
 		String sql = "DELETE FROM pais WHERE id_pais =" + id;
 
@@ -172,20 +172,26 @@ public class PaisDAO {
 
 		int id = capturarIdPaisByNome(pais);
 		int quantidadeHospitaisCatalogados = retornarQtHospitaisCatalogados(id);
-		int quantidadeHospitaisComSites = retornarQtHospitaisComSites(id, data);
-		int quantidadeSitesInfomacoesInstitucionais = retornarQtSitesComInformacoesInstitucionais(id);
-		int quantidadeSitesComServicos = retornarQtSitesComServico(id);
-		int quantidadeSitesComCorpoClinico = retornarQtSitesComCorpoClinico(id);
-		int quantidadeSitesForaDoAr = retornarQtSitesForaDoAr(id, data);
-		int quantidadeSitesComComentarios = retornarQtSitesComComentarios(id);
+
+		// Exibidos na tela Pesquisa no combo Hospitais com Sites próprios
+		int quantidadeSitesInfomacoesInstitucionais = retornarQtSitesComInformacoesInstitucionais(id, data);
+		int quantidadeSitesComServicos = retornarQtSitesComServico(id, data);
+		int quantidadeSitesComCorpoClinico = retornarQtSitesComCorpoClinico(id, data);
+		int quantidadeSitesComComentarios = retornarQtSitesComComentarios(id, data);
+
+		// Exibidos na tela Pesquisa no combo Tipo Organizacao
 		int hospitaisPublicos = retornarQtHospitaisPublicos(id);
 		int hospitaisPrivados = retornarQtHospitaisPrivados(id);
 		int hospitaisMisto = retornarQtHospitaisMisto(id);
 		int hospitaisNaoDefinidos = retornarQtHospitaisNaoDefinido(id);
 		int hospitaisUniversitarios = retornarQtHospitaisUniversitarios(id);
 		int hospitaisSemFinsLucrativos = retornarQtHospitaisSemFinsLucrativos(id);
+
+		// Utilizados na tela Construa Visualização
 		int hospitaisSemSites = retornarQtHospitaisSemSites(id, data);
 		int quantidadeSitesDisponiveis = retornarQtSitesDisponiveis(id, data);
+		int quantidadeSitesForaDoAr = retornarQtSitesForaDoAr(id, data);
+		int quantidadeHospitaisComSites = retornarQtHospitaisComSites(id, data);
 
 		// Preenchendo o objeto
 
@@ -291,11 +297,11 @@ public class PaisDAO {
 	}
 
 	// SITES COM SERVICOS
-	public int retornarQtSitesComServico(int id) throws SQLException {
+	public int retornarQtSitesComServico(int id, String data) throws SQLException {
 		String sql = " select COUNT(cv_servicos) as qt_sitesComServicos from formulario_hospital fm "
 				+ " INNER JOIN formulario f ON f.id_formulario = fm.id_formulario "
 				+ " INNER JOIN hospital h ON h.id_hospital = fm.id_hospital " + " where id_Pais =" + id
-				+ " AND cv_servicos = 'Sim'";
+				+ " AND cv_servicos = 'Sim'" + " AND f.dt_formulario like '%" + data + "%'";
 
 		int sitesComServico = 0;
 
@@ -314,11 +320,11 @@ public class PaisDAO {
 	}
 
 	// SITES COM INFORMACOES INSTITUCIONAIS
-	public int retornarQtSitesComInformacoesInstitucionais(int id) throws SQLException {
+	public int retornarQtSitesComInformacoesInstitucionais(int id, String data) throws SQLException {
 		String sql = " select COUNT(cv_informacoes_institucionais) as qt_sitesInformacaoInstitucional from formulario_hospital fm "
 				+ " INNER JOIN formulario f ON f.id_formulario = fm.id_formulario "
 				+ " INNER JOIN hospital h ON h.id_hospital = fm.id_hospital " + " where id_Pais =" + id
-				+ " AND cv_informacoes_institucionais = 'Sim'";
+				+ " AND f.cv_informacoes_institucionais = 'Sim'" + " AND f.dt_formulario like '%" + data + "%'";
 
 		int sitesComServico = 0;
 
@@ -337,11 +343,11 @@ public class PaisDAO {
 	}
 
 	// SITES COM CORPO CLINICO
-	public int retornarQtSitesComCorpoClinico(int id) throws SQLException {
+	public int retornarQtSitesComCorpoClinico(int id, String data) throws SQLException {
 		String sql = " select COUNT(cv_corpo_clinico) as qt_sitesComCorpoClinico from formulario_hospital fm "
 				+ " INNER JOIN formulario f ON f.id_formulario = fm.id_formulario "
 				+ " INNER JOIN hospital h ON h.id_hospital = fm.id_hospital " + " where id_Pais =" + id
-				+ " AND cv_corpo_clinico = 'Sim'";
+				+ " AND cv_corpo_clinico = 'Sim'" + " AND f.dt_formulario like '%" + data + "%'";
 
 		int sitesComCorpoClinico = 0;
 
@@ -360,11 +366,12 @@ public class PaisDAO {
 	}
 
 	// SITES COM EMAIL PARA COMENTARIOS
-	public int retornarQtSitesComComentarios(int id) throws SQLException {
+	public int retornarQtSitesComComentarios(int id, String data) throws SQLException {
 		String sql = " select COUNT(cv_comentarios) as qt_sitesComComentarios from formulario_hospital fm "
 				+ " INNER JOIN formulario f ON f.id_formulario = fm.id_formulario "
 				+ " INNER JOIN hospital h ON h.id_hospital = fm.id_hospital " + " where id_Pais =" + id
-				+ " AND cv_comentarios = 'Sim'";
+				+ " AND cv_comentarios = 'Sim'" 
+				+ " AND f.dt_formulario like '%" + data + "%'";
 
 		int sitesComComentarios = 0;
 

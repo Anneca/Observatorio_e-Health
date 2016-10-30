@@ -1,5 +1,6 @@
 package br.com.ufs.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,21 +40,29 @@ public class CidadeMB {
 
 	}
 
-	public void alterarCidade() {
+	public void alterarCidade(){
 
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
 		String descricao = req.getParameter("descricao");
 		String capital = req.getParameter("capital");
+		String pagina = "ConsultaCidade.xhtml";
 		int id = Integer.parseInt(req.getParameter("codigo"));
 		
 		try {
 			cidadeDAO.alterarCidade(descricao, capital, id);
 			addMessage("Cidade Alterada");
+			FacesContext.getCurrentInstance().getExternalContext().redirect(pagina);
+
 		} catch (SQLException e) {
 			addMessageError("Não foi possível cadastrar a cidade");
 			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+
 	}
 
 	public void excluirCidade() {
@@ -61,14 +70,20 @@ public class CidadeMB {
 				.getRequest();
 		
 		int id = Integer.parseInt(req.getParameter("codigo"));
+		String pagina = "ConsultaCidade.xhtml";
 		
 		try {
 			cidadeDAO.excluirCidade(id);
 			addMessage("Cidade excluída");
+			FacesContext.getCurrentInstance().getExternalContext().redirect(pagina);
 		} catch (SQLException e) {
 			addMessageError("Não foi possível excluir a cidade");
 			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 	}
 
 	public void cadastrarCidade() {

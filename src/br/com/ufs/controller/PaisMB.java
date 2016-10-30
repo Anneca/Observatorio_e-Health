@@ -1,5 +1,6 @@
 package br.com.ufs.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +23,6 @@ import br.com.ufs.observatorio.util.JsonWrite;
 @ManagedBean(name = "paisMB")
 public class PaisMB {
 
-	String teste = "39";
 	private int qtSitesDisponiveis;
 	private int qtHospitaisSemSite;
 	private int qtHospitaisCatalogados;
@@ -34,8 +34,6 @@ public class PaisMB {
 	private int qtSitesInformacaoInstitucional;
 	private String pais = "Escolha um País";
 	private String ano = "";
-	private String propertyName1;
-	private String propertyName2;
 	private int hospitaisPublicos;
 	private int hospitaisPrivados;
 	private int hospitaisSemFinsLucrativos;
@@ -49,6 +47,8 @@ public class PaisMB {
 	private String idi;
 	private String idh;
 	private String pib;
+	Date data;
+	String dataFormatada;
 	
 	JsonWrite jsonWrite = new JsonWrite();
 
@@ -60,7 +60,7 @@ public class PaisMB {
 
 	PaisDAO paisDAO = new PaisDAO();
 	
-	public String alterarPais(){
+	public void alterarPais() {
 		
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
@@ -71,29 +71,40 @@ public class PaisMB {
 		String idi = req.getParameter("idi");
 		String idh = req.getParameter("idh");
 		String pib = req.getParameter("pib");
+		String pagina = "ConsultaPais.xhtml";
 		
 		try {
 			paisDAO.alterarPais(descricao, capital, id, populacao, idi, idh, pib);
 			addMessage("Pais Alterado");
+			FacesContext.getCurrentInstance().getExternalContext().redirect(pagina);
+
 		} catch (SQLException e) {
 			addMessageError("Não foi possível alterar o país");
 			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return "/AdminLTE-2.3.6/ConsultaPais?faces-redirect=true";
-
 	}
 
+	
 	public void excluirPais(){
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
 		
 		int id = Integer.parseInt(req.getParameter("codigo"));
+		String pagina="ConsultaPais.xhtml";
 		
 		try {
 			paisDAO.excluirPais(id);
 			addMessage("Pais excluído");
+			FacesContext.getCurrentInstance().getExternalContext().redirect(pagina);
+
 		} catch (SQLException e) {
 			addMessageError("Não foi possível excluir o país");
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -139,8 +150,13 @@ public class PaisMB {
 	}
 
 	public void preencherDadosPais() throws SQLException {
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		dataFormatada = req.getParameter("calendario");
+		// Essa informação é temporária
+		String dataTemp = "13-10-2016";
 		objPais = paisDAO.consultarPaisByNome(pais);
-		DadosPais objeto = paisDAO.consultarDadosPais(pais, ano);
+		DadosPais objeto = paisDAO.consultarDadosPais(pais, dataTemp);
 		qtHospitaisCatalogados = objeto.getQtHospitaisCatalogados();
 		qtHospitaisComSite = objeto.getQtHospitaisComSite();
 		qtSitesForaDoAr = objeto.getQtSitesForaDoAr();
@@ -184,13 +200,25 @@ public class PaisMB {
 	// -----------------------------------Getters and
 	// Setters------------------------
 	
-	
-	
-	
-	public String getTeste() {
-		return teste;
+
+	public Date getData() {
+		return data;
 	}
 
+	public String getDataFormatada() {
+		return dataFormatada;
+	}
+
+
+	public void setDataFormatada(String dataFormatada) {
+		this.dataFormatada = dataFormatada;
+	}
+
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -303,22 +331,6 @@ public class PaisMB {
 		this.hospitaisPrivados = hospitaisPrivados;
 	}
 
-	public String getPropertyName1() {
-		return propertyName1;
-	}
-
-	public void setPropertyName1(String propertyName1) {
-		this.propertyName1 = propertyName1;
-	}
-
-	public String getPropertyName2() {
-		return propertyName2;
-	}
-
-	public void setPropertyName2(String propertyName2) {
-		this.propertyName2 = propertyName2;
-	}
-
 	public String getAno() {
 		return ano;
 	}
@@ -389,10 +401,6 @@ public class PaisMB {
 
 	public String getPais() {
 		return pais;
-	}
-
-	public void setTeste(String teste) {
-		this.teste = teste;
 	}
 
 	public int getHospitaisSemFinsLucrativos() {
