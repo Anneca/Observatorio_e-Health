@@ -138,7 +138,38 @@ public class JsonWrite {
 		return jsonArray;
 	}
 
+	@SuppressWarnings("unchecked")
+	public JSONArray gerarArquivoJsonTecnologias(ArrayList<Tecnologia> list) {
 
+		for (Tecnologia c : list) {
+
+			JSONObject jsonObject = new JSONObject();
+			// Armazena dados em um Objeto JSON
+			jsonObject.put("colocacao", c.getColocacao());
+			jsonObject.put("descricao", c.getDescricao());
+			jsonObject.put("quantidade", c.getQuantidade());
+			
+			jsonArray.add(jsonObject);
+		}
+		return jsonArray;
+	}
+
+	@SuppressWarnings("unchecked")
+	public JSONArray gerarArquivoJsonRedesSociais(ArrayList<RedeSocial> list) {
+
+		for (RedeSocial rede : list) {
+
+			JSONObject jsonObject = new JSONObject();
+			// Armazena dados em um Objeto JSON
+			jsonObject.put("colocacao", rede.getColocacao());
+			jsonObject.put("descricao", rede.getDescricao());
+			jsonObject.put("quantidade", rede.getQuantidade());
+			
+			jsonArray.add(jsonObject);
+		}
+		return jsonArray;
+	}
+	
 	public List<String> getListaCores() {
 		return listaCores;
 	}

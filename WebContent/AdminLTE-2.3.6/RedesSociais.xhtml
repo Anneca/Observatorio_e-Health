@@ -7,39 +7,83 @@
 	<title>Redes Sociais</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta
-		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-		name="viewport"></meta>
-	<!-- Bootstrap 3.3.6 -->
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"></link>
-	<!-- Font Awesome -->
 	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css"></link>
-	<!-- Ionicons -->
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"></link>
-	<!-- Theme style -->
-	<link rel="stylesheet" href="dist/css/AdminLTE.min.css"></link>
-	<!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-	<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css"></link>
-	<!-- iCheck -->
-	<link rel="stylesheet" href="plugins/iCheck/flat/blue.css"></link>
-	<!-- Morris chart -->
-	<link rel="stylesheet" href="plugins/morris/morris.css"></link>
-	<!-- jvectormap -->
-	<link rel="stylesheet"
-		href="plugins/jvectormap/jquery-jvectormap-1.2.2.css"></link>
-	<!-- Date Picker -->
-	<link rel="stylesheet" href="plugins/datepicker/datepicker3.css"></link>
-	<!-- Daterange picker -->
-	<link rel="stylesheet"
-		href="plugins/daterangepicker/daterangepicker.css"></link>
-	<!-- bootstrap wysihtml5 - text editor -->
-	<link rel="stylesheet"
-		href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"></link>
-
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 	<link rel="stylesheet" href="assets/css/main.css"></link>
+
+	<link href="assets/css/animate.css" rel="stylesheet" />
+	<link rel="stylesheet"
+		href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"></link>
+	<link rel="stylesheet"
+		href="https://cdn.datatables.net/select/1.2.0/css/select.dataTables.min.css"></link>
+
+	<link rel="stylesheet"
+		href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+
+	<!-- Script -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+
+
+	<!-- DataTable -->
+	<script
+		src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
+	<style>
+input, label, select {
+	color: #6b6565;
+	background-color: #FFF;
+	border-radius: 4px;
+}
+
+.wrapper.style5 select {
+	background-color: #FFF;
+	border: solid 1px;
+}
+
+input {
+	border: solid 1px;
+}
+
+.ui-growl {
+	margin-top: 56px;
+	left: 74%;
+	width: 360px;
+	height: 110px;
+	z-index: 9999;
+}
+
+.wrapper.style5 table tbody tr {
+	border-color: #fff;
+}
+
+.wrapper.style5 table tbody tr:nth-child(2n+1) {
+	background-color: rgba(246, 237, 237, 0);
+}
+
+table td {
+	padding: 0;
+}
+
+.lista {
+	width: 82%;
+	clear: none;
+	margin-left: 15px;
+}
+
+.\31 0u, .\31 0u\$ {
+	width: 83.3333333333%;
+}
+
+#footer {
+	padding: 10em 0 2em 0;
+}
+</style>
 </h:head>
 <h:body>
 
@@ -47,83 +91,107 @@
 	<div id="page-wrapper">
 
 		<!-- Header -->
-		<header id="header">
-
+		<header id="header"
+			style="padding-top: 0px; padding-right: 2em; padding-bottom: 0px; padding-left: 0px;">
 			<div class="col-md-6">
 				<h1>
-					<a href="index.html">OBSERVATÓRIO</a>
+					#{usuarioMB.texto}
+					<h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
 				</h1>
 			</div>
-			<div class="col-md-6">
-				<div class="language">
-					<ul>
-						<li><a class="active" href="#"> <img alt=""
-								src="images/inglaterra.jpg" style="margin-top: 16px;"
-								width="27px" height="15px" />
-						</a></li>
-						<li><a href="#"> <img alt=""
-								src="images/Bandeira_da_Espanha.png" style="margin-top: 16px;"
-								width="27px" height="15px" />
-						</a></li>
-					</ul>
-				</div>
-				<nav id="nav">
-					<ul>
-						<li class="special"><a href="#menu" class="menuToggle"><span>Menu</span></a>
-							<div id="menu">
-								<ul>
-									<li><a href="index.xhtml">Home</a></li>
-									<li><a href="Sobre.xhtml">Sobre</a></li>
-									<li><a id="27_faq" href="#">Ranking</a>
-										<div id="27" style="display: none;">
-											<ul style="margin-top: 15px; margin-bottom: 15px">
-												<li style="font-size: 0.8em; margin-left: 15px;"><a
-													href="RedesSociais.xhtml">Redes Sociais</a></li>
-												<li style="font-size: 0.8em; margin-left: 15px;"><a
-													href="Tecnologias.xhtml">Tecnologias</a></li>
-											</ul>
-										</div></li>
-									<li><a href="Contato.xhtml">Contato</a></li>
-								</ul>
-							</div></li>
-					</ul>
+			<nav id="nav">
+				<ul>
+					<li class="special"><a href="#menu"
+						style="text-decoration: none;" class="menuToggle"><span>Menu</span></a>
+						<div id="menu">
+							<ul>
+								<li><a href="index.xhtml">Home</a></li>
+								<li><a href="Sobre.xhtml">Sobre</a></li>
+								<li><a href="Pesquisa.xhtml">Pesquisa</a></li>
+								<li><a id="27_faq" href="#">Cadastro</a>
+									<div id="27" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroHospital.xhtml">Hospital</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroPais.xhtml">País</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="CadastroCidade.xhtml">Cidade</a></li>
+										</ul>
+									</div></li>
+								<li><a id="28_faq" href="#">Consulta</a>
+									<div id="28" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="ConsultaHospital.xhtml">Hospital</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="ConsultaPais.xhtml">País</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="ConsultaCidade.xhtml">Cidade</a></li>
+										</ul>
+									</div></li>
+								<li><a href="Login.xhtml">Login</a></li>
+								<li><h:form id="usuario" method="post" action="#">
+										<h:commandLink style="text-decoration:none;"
+											action="#{usuarioMB.logout}">Sair</h:commandLink>
+									</h:form></li>
+							</ul>
+						</div></li>
+				</ul>
 
-				</nav>
-
-			</div>
+			</nav>
 
 		</header>
 
-		<!-- Main -->
-		<article id="main">
 
-			<section>
-				<div class="content-wrapper"
-					style="margin-left: 0px; background-color: #FFF">
 
-					<h:form id="form">
-						<br/>
-						<h3 style="font-size: 22px; margin-bottom: 10px; color: #777; letter-spacing: 2px; text-align: center">Redes Sociais</h3>
-						<p:dataTable id="basicDT" var="redeSocial" style="width: 80%; margin-left:120px; text-align: center;" paginator="true" rows="10"
-							value="#{redeSocialMB.lista}">
+		<section class="wrapper style5"
+			style="padding-top: 2em; padding-bottom: 1em;">
 
-							<p:column headerText="Rank" sortBy="#{redeSocial.colocacao}">
-								<h:outputText value="#{redeSocial.colocacao}" />
-							</p:column>
-							<p:column headerText="Rede Social"
-								sortBy="#{redeSocial.descricao}">
-								<h:outputText value="#{redeSocial.descricao}" />
-							</p:column>
-							<p:column headerText="Quantidade"
-								sortBy="#{redeSocial.quantidade}">
-								<h:outputText value="#{redeSocial.quantidade}" />
-							</p:column>
-							
-						</p:dataTable>
+			<div class="row">
+				<div class="2u">
+					<h:form method="#post" action="#">
+						<label for="advanced">País:</label>
+						<h:selectOneMenu value="#{redeSocialMB.nomePaisRanking}"
+							name="pais"
+							style="margin-left:6px; position: relative; height: 2.55em; border-radius: 4px; border: 1px solid #C0C0C0; background-color: #FFF;">
+							<f:selectItem itemValue="" itemLabel="Selecione..." />
+							<f:selectItems value="#{paisMB.listaPaises}" var="pais"
+								itemLabel="#{pais.descricao}" itemValue="#{pais.descricao}" />
+						</h:selectOneMenu>
+
+
+						<label for="popup"> Data: </label>
+						<input value="#{redeSocialMB.data}"
+							style="position: relative; height: 2.55em; width: 100%; color: #545454; border-radius: 4px; padding-left: 5px; border: 1px solid #C0C0C0; background-color: #FFF; font-weight: 600;"
+							id="calendario" name="calendario"></input>
+						<h:commandButton value="Pesquisar"
+							actionListener="#{redeSocialMB.preencherListaRedesSociais}">
+						</h:commandButton>
 					</h:form>
+
 				</div>
-			</section>
-		</article>
+				<div class="lista">
+					<div class="10u" id="dashboard">
+						<h4>Listagem de Redes Sociais</h4>
+
+
+						<table id="example" class="display" width="100%" cellspacing="0">
+							<thead>
+								<tr>
+									<th>Colocação</th>
+									<th>Descrição</th>
+									<th>Quantidade</th>
+								</tr>
+							</thead>
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
 
 		<!-- Footer -->
 		<footer id="footer">
@@ -146,42 +214,92 @@
 
 	</div>
 
-	<!-- Scripts -->
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-
 	<script>
 		$(document).ready(function() {
-			$("#27_faq").click(function() {
-				$("#27").slideToggle(170);
-			});
+			var editor; // use a global for the submit and return data rendering in the examples
+			
+					$("#27_faq").click(function() {
+						$("#27").slideToggle(170);
+					});
+
+					$("#28_faq").click(function() {
+						$("#28").slideToggle(170);
+					});
+					
+					
+					var data =#{redeSocialMB.listaJsonRedesSociais};
+
+					var table = $('#example').DataTable( {
+					    data: data,
+					    columns: [
+					        { data: 'colocacao'},
+					        { data: 'descricao' },
+					        { data: 'quantidade' }
+					        
+					    ],
+					    language: {
+					        "sProcessing":    "Procesando...",
+					        "sLengthMenu":    "Mostrar _MENU_ registros",
+					        "sZeroRecords":   "Não foram encontrados resultados",
+					        "sEmptyTable":    "Ningún dato disponible en esta tabla",
+					        "sInfo":          "Mostrando registros de _START_ a _END_ de um total de _TOTAL_ registros",
+					        "sInfoEmpty":     "Mostrando registros de 0 a 0 de um total de 0 registros",
+					        "sInfoFiltered":  "(filtrado de um total de _MAX_ registros)",
+					        "sInfoPostFix":   "",
+					        "sSearch":        "Buscar:",
+					        "sUrl":           "",
+					        "sInfoThousands":  ",",
+					        "sLoadingRecords": "Carregando...",
+					        "oPaginate": {
+					            "sFirst":    "Primero",
+					            "sLast":    "Último",
+					            "sNext":    "Próximo",
+					            "sPrevious": "Anterior"
+					        },
+					        "oAria": {
+					            "sSortAscending":  ": Ativar para ordenar a coluna de maneira ascendente",
+					            "sSortDescending": ": Ativar para ordenar a coluna de maneira descendente"
+					        }
+					    },
+					    select: true
+					} );					
+				});
+		
+		$(function() {
+			$.noConflict(); //Not to conflict with other scripts
+			jQuery(document).ready(
+					function($) {
+						$('#calendario')
+								.datepicker(
+										{
+											dateFormat : "dd-mm-yy",
+											monthNames : [ 'Janeiro',
+													'Fevereiro', 'Março',
+													'Abril', 'Maio', 'Junho',
+													'Julho', 'Agosto',
+													'Setembro', 'Outubro',
+													'Novembro', 'Dezembro' ],
+											dayNames : [ 'Domingo', 'Segunda',
+													'Terça', 'Quarta',
+													'Quinta', 'Sexta',
+													'Sábado', 'Domingo' ],
+											dayNamesShort : [ 'Dom', 'Seg',
+													'Ter', 'Qua', 'Qui', 'Sex',
+													'Sáb', 'Dom' ],
+											dayNamesMin : [ 'D', 'S', 'T', 'Q',
+													'Q', 'S', 'S', 'D' ]
+										})
+
+					})
 		});
+
 	</script>
-	<script src="assets/js/jquery.min.js"></script>
+
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
 	<script src="assets/js/skel.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 
-	<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
-	<!-- Bootstrap 3.3.6 -->
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<!-- FastClick -->
-	<script src="plugins/fastclick/fastclick.js"></script>
-	<!-- AdminLTE App -->
-	<script src="dist/js/app.min.js"></script>
-	<!-- Sparkline -->
-	<script src="plugins/sparkline/jquery.sparkline.min.js"></script>
-	<!-- jvectormap -->
-	<script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-	<script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-	<!-- SlimScroll 1.3.0 -->
-	<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
-	<!-- ChartJS 1.0.1 -->
-	<script src="plugins/chartjs/Chart.min.js"></script>
-	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-	<script src="dist/js/pages/dashboard2.js"></script>
-	<!-- AdminLTE for demo purposes -->
-	<script src="dist/js/demo.js"></script>
 </h:body>
 </html>

@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONArray;
 
@@ -27,6 +28,9 @@ public class TecnologiaMB {
 	Pais pais = new Pais();
 	PaisDAO paisDAO = new PaisDAO();
 	JsonWrite jsonWrite = new JsonWrite();
+	String nomePaisRanking;
+	String listaJsonTecnologias;
+	Date data;
 
 	@PostConstruct
 	public void init() {
@@ -43,16 +47,61 @@ public class TecnologiaMB {
 			format = "13-10-2016";
 			lista = tecnologiaDAO.consultarTecnologiasByPaisDataAtual(format, pais.getCodigo());
 			listaJSON = JSONArray.toJSONString((jsonWrite.gerarArquivoJson(lista)));
-			System.out.println(listaJSON);
+			listaJsonTecnologias = "[{'colocacao':'','descricao':'','quantidade':''}]";
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	// --------------------Getters And Setters------------
+	
+	public void preencherListaTecnologias(){
+		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
+		String data = req.getParameter("calendario");
+		data = "13-10-2016";
 
+		try {
+			pais = paisDAO.consultarPaisByNome(nomePaisRanking);
+			lista = tecnologiaDAO.consultarTecnologiasByPaisData(data, pais.getCodigo());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		listaJsonTecnologias = JSONArray.toJSONString((jsonWrite.gerarArquivoJsonTecnologias(lista)));
+		
+
+	}
+	
+	
+	// --------------------Getters And Setters------------
+	
+	
 	public String getListaJSON() {
 		return listaJSON;
+	}
+
+	public String getListaJsonTecnologias() {
+		return listaJsonTecnologias;
+	}
+
+	public void setListaJsonTecnologias(String listaJsonTecnologias) {
+		this.listaJsonTecnologias = listaJsonTecnologias;
+	}
+
+	public String getNomePaisRanking() {
+		return nomePaisRanking;
+	}
+
+	public void setNomePaisRanking(String nomePaisRanking) {
+		this.nomePaisRanking = nomePaisRanking;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 	public void setListaJSON(String listaJSON) {
