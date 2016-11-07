@@ -55,6 +55,8 @@ public class AutenticadorFilter implements Filter {
 				&& !req.getRequestURL().toString().contains("Sobre.xhtml")
 				&& !req.getRequestURL().toString().contains("javax.faces/")
 				&& !req.getRequestURL().toString().contains("Pesquisa.xhtml")
+				&& !req.getRequestURL().toString().contains("Tecnologias.xhtml")
+				&& !req.getRequestURL().toString().contains("RedesSociais.xhtml")
 				&& !req.getRequestURL().toString().contains("Pesquisa2.xhtml")) {
 			resp.sendRedirect(req.getContextPath() + "/faces/AdminLTE-2.3.6/Login.xhtml");
 

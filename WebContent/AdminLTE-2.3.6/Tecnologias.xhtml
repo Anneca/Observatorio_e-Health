@@ -79,9 +79,47 @@ table td {
 .\31 0u, .\31 0u\$ {
 	width: 83.3333333333%;
 }
+
 #footer {
-    padding: 10em 0 2em 0;
-    }
+	padding: 10em 0 2em 0;
+}
+
+table th {
+	color: #7d7373;
+}
+
+.ui-datepicker table {
+	background-color: white;
+}
+
+table tbody tr:nth-child(2n+1) {
+	background-color: white;
+}
+
+.ui-datepicker {
+	width: 11em;
+}
+
+.ui-datepicker .ui-datepicker-header {
+	background: white;
+}
+
+.\32 u, .\32 u\$ {
+	width: 16.7%
+}
+
+.ui-widget-header{
+	font-size: 0.7em;
+}
+
+.wrapper.style5 input[type="submit"]{
+	background-color: #346534;
+	color: white;
+	margin-left: 12px;
+	border-radius:3px;
+	margin-top:15px;
+}
+
 </style>
 </h:head>
 <h:body>
@@ -145,7 +183,7 @@ table td {
 
 
 		<section class="wrapper style5"
-			style="padding-top: 2em; padding-bottom: 1em;">
+			style="padding-top: 2em; padding-bottom: 1em; padding-left: 2em;">
 
 			<div class="row">
 				<div class="2u">
@@ -153,7 +191,7 @@ table td {
 						<label for="advanced">País:</label>
 						<h:selectOneMenu value="#{tecnologiaMB.nomePaisRanking}"
 							name="pais"
-							style="margin-left:6px; position: relative; height: 2.55em; border-radius: 4px; border: 1px solid #C0C0C0; background-color: #FFF;">
+							style="margin-left:6px; position: relative; height: 2.55em; border-radius: 4px; border: 1px solid #C0C0C0; background-color: #FFF; color:#000;">
 							<f:selectItem itemValue="" itemLabel="Selecione..." />
 							<f:selectItems value="#{paisMB.listaPaises}" var="pais"
 								itemLabel="#{pais.descricao}" itemValue="#{pais.descricao}" />
@@ -162,7 +200,7 @@ table td {
 
 						<label for="popup"> Data: </label>
 						<input value="#{tecnologiaMB.data}"
-							style="position: relative; height: 2.55em; width: 100%; color: #545454; border-radius: 4px; padding-left: 5px; border: 1px solid #C0C0C0; background-color: #FFF; font-weight: 600;"
+							style="position: relative; text-align:center; height: 2.55em; width: 100%; color: #545454; border-radius: 4px; padding-left: 5px; border: 1px solid #C0C0C0; background-color: #FFF; font-weight: 600;"
 							id="calendario" name="calendario"></input>
 						<h:commandButton value="Pesquisar"
 							actionListener="#{tecnologiaMB.preencherListaTecnologias}">
