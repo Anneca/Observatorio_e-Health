@@ -53,6 +53,15 @@
 									<li><a href="index.xhtml">Home</a></li>
 									<li><a href="Sobre.xhtml">Sobre</a></li>
 									<li><a href="Pesquisa.xhtml">Pesquisa</a></li>
+									<li><a id="29_faq" href="#">Ranking</a>
+										<div id="29" style="display: none;">
+											<ul style="margin-top: 15px; margin-bottom: 15px">
+												<li style="font-size: 0.8em; margin-left: 15px;"><a
+													href="Tecnologias.xhtml">Tecnologias</a></li>
+												<li style="font-size: 0.8em; margin-left: 15px;"><a
+													href="RedesSociais.xhtml">Redes Sociais</a></li>
+											</ul>
+										</div></li>
 									<li><a id="27_faq" href="#">Cadastro</a>
 										<div id="27" style="display: none;">
 											<ul style="margin-top: 15px; margin-bottom: 15px">
@@ -77,9 +86,10 @@
 										</div></li>
 									<li><a href="Login.xhtml">Login</a></li>
 									<li><h:form id="usuario" method="post" action="#">
-										<h:commandLink style="text-decoration:none;"
-											action="#{usuarioMB.logout}">Sair</h:commandLink>
-									</h:form></li>
+											<h:commandLink
+												style="border: 0; color: inherit; display: block; font-size: 0.8em; letter-spacing: 0.225em;outline: 0;text-decoration: none; text-transform: uppercase;"
+												action="#{usuarioMB.logout}">SAIR</h:commandLink>
+										</h:form></li>
 								</ul>
 							</div></li>
 					</ul>
@@ -88,7 +98,7 @@
 
 				<div id="login">
 					<h1 id="titulo">
-					  #{usuarioMB.texto}
+						#{usuarioMB.texto}
 						<h:outputText value="#{usuarioMB.usuario.nome}"></h:outputText>
 					</h1>
 				</div>
@@ -108,7 +118,7 @@
 		<!-- Banner -->
 		<section id="banner">
 			<div class="inner">
-				<h2>OBSERVATÓRIO</h2>
+				<h2>OB-Health</h2>
 				<p>Hospitais no Ciberespaço</p>
 				<ul class="actions">
 					<li><a href="ConstruaVisualizacao.xhtml"
@@ -133,6 +143,10 @@
 
 			$("#28_faq").click(function() {
 				$("#28").slideToggle(170);
+			});
+			
+			$("#29_faq").click(function() {
+				$("#29").slideToggle(170);
 			});
 
 			$("#login").click(function() {

@@ -43,7 +43,7 @@ public class RedeSocialMB {
 			Date data = new Date(System.currentTimeMillis());
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			String format = formatter.format(data);
-			format = "13-10-2016";
+			// format = "13-10-2016";
 			lista = redeSocialDAO.consultarRedesSociaisByPaisDataAtual(format, pais.getCodigo());
 			listaJSON = JSONArray.toJSONString((jsonWrite.gerarArquivoJsonRedeSocial(lista)));
 			listaJsonRedesSociais = "[{'colocacao':'','descricao':'','quantidade':''}]";
@@ -53,26 +53,25 @@ public class RedeSocialMB {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	public void preencherListaRedesSociais(){
+
+	public void preencherListaRedesSociais() {
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
 		String data = req.getParameter("calendario");
-		data = "13-10-2016";
+		// data = "13-10-2016";
 
 		try {
 			pais = paisDAO.consultarPaisByNome(nomePaisRanking);
-			lista = redeSocialDAO.consultarRedeSocialByPaisData(data, pais.getCodigo());
+			if (!data.equals("")) {
+				lista = redeSocialDAO.consultarRedeSocialByPaisData(data, pais.getCodigo());
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		listaJsonRedesSociais = JSONArray.toJSONString((jsonWrite.gerarArquivoJsonRedesSociais(lista)));
-		
 
 	}
-	
 
 	// -----------------------------------Getters And
 	// Setters-----------------------------

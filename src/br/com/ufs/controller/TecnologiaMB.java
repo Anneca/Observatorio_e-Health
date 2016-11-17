@@ -44,7 +44,7 @@ public class TecnologiaMB {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 			String format = formatter.format(data);
 			// System.out.println(format);
-			format = "13-10-2016";
+			// format = "13-10-2016";
 			lista = tecnologiaDAO.consultarTecnologiasByPaisDataAtual(format, pais.getCodigo());
 			listaJSON = JSONArray.toJSONString((jsonWrite.gerarArquivoJson(lista)));
 			listaJsonTecnologias = "[{'colocacao':'','descricao':'','quantidade':''}]";
@@ -53,29 +53,28 @@ public class TecnologiaMB {
 			e.printStackTrace();
 		}
 	}
-	
-	public void preencherListaTecnologias(){
+
+	public void preencherListaTecnologias() {
 		HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 				.getRequest();
 		String data = req.getParameter("calendario");
-		data = "13-10-2016";
+		// data = "13-10-2016";
 
 		try {
 			pais = paisDAO.consultarPaisByNome(nomePaisRanking);
-			lista = tecnologiaDAO.consultarTecnologiasByPaisData(data, pais.getCodigo());
+			if (!data.equals("")) {
+				lista = tecnologiaDAO.consultarTecnologiasByPaisData(data, pais.getCodigo());
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		listaJsonTecnologias = JSONArray.toJSONString((jsonWrite.gerarArquivoJsonTecnologias(lista)));
-		
 
 	}
-	
-	
+
 	// --------------------Getters And Setters------------
-	
-	
+
 	public String getListaJSON() {
 		return listaJSON;
 	}

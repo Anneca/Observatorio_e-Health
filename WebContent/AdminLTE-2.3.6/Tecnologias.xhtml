@@ -145,6 +145,15 @@ table tbody tr:nth-child(2n+1) {
 								<li><a href="index.xhtml">Home</a></li>
 								<li><a href="Sobre.xhtml">Sobre</a></li>
 								<li><a href="Pesquisa.xhtml">Pesquisa</a></li>
+								<li><a id="29_faq" href="#">Ranking</a>
+									<div id="29" style="display: none;">
+										<ul style="margin-top: 15px; margin-bottom: 15px">
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="Tecnologias.xhtml">Tecnologias</a></li>
+											<li style="font-size: 0.8em; margin-left: 15px;"><a
+												href="RedesSociais.xhtml">Redes Sociais</a></li>
+										</ul>
+									</div></li>
 								<li><a id="27_faq" href="#">Cadastro</a>
 									<div id="27" style="display: none;">
 										<ul style="margin-top: 15px; margin-bottom: 15px">
@@ -168,8 +177,9 @@ table tbody tr:nth-child(2n+1) {
 										</ul>
 									</div></li>
 								<li><a href="Login.xhtml">Login</a></li>
-								<li><h:form id="usuario" method="post" action="#">
-										<h:commandLink style="text-decoration:none;"
+								<li><h:form>
+										<h:commandLink
+											style="border: 0; color: inherit; display: block; font-size: 0.8em; letter-spacing: 0.225em;outline: 0;text-decoration: none; text-transform: uppercase;"
 											action="#{usuarioMB.logout}">Sair</h:commandLink>
 									</h:form></li>
 							</ul>
@@ -263,6 +273,9 @@ table tbody tr:nth-child(2n+1) {
 						$("#28").slideToggle(170);
 					});
 					
+					$("#29_faq").click(function() {
+						$("#29").slideToggle(170);
+					});
 					
 					var data =#{tecnologiaMB.listaJsonTecnologias};
 
@@ -278,7 +291,7 @@ table tbody tr:nth-child(2n+1) {
 					        "sProcessing":    "Procesando...",
 					        "sLengthMenu":    "Mostrar _MENU_ registros",
 					        "sZeroRecords":   "Não foram encontrados resultados",
-					        "sEmptyTable":    "Ningún dato disponible en esta tabla",
+					        "sEmptyTable":    "Não foram encontrados resultados",
 					        "sInfo":          "Mostrando registros de _START_ a _END_ de um total de _TOTAL_ registros",
 					        "sInfoEmpty":     "Mostrando registros de 0 a 0 de um total de 0 registros",
 					        "sInfoFiltered":  "(filtrado de um total de _MAX_ registros)",

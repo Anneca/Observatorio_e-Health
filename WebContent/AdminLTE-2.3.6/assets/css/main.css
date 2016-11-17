@@ -2895,6 +2895,7 @@ input[type="submit"].disabled, input[type="submit"]:disabled, input[type="reset"
 
 #menu .close {
 	background-image: url("images/close.svg");
+	background-color: transparent;
 	background-position: 4.85em 1em;
 	background-repeat: no-repeat;
 	border: 0;

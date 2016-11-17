@@ -400,6 +400,7 @@ public class PaisDAO {
 
 		con.setConnection();
 		Statement comando = con.conexao.createStatement();
+		System.out.println(sql);
 		ResultSet resultado = comando.executeQuery(sql);
 
 		while (resultado.next()) {
@@ -421,7 +422,7 @@ public class PaisDAO {
 				+ " AND f.cv_observacao = 'Sem Observações!' " + " AND f.dt_formulario LIKE '%" + data + "%'";
 
 		int sitesDisponiveis = 0;
-
+		System.out.println(sql);
 		con.setConnection();
 		Statement comando = con.conexao.createStatement();
 		ResultSet resultado = comando.executeQuery(sql);

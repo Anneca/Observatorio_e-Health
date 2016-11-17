@@ -125,7 +125,7 @@ public class PaisMB {
 			String format = formatter.format(data);
 			System.out.println(format);
 			// Temporário
-			format = "13-10-2016";
+//			format = "16-11-2016";
 			// Capturando o objeto
 			DadosPais objeto = paisDAO.consultarDadosPais(pais, format);
 			qtHospitaisCatalogados = objeto.getQtHospitaisCatalogados();
