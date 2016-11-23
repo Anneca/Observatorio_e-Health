@@ -257,7 +257,7 @@
 		}
 	</script>
 </h:head>
-<h:body>
+<h:body onload="time()">
 	<div id="page-wrapper">
 
 		<!-- Header -->
@@ -335,9 +335,10 @@
 
 				<!-- Content Wrapper. Contains page content -->
 				<div style="margin-right: 5000px; background-color: #FFF;">
+					<div id="txt"
+						style="color: black; margin-left: 970px; width: 300px;"></div>
 
 					<div class="container">
-						<br />
 						<h1>Escolha um País</h1>
 
 						<div class="mapcontainer">
@@ -406,7 +407,44 @@
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 	<script>
+		//<![CDATA[
+
+		
+		setInterval(function() {
+			
+			var data = new Date();
+			data.setDate(data.getDate() + 1);
+
+			data.setHours(11);
+			data.setMinutes(5);
+			data.setSeconds(0);
+
+			var target_date = new Date(data).getTime();
+
+			var dias, horas, minutos, segundos;
+
+			var current_date = new Date().getTime();
+			var segundos_f = (target_date - current_date) / 1000;
+
+			dias = parseInt(segundos_f / 86400);
+			segundos_f = segundos_f % 86400;
+
+			horas = parseInt(segundos_f / 3600);
+			segundos_f = segundos_f % 3600;
+
+			minutos = parseInt(segundos_f / 60);
+			segundos = parseInt(segundos_f % 60);
+
+			document.getElementById('txt').innerHTML = "Será atualizado em "
+					+ horas + "h:" + minutos + "m:" + segundos + "s";
+			if (horas == "0" && minutos == "0" && segundos=="0") {
+				window.location = "ConstruaVisualizacao.xhtml";
+			}
+
+		}, 1000);
+
 		$(document).ready(function() {
+
 			$("#27_faq").click(function() {
 				$("#27").slideToggle(170);
 			});
@@ -420,6 +458,7 @@
 			});
 
 		});
+		//]]>
 	</script>
 </h:body>
 </html>

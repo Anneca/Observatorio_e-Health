@@ -154,9 +154,9 @@ public class PaisMB {
 				.getRequest();
 		dataFormatada = req.getParameter("calendario");
 		// Essa informação é temporária
-		String dataTemp = "13-10-2016";
+		//String dataTemp = "13-10-2016";
 		objPais = paisDAO.consultarPaisByNome(pais);
-		DadosPais objeto = paisDAO.consultarDadosPais(pais, dataTemp);
+		DadosPais objeto = paisDAO.consultarDadosPais(pais, dataFormatada);
 		qtHospitaisCatalogados = objeto.getQtHospitaisCatalogados();
 		qtHospitaisComSite = objeto.getQtHospitaisComSite();
 		qtSitesForaDoAr = objeto.getQtSitesForaDoAr();

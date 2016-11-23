@@ -1,0 +1,35 @@
+<html>
+<head>
+<script language=JavaScript>
+<!-- begin
+var sHors = "0"; 
+var sMins = "40";
+var sSecs =0;
+function getSecs(){
+sSecs--;
+if(sSecs<0)
+    {sSecs=59;sMins--;if(sMins<=9)sMins="0"+sMins;}
+if(sMins=="0-1")
+    {sMins=5;sHors--;if(sHors<=9)sHors="0"+sHors;}
+if(sSecs<=9)sSecs="0"+sSecs;
+if(sHors=="0-1")
+{sHors="00";sMins="00";sSecs="00";
+clock1.innerHTML=sHors+"<font color=#000000>:</font>"+sMins+"<font color=#000000>:</font>"+sSecs;}
+    else
+    {
+   clock1.innerHTML=sHors+"<font color=#000000>:</font>"+sMins+"<font color=#000000>:</font>"+sSecs;
+    setTimeout('getSecs()',1000);
+}
+}
+//-->
+</SCRIPT>
+
+</head>
+<!-- Aqui começa o corpo da página -->
+<body>
+
+<div align=""> 
+<b><font color=black size=5 face=arial><span id="clock1"></span><script>setTimeout('getSecs()',1000);</script></font></b><br>
+</div>
+</body>
+</html>

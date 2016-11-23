@@ -25,5 +25,7 @@
 	<classpathentry kind="lib" path="/Users/Anne/Workspaces/Neon/Observatorio-e-Health/WebContent/WEB-INF/lib/gson-2.7.jar"/>
 	<classpathentry kind="lib" path="/Users/Anne/Workspaces/Neon/Observatorio-e-Health/WebContent/WEB-INF/lib/json-simple-1.1.jar"/>
 	<classpathentry kind="lib" path="/Users/Anne/Workspaces/Neon/Observatorio-e-Health/WebContent/WEB-INF/lib/java-json.jar"/>
+	<classpathentry kind="lib" path="/Users/Anne/Workspaces/Neon/Observatorio-e-Health/WebContent/WEB-INF/lib/quartz-2.1.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/Anne/Workspaces/Neon/WebCrawler/lib/postgresql-9.4-1203.jdbc4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
